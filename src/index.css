@@ -9,5 +9,7 @@
     display: block;
 }
 
-
+.logo-black {
+    filter: invert(1) brightness(0);
+}
   
