@@ -8,3 +8,36 @@
 .mobile-menu.active {
     display: block;
 }
+.logo-carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
+  .logo-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+  }
+  
+  .logo-item {
+    flex: 0 0 25%; /* 4 logos por vez */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-black {
+    width: 12rem; /* Ajuste o tamanho conforme necessário */
+    height: 6rem; /* Ajuste o tamanho conforme necessário */
+    object-fit: contain;
+    filter: invert(1) brightness(0);
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
