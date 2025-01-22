@@ -47,3 +47,15 @@
         gap: 2rem; /* Increase gap between logos on smaller screens */
     }
 }
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    content: none;
+    background-image: url('images/logo_white.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 56px; /* Substituir altura do h-14 */
+    width: auto;
+  }
+}
