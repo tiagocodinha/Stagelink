@@ -94,40 +94,6 @@
 
 
 <script>
-  // Variáveis globais para controlar o arraste
-let isDragging = false;
-let startX;
-let scrollLeft;
-
-const logoCarousel = document.querySelector('.logo-carousel');
-
-// Inicia o arraste
-logoCarousel.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startX = e.pageX - logoCarousel.offsetLeft;
-  scrollLeft = logoCarousel.scrollLeft;
-  logoCarousel.style.cursor = 'grabbing'; // Muda o cursor ao arrastar
-});
-
-// Para o arraste
-logoCarousel.addEventListener('mouseleave', () => {
-  isDragging = false;
-  logoCarousel.style.cursor = 'grab'; // Retorna ao cursor original
-});
-
-logoCarousel.addEventListener('mouseup', () => {
-  isDragging = false;
-  logoCarousel.style.cursor = 'grab'; // Retorna ao cursor original
-});
-
-// Mover o carrossel enquanto o usuário arrasta
-logoCarousel.addEventListener('mousemove', (e) => {
-  if (!isDragging) return; // Ignora se o arraste não foi iniciado
-  e.preventDefault();
-  const x = e.pageX - logoCarousel.offsetLeft;
-  const walk = (x - startX) * 2; // Ajuste da velocidade de arraste
-  logoCarousel.scrollLeft = scrollLeft - walk; // Mover o carrossel
-});
   
 </script>
 
