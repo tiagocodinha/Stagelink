@@ -40,4 +40,10 @@
     100% {
       transform: translateX(-50%);
     }
+
   }
+  @media (max-width: 840px) {
+    .logo-track {
+        gap: 2rem; /* Increase gap between logos on smaller screens */
+    }
+}
