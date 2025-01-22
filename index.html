@@ -53,8 +53,9 @@
           
           <!-- Desktop Navigation -->
           <div class="desktop-menu hidden md:flex space-x-8">
-            <a href="#servicos" class="text-gray-900 hover:text-gray-600">Serviços</a>
             <a href="#sobre" class="text-gray-900 hover:text-gray-600">Sobre</a>
+            <a href="#eventos" class="text-gray-900 hover:text-gray-600">Eventos</a>
+            <a href="#servicos" class="text-gray-900 hover:text-gray-600">Serviços</a>
             <a href="#contato" class="text-gray-900 hover:text-gray-600">Contato</a>
           </div>
 
@@ -70,8 +71,9 @@
       <!-- Mobile Navigation -->
       <div class="mobile-menu md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
           <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
+          <a href="#eventos" class="block px-3 py-2 text-gray-900">Eventos</a>
+          <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
           <a href="#contato" class="block px-3 py-2 text-gray-900">Contato</a>
         </div>
       </div>
@@ -103,10 +105,36 @@
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="servicos" class="py-20">
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 bg-white text-black">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-16">Nossos Serviços</h2>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <img 
+              src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80"
+              alt="Our office"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+          <div>
+            <h2 class="text-4xl font-bold mb-6">SOMOS A STAGELINK.</h2>
+            <p class="text-lg mb-6">
+              Somos uma empresa apaixonada por eventos corporativos e comunicacão, dedicada a criar experiências únicas e impactantes que geram resultados e fortalecem marcas.
+            <p class="text-lg mb-6">
+              Oferecemos soluções completas, cuidando de cada detalhe desde o planeamento até à execução, sempre alinhados às necessidades e valores dos nossos clientes. 
+            <p class="text-lg mb-6">
+              A nossa equipa multidisciplinar é o nosso maior ativo, com know-how em diversas áreas que nos permite oferecer uma abordagem personalizada e inovadora para cada projeto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-20 bg-black text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16">Os Nossos Serviços</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Marketing Digital -->
           <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
@@ -117,7 +145,7 @@
             </svg>
             <h3 class="text-xl font-semibold mb-2">Marketing Digital</h3>
             <p class="text-gray-600">Estratégias personalizadas para aumentar sua presença online e gerar resultados.</p>
-            <button class="mt-4 flex items-center text-black font-semibold group">
+            <button class="mt-4 flex items-center text-white font-semibold group">
               Saiba mais
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -135,7 +163,7 @@
             </svg>
             <h3 class="text-xl font-semibold mb-2">Eventos Corporativos</h3>
             <p class="text-gray-600">Organização completa de eventos que fortalecem sua marca e engajam seu público.</p>
-            <button class="mt-4 flex items-center text-black font-semibold group">
+            <button class="mt-4 flex items-center text-white font-semibold group">
               Saiba mais
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -152,7 +180,7 @@
             </svg>
             <h3 class="text-xl font-semibold mb-2">Consultoria Estratégica</h3>
             <p class="text-gray-600">Análise e planejamento para impulsionar seu negócio ao próximo nível.</p>
-            <button class="mt-4 flex items-center text-black font-semibold group">
+            <button class="mt-4 flex items-center text-white font-semibold group">
               Saiba mais
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -170,54 +198,12 @@
             </svg>
             <h3 class="text-xl font-semibold mb-2">Gestão de Redes Sociais</h3>
             <p class="text-gray-600">Criação de conteúdo relevante e gestão completa das suas redes sociais.</p>
-            <button class="mt-4 flex items-center text-black font-semibold group">
+            <button class="mt-4 flex items-center text-white font-semibold group">
               Saiba mais
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="sobre" class="py-20 bg-black text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80"
-              alt="Our office"
-              class="rounded-lg shadow-xl"
-            />
-          </div>
-          <div>
-            <h2 class="text-4xl font-bold mb-6">Sobre Nós</h2>
-            <p class="text-lg mb-6">
-              Somos uma agência de marketing digital e eventos corporativos com mais de 10 anos de experiência no mercado.
-              Nossa missão é transformar negócios através de estratégias digitais inovadoras e eventos memoráveis.
-            </p>
-            <ul class="space-y-4">
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-                Mais de 500 projetos entregues
-              </li>
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-                Equipe especializada e certificada
-              </li>
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-                Metodologia própria e comprovada
-              </li>
-            </ul>
           </div>
         </div>
       </div>
