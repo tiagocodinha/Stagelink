@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+  .mobile-menu {
+    display: none;
+  }
+  .mobile-menu.active {
+    display: block;
+  }
+
+  .carousel {
+    position: relative; /* Garante que os elementos dentro possam usar posição absoluta */
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%);
+    z-index: 10; /* Garante que as setas fiquem sobre o carrossel */
+  }
+  
+  .carousel-arrow.left {
+    left: 10px; /* Ajuste para alinhar à esquerda */
+  }
+  
+  .carousel-arrow.right {
+    right: 10px; /* Ajuste para alinhar à direita */
+  }

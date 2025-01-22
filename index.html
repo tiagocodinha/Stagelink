@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketing Digital & Eventos Corporativos</title>
+  <title>Marketing Digital & Produção Eventos | Stagelink</title>
+  <meta name="description" content="Oferecemos serviços completos de Marketing Digital 360, Produção de Eventos Corporativos.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="text/javascript"
@@ -33,7 +34,7 @@
     }
     .carousel-slide {
       display: none;
-      transition: transform 0.5s ease-in-out;
+      transition: transform 1s ease-in-out;
     }
     .carousel-slide.active {
       display: block;
@@ -56,8 +57,40 @@
     }
     html {
   scroll-behavior: smooth;
-}
+    }
+    .social-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
+
   </style>
+
+<script>
+  function toggleMobileMenu() {
+    const menu = document.querySelector('.mobile-menu');
+    menu.classList.toggle('active');
+  }
+
+  // Fecha o menu móvel ao clicar em qualquer link
+  function closeMobileMenu() {
+    const menu = document.querySelector('.mobile-menu');
+    if (menu.classList.contains('active')) {
+      menu.classList.remove('active');
+    }
+  }
+
+  // Adiciona o evento de clique para fechar o menu em todos os links
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  });
+</script>
+
 </head>
 <body>
   <div class="min-h-screen bg-white">
@@ -72,7 +105,7 @@
             <a href="#sobre" class="text-gray-900 hover:text-gray-600">Sobre</a>
             <a href="#eventos" class="text-gray-900 hover:text-gray-600">Eventos</a>
             <a href="#servicos" class="text-gray-900 hover:text-gray-600">Serviços</a>
-            <a href="#contacto" class="text-gray-900 hover:text-gray-600">Contacto</a>
+            <a href="#contactos" class="text-gray-900 hover:text-gray-600">Contactos</a>
           </div>
 
           <!-- Mobile menu button -->
@@ -90,7 +123,7 @@
           <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
           <a href="#eventos" class="block px-3 py-2 text-gray-900">Eventos</a>
           <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
-          <a href="#contacto" class="block px-3 py-2 text-gray-900">Contacto</a>
+          <a href="#contactos" class="block px-3 py-2 text-gray-900">Contactos</a>
         </div>
       </div>
     </nav>
@@ -103,7 +136,7 @@
             <h1 class="text-5xl font-bold mb-6">Transformamos ideias em resultados digitais</h1>
             <p class="text-xl mb-8">Marketing digital e eventos corporativos que impulsionam seu negócio ao próximo nível.</p>
             <button class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
-              <a href="#contacto" class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
+              <a href="#contactos" class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
                 Fale Conosco
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -234,9 +267,28 @@
             <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" alt="Strategy planning" class="carousel-slide w-full h-full object-cover"/>
             <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Corporate event" class="carousel-slide w-full h-full object-cover"/>
           </div>
+
+
+          <!-- Navigation Buttons -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Dots Indicator -->
+          <div class="flex justify-center mt-4 space-x-2" id="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
     
     <!-- Contact Section -->
-    <section id="contacto" class="py-20 mt-20">
+    <section id="contactos" class="py-20 mt-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12">
           <div>
@@ -292,23 +344,6 @@
       </div>
     </section>
           
-          <!-- Navigation Buttons -->
-          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
-
-          <!-- Dots Indicator -->
-          <div class="flex justify-center mt-4 space-x-2" id="carousel-dots"></div>
-        </div>
-      </div>
-    </section>
 
     <!-- Footer -->
     <footer class="bg-black text-white py-12">
@@ -323,9 +358,10 @@
           <div>
             <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
             <ul class="space-y-2">
-              <li><a href="#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
               <li><a href="#sobre" class="text-gray-400 hover:text-white">Sobre</a></li>
-              <li><a href="#contacto" class="text-gray-400 hover:text-white">Contacto</a></li>
+              <li><a href="#eventos" class="text-gray-400 hover:text-white">Eventos</a></li>
+              <li><a href="#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
+              <li><a href="#contactos" class="text-gray-400 hover:text-white">Contactos</a></li>
             </ul>
           </div>
           <div>
@@ -340,24 +376,11 @@
           <div>
             <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
             <div class="flex space-x-4">
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
+              <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank">
+                <img src="images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon">
               </a>
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
+              <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank">
+                <img src="images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon">
               </a>
             </div>
           </div>

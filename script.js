@@ -7,6 +7,3 @@ function sendMail(){
     emailjs.send('service_iyooo0p', 'template_4wi67kr', params).then(alert('Email Enviado com Sucesso!'))
     
 }
-
-
-    
