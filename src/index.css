@@ -4,9 +4,10 @@
 
 .mobile-menu {
     display: none;
-  }
-  .mobile-menu.active {
+}
+.mobile-menu.active {
     display: block;
-  }
+}
+
 
   
