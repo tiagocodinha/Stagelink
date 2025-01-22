@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Digital & Eventos Corporativos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .group:hover .group-hover\:translate-x-1 {
+      transform: translateX(0.25rem);
+    }
+    .transition-transform {
+      transition-property: transform;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-slide {
+      display: none;
+      transition: transform 0.5s ease-in-out;
+    }
+    .carousel-slide.active {
+      display: block;
+    }
+    .mobile-menu {
+      display: none;
+    }
+    .mobile-menu.active {
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+    @media (max-width: 767px) {
+      .desktop-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="text-2xl font-bold">LOGO</div>
+          
+          <!-- Desktop Navigation -->
+          <div class="desktop-menu hidden md:flex space-x-8">
+            <a href="#inicio" class="text-gray-900 hover:text-gray-600">Início</a>
+            <a href="#servicos" class="text-gray-900 hover:text-gray-600">Serviços</a>
+            <a href="#sobre" class="text-gray-900 hover:text-gray-600">Sobre</a>
+            <a href="#contato" class="text-gray-900 hover:text-gray-600">Contato</a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <button class="mobile-menu-button md:hidden" onclick="toggleMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="mobile-menu md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a href="#inicio" class="block px-3 py-2 text-gray-900">Início</a>
+          <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
+          <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
+          <a href="#contato" class="block px-3 py-2 text-gray-900">Contato</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-20 bg-black text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-5xl font-bold mb-6">Transformamos ideias em resultados digitais</h1>
+            <p class="text-xl mb-8">Marketing digital e eventos corporativos que impulsionam seu negócio ao próximo nível.</p>
+            <button class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
+              Fale Conosco
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+          <div class="hidden md:block">
+            <img 
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80"
+              alt="Team meeting"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16">Nossos Serviços</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Marketing Digital -->
+          <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">Marketing Digital</h3>
+            <p class="text-gray-600">Estratégias personalizadas para aumentar sua presença online e gerar resultados.</p>
+            <button class="mt-4 flex items-center text-black font-semibold group">
+              Saiba mais
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Eventos Corporativos -->
+          <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">Eventos Corporativos</h3>
+            <p class="text-gray-600">Organização completa de eventos que fortalecem sua marca e engajam seu público.</p>
+            <button class="mt-4 flex items-center text-black font-semibold group">
+              Saiba mais
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Consultoria Estratégica -->
+          <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="20" x2="12" y2="10"></line>
+              <line x1="18" y1="20" x2="18" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="16"></line>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">Consultoria Estratégica</h3>
+            <p class="text-gray-600">Análise e planejamento para impulsionar seu negócio ao próximo nível.</p>
+            <button class="mt-4 flex items-center text-black font-semibold group">
+              Saiba mais
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Gestão de Redes Sociais -->
+          <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">Gestão de Redes Sociais</h3>
+            <p class="text-gray-600">Criação de conteúdo relevante e gestão completa das suas redes sociais.</p>
+            <button class="mt-4 flex items-center text-black font-semibold group">
+              Saiba mais
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 bg-black text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <img 
+              src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80"
+              alt="Our office"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+          <div>
+            <h2 class="text-4xl font-bold mb-6">Sobre Nós</h2>
+            <p class="text-lg mb-6">
+              Somos uma agência de marketing digital e eventos corporativos com mais de 10 anos de experiência no mercado.
+              Nossa missão é transformar negócios através de estratégias digitais inovadoras e eventos memoráveis.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                Mais de 500 projetos entregues
+              </li>
+              <li class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                Equipe especializada e certificada
+              </li>
+              <li class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                Metodologia própria e comprovada
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-4xl font-bold mb-6">Entre em Contato</h2>
+            <p class="text-lg mb-8">
+              Estamos prontos para ajudar seu negócio a alcançar novos patamares.
+              Entre em contato e vamos conversar sobre suas necessidades.
+            </p>
+            <div class="space-y-4">
+              <p class="flex items-center">
+                <span class="font-semibold mr-2">Email:</span>
+                contato@empresa.com
+              </p>
+              <p class="flex items-center">
+                <span class="font-semibold mr-2">Telefone:</span>
+                +351 123 456 789
+              </p>
+              <p class="flex items-center">
+                <span class="font-semibold mr-2">Endereço:</span>
+                Rua Example, 123 - Lisboa
+              </p>
+            </div>
+          </div>
+          <form class="space-y-6" onsubmit="event.preventDefault();">
+            <div>
+              <input
+                type="text"
+                placeholder="Nome"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+              />
+            </div>
+            <div>
+              <textarea
+                placeholder="Mensagem"
+                rows="4"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+              ></textarea>
+            </div>
+            <button class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition-colors">
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Carousel Section -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16">Nossos Projetos</h2>
+        <div class="relative carousel-container">
+          <div class="overflow-hidden rounded-lg shadow-xl aspect-video">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" alt="Corporate meeting" class="carousel-slide active w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80" alt="Marketing presentation" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80" alt="Team collaboration" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" alt="Strategy planning" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Corporate event" class="carousel-slide w-full h-full object-cover"/>
+          </div>
+          
+          <!-- Navigation Buttons -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Dots Indicator -->
+          <div class="flex justify-center mt-4 space-x-2" id="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">LOGO</h3>
+            <p class="text-gray-400">
+              Transformando negócios através do marketing digital e eventos corporativos.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+            <ul class="space-y-2">
+              <li><a href="#inicio" class="text-gray-400 hover:text-white">Início</a></li>
+              <li><a href="#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
+              <li><a href="#sobre" class="text-gray-400 hover:text-white">Sobre</a></li>
+              <li><a href="#contato" class="text-gray-400 hover:text-white">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Serviços</h4>
+            <ul class="space-y-2">
+              <li class="text-gray-400">Marketing Digital</li>
+              <li class="text-gray-400">Eventos Corporativos</li>
+              <li class="text-gray-400">Consultoria Estratégica</li>
+              <li class="text-gray-400">Gestão de Redes Sociais</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+          <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const mobileMenu = document.querySelector('.mobile-menu');
+      mobileMenu.classList.toggle('active');
+    }
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = `w-3 h-3 rounded-full transition-colors ${
+        index === 0 ? 'bg-black' : 'bg-gray-300'
+      }`;
+      dot.onclick = () => goToSlide(index);
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === currentSlide) {
+          slide.classList.add('active');
+        }
+      });
+
+      // Update dots
+      const dots = dotsContainer.children;
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = `w-3 h-3 rounded-full transition-colors ${
+          i === currentSlide ? 'bg-black' : 'bg-gray-300'
+        }`;
+      }
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlides();
+    }
+
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>
