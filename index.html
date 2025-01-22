@@ -42,6 +42,9 @@
         display: none;
       }
     }
+    html {
+  scroll-behavior: smooth;
+}
   </style>
 </head>
 <body>
@@ -57,7 +60,7 @@
             <a href="#sobre" class="text-gray-900 hover:text-gray-600">Sobre</a>
             <a href="#eventos" class="text-gray-900 hover:text-gray-600">Eventos</a>
             <a href="#servicos" class="text-gray-900 hover:text-gray-600">Serviços</a>
-            <a href="#contato" class="text-gray-900 hover:text-gray-600">Contato</a>
+            <a href="#contacto" class="text-gray-900 hover:text-gray-600">Contacto</a>
           </div>
 
           <!-- Mobile menu button -->
@@ -75,7 +78,7 @@
           <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
           <a href="#eventos" class="block px-3 py-2 text-gray-900">Eventos</a>
           <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
-          <a href="#contato" class="block px-3 py-2 text-gray-900">Contato</a>
+          <a href="#contacto" class="block px-3 py-2 text-gray-900">Contacto</a>
         </div>
       </div>
     </nav>
@@ -88,11 +91,13 @@
             <h1 class="text-5xl font-bold mb-6">Transformamos ideias em resultados digitais</h1>
             <p class="text-xl mb-8">Marketing digital e eventos corporativos que impulsionam seu negócio ao próximo nível.</p>
             <button class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
-              Fale Conosco
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
+              <a href="mailto:geral@stagelink.pt" class="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center group">
+                Fale Conosco
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
             </button>
           </div>
           <div class="hidden md:block">
@@ -108,11 +113,11 @@
 
 
     <!-- About Section -->
-    <section id="sobre" class="py-20 bg-white text-black">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-4xl font-bold mb-6">SOMOS A STAGELINK.</h2>
+    <section id="sobre" class="py-10 bg-white text-black">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-5xl font-bold mb-4 mt-0">SOMOS A<br>STAGELINK.</h2>
           </div>
           <div>
             <p class="text-lg mb-6">
@@ -157,7 +162,7 @@
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            <h3 class="text-xl font-semibold mb-2">Eventos Corporativos</h3>
+            <h3 class="text-xl font-semibold mb-2">Eventos e Ativações de Marca</h3>
             <p class="text-gray-600">Organização completa de eventos que fortalecem sua marca e engajam seu público.</p>
             <button class="mt-4 flex items-center text-white font-semibold group">
               Saiba mais
@@ -205,28 +210,43 @@
       </div>
     </section>
 
+    <!-- Image Carousel Section -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16">Nossos Projetos</h2>
+        <div class="relative carousel-container">
+          <div class="overflow-hidden rounded-lg shadow-xl aspect-video">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" alt="Corporate meeting" class="carousel-slide active w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80" alt="Marketing presentation" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80" alt="Team collaboration" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" alt="Strategy planning" class="carousel-slide w-full h-full object-cover"/>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Corporate event" class="carousel-slide w-full h-full object-cover"/>
+          </div>
+    
     <!-- Contact Section -->
-    <section id="contato" class="py-20">
+    <section id="contacto" class="py-20 mt-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12">
           <div>
-            <h2 class="text-4xl font-bold mb-6">Entre em Contato</h2>
+            <h2 class="text-4xl font-bold mb-6">Entre em Contacto</h2>
             <p class="text-lg mb-8">
               Estamos prontos para ajudar seu negócio a alcançar novos patamares.
-              Entre em contato e vamos conversar sobre suas necessidades.
+              Entre em contacto e vamos conversar sobre suas necessidades.
             </p>
             <div class="space-y-4">
               <p class="flex items-center">
                 <span class="font-semibold mr-2">Email:</span>
-                contato@empresa.com
+                <a href="mailto:geral@stagelink.pt">geral@stagelink.pt</a>
               </p>
               <p class="flex items-center">
-                <span class="font-semibold mr-2">Telefone:</span>
-                +351 123 456 789
+                <span class="font-semibold mr-2">Telemóvel:</span>
+                <a href="tel:+351915542170">+351 915 542 170</a>
               </p>
               <p class="flex items-center">
-                <span class="font-semibold mr-2">Endereço:</span>
-                Rua Example, 123 - Lisboa
+                <span class="font-semibold mr-2">Morada:</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Artur+Feliciano,+Edifíco+Camarção,+Loja+11+2450-027+Famalicão" target="_blank">
+                  Rua Artur Feliciano, Edifíco Camarção, Loja 11 2450-027 Famalicão
+                </a>
               </p>
             </div>
           </div>
@@ -259,19 +279,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Image Carousel Section -->
-    <section class="py-20 bg-gray-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-16">Nossos Projetos</h2>
-        <div class="relative carousel-container">
-          <div class="overflow-hidden rounded-lg shadow-xl aspect-video">
-            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" alt="Corporate meeting" class="carousel-slide active w-full h-full object-cover"/>
-            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80" alt="Marketing presentation" class="carousel-slide w-full h-full object-cover"/>
-            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80" alt="Team collaboration" class="carousel-slide w-full h-full object-cover"/>
-            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" alt="Strategy planning" class="carousel-slide w-full h-full object-cover"/>
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Corporate event" class="carousel-slide w-full h-full object-cover"/>
-          </div>
           
           <!-- Navigation Buttons -->
           <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
@@ -306,7 +313,7 @@
             <ul class="space-y-2">
               <li><a href="#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
               <li><a href="#sobre" class="text-gray-400 hover:text-white">Sobre</a></li>
-              <li><a href="#contato" class="text-gray-400 hover:text-white">Contato</a></li>
+              <li><a href="#contacto" class="text-gray-400 hover:text-white">Contacto</a></li>
             </ul>
           </div>
           <div>
