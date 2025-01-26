@@ -31,6 +31,12 @@
     align-items: center;
   }
   
+  .logo-black {
+    width: 8rem; /* Ajuste o tamanho conforme necessário */
+    height: rem; /* Ajuste o tamanho conforme necessário */
+    object-fit: contain;
+    filter: invert(1) brightness(0);
+  }
   
   @keyframes scroll {
     0% {
