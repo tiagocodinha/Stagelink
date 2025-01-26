@@ -59,6 +59,4 @@
   }
 }
 
-[data-bs-theme="dark"] img.logo {
-  filter: invert(1) brightness(2);
-}
+
