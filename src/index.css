@@ -25,6 +25,14 @@
   color: #000;
 }
 
+.service-title-main {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
 .service-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
@@ -68,6 +76,21 @@
     height: rem; /* Ajuste o tamanho conforme necessário */
     object-fit: contain;
     filter: invert(1) brightness(0);
+  }
+
+  .logo-climarsol {
+    width: 200px; /* Ajuste conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+  }
+
+  .logo-michael {
+    width: 180px; /* Ajuste conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+  }
+
+  .logo-liga {
+    width: 200px; /* Ajuste conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
   }
   
   @keyframes scroll {
