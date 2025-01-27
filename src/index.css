@@ -92,6 +92,10 @@
     width: 200px; /* Ajuste conforme necessário */
     height: auto; /* Mantém a proporção da imagem */
   }
+
+  .gradient-mensagem {
+    background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 50%, rgba(36,196,218,1) 100%);
+  }
   
   @keyframes scroll {
     0% {
