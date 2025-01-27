@@ -8,6 +8,14 @@
   .mobile-menu.active {
       display: block;
   }
+
+  .intro-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000;
+}
   
   .logo-carousel {
     overflow: hidden;
@@ -64,5 +72,6 @@
     width: auto;
   }
 }
+
 
 
