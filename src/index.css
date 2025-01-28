@@ -152,17 +152,29 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    content: none;
-    background-image: url('images/logo_white.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 56px; /* Substituir altura do h-14 */
-    width: auto;
+  @media (prefers-color-scheme: dark) {
+    .logo {
+      content: none;
+      background-image: url('images/logo_white.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 56px; /* Substituir altura do h-14 */
+      width: auto;
+    }
   }
-}
 
+  @media (max-width: 768px) {
+    .intro-title {
+      font-size: 40px; /* Reduz o tamanho para melhor adaptação */
+      text-align: center; /* Centraliza o texto, se necessário */
+    }
+  }
 
+  @media (max-width: 768px) {
+    .intro-title-service {
+      font-size: 40px; /* Reduz o tamanho para melhor adaptação */
+      text-align: center; /* Centraliza o texto, se necessário */
+    }
+  }
 
