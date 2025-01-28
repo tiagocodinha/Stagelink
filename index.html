@@ -425,61 +425,72 @@
   </div>
 
   <script>
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-      const mobileMenu = document.querySelector('.mobile-menu');
-      mobileMenu.classList.toggle('active');
-    }
+      // Mobile menu toggle
+  function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.classList.toggle('active');
+  }
 
-    // Carousel functionality
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dotsContainer = document.getElementById('carousel-dots');
+  // Carousel functionality
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carousel-dots');
+  let slideInterval = setInterval(nextSlide, 5000); // Auto-advance slides every 5 seconds
 
-    // Create dots
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.className = `w-3 h-3 rounded-full transition-colors ${
-        index === 0 ? 'bg-black' : 'bg-gray-300'
-      }`;
-      dot.onclick = () => goToSlide(index);
-      dotsContainer.appendChild(dot);
+  // Create dots
+  slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = `w-3 h-3 rounded-full transition-colors ${
+      index === 0 ? 'bg-black' : 'bg-gray-300'
+    }`;
+    dot.onclick = () => goToSlide(index);
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active');
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      }
     });
 
-    function updateSlides() {
-      slides.forEach((slide, index) => {
-        slide.classList.remove('active');
-        if (index === currentSlide) {
-          slide.classList.add('active');
-        }
-      });
-
-      // Update dots
-      const dots = dotsContainer.children;
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = `w-3 h-3 rounded-full transition-colors ${
-          i === currentSlide ? 'bg-black' : 'bg-gray-300'
-        }`;
-      }
+    // Update dots
+    const dots = dotsContainer.children;
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = `w-3 h-3 rounded-full transition-colors ${
+        i === currentSlide ? 'bg-black' : 'bg-gray-300'
+      }`;
     }
+  }
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      updateSlides();
-    }
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlides();
+  }
 
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateSlides();
-    }
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlides();
+  }
 
-    function goToSlide(index) {
-      currentSlide = index;
-      updateSlides();
-    }
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlides();
+  }
 
-    // Auto-advance slides every 5 seconds
-    setInterval(nextSlide, 5000);
+  function pauseSlideshow() {
+    clearInterval(slideInterval);
+  }
+
+  function resumeSlideshow() {
+    slideInterval = setInterval(nextSlide, 5000); // Adjust the interval as needed
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('mouseenter', pauseSlideshow);
+    slide.addEventListener('mouseleave', resumeSlideshow);
+  });
   </script>
 </body>
 </html>
