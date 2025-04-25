@@ -190,10 +190,6 @@
       height: 56px; /* Substituir altura do h-14 */
       width: auto;
     }
-
-    .logo-black {
-      filter: invert(0) brightness(1); /* Remove o filtro escuro */
-    }
   
 
     .intro-title {
@@ -217,6 +213,18 @@
   @media (max-width: 767px) {
     .desktop-menu {
       display: none;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .logo-black {
+      filter: brightness(100%) invert(100%);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .logostage {
+      filter: brightness(100%) invert(100%);
     }
   }
 
