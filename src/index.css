@@ -190,6 +190,10 @@
       height: 56px; /* Substituir altura do h-14 */
       width: auto;
     }
+
+    .logo-black {
+      filter: invert(0) brightness(1); /* Remove o filtro escuro */
+    }
   
 
     .intro-title {
