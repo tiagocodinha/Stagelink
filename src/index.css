@@ -216,17 +216,7 @@
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    .logo-black {
-      filter: brightness(100%) invert(100%);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .logostage {
-      filter: brightness(100%) invert(100%);
-    }
-  }
+  
 
   @keyframes scroll {
     0% {
