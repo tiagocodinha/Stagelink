@@ -11,57 +11,7 @@
   <link rel="stylesheet" href="src/index.css">
   
 
-  <style>
-    .group:hover .group-hover\:translate-x-1 {
-      transform: translateX(0.25rem);
-    }
-    .transition-transform {
-      transition-property: transform;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 150ms;
-    }
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1rem;
-    }
-    .carousel-slide {
-      display: none;
-      transition: transform 1s ease-in-out;
-    }
-    .carousel-slide.active {
-      display: block;
-    }
-    .mobile-menu {
-      display: none;
-    }
-    .mobile-menu.active {
-      display: block;
-    }
-    @media (min-width: 768px) {
-      .mobile-menu-button {
-        display: none;
-      }
-    }
-    @media (max-width: 767px) {
-      .desktop-menu {
-        display: none;
-      }
-    }
-    html {
-    scroll-behavior: smooth;
-    }
-    .social-icon {
-      transition: transform 0.3s ease;
-    }
-
-    .social-icon:hover {
-      transform: scale(1.2);
-    }
-
-  </style>
-
-<script>
+  <script>
   function toggleMobileMenu() {
     const menu = document.querySelector('.mobile-menu');
     menu.classList.toggle('active');
