@@ -284,30 +284,21 @@
               </p>
             </div>
           </div>
-          <form class="space-y-6">
+          <form id="contactForm" class="space-y-6">
             <div>
-              <input
-                type="text" 
-                placeholder="Nome" id="name"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
-              />
+              <input type="text" placeholder="Nome" id="name" name="name" required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"/>
             </div>
             <div>
-              <input
-                type="email" 
-                placeholder="Email" id="email"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
-              />
+              <input type="email" placeholder="Email" id="email" name="email" required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"/>
             </div>
             <div>
-              <textarea
-                placeholder="Mensagem" id="message"
-                rows="4"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
-              ></textarea>
+              <textarea placeholder="Mensagem" id="message" name="message" rows="4" required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"></textarea>
             </div>
-            <button type="submit" onclick="sendMail()"
-            class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition-colors gradient-mensagem">
+            <button type="submit" id="sendBtn"
+              class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition-colors gradient-mensagem">
               Enviar Mensagem
             </button>
           </form>
@@ -367,6 +358,55 @@
   <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
   </script>
+
+  <script>
+    (function () {
+      emailjs.init({ publicKey: "w8cq1CUL3lCf5PJgq" });
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      const btn  = document.getElementById('sendBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // impede o refresh da página
+
+        // (opcional) validação simples
+        if (!form.name.value || !form.email.value || !form.message.value) {
+          alert('Preenche todos os campos, por favor.');
+          return;
+        }
+
+        // desativa botão enquanto envia
+        btn.disabled = true;
+        btn.innerText = 'A enviar...';
+
+        try {
+          const serviceId  = 'service_iyooo0p';
+          const templateId = 'template_4wi67kr';
+
+          // Envia com os campos do form (os "name" têm de bater no template)
+          const result = await emailjs.send(serviceId, templateId, {
+            name: form.name.value,
+            email: form.email.value,
+            message: form.message.value,
+          });
+
+          console.log('EmailJS OK:', result);
+          alert('Email enviado com sucesso!');
+          form.reset();
+        } catch (err) {
+          console.error('EmailJS ERROR:', err);
+          alert('Não foi possível enviar. Verifica a configuração e tenta novamente.');
+        } finally {
+          btn.disabled = false;
+          btn.innerText = 'Enviar Mensagem';
+        }
+      });
+    });
+  </script>
+
+
   <script type="text/javascript">
     (function(){
         emailjs.init({
@@ -444,5 +484,11 @@
     slide.addEventListener('mouseleave', resumeSlideshow);
   });
   </script>
+
+  <!-- Toast container (fixo no topo-direito) -->
+  <div id="toast-root"
+     class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none">
+  </div>
+
 </body>
 </html>
