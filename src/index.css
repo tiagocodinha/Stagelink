@@ -103,17 +103,21 @@ html, body {
 }
 
 /* CTA gradient (botão do formulário) */
-.gradient-mensagem{
+.gradient-mensagem {
   background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
-  background-size: 200% 100%;        /* permite “deslizar” o gradiente */
-  background-position: 0% 50%;       /* posição inicial */
-  transition: background-position 1.2s cubic-bezier(.22,.61,.36,1); /* mais fluido e lento */
-  will-change: background-position;
+  background-size: 300% 100%;
+  background-position: left center;
+  transition: background-position 1s ease-in-out;
+  color: #fff;
+  border: none;
 }
 
-.gradient-mensagem:hover{
-  background-position: 100% 50%;     /* desliza para a direita no hover */
+.gradient-mensagem:hover {
+  background-position: right center;
 }
+
+
+
 
 /* Social hover */
 .social-icon {
