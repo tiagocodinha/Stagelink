@@ -258,13 +258,66 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* Opcional: exemplos de toasts iniciais (remover se não quiser auto-exibir)
-showToast('Email enviado com sucesso! Vamos responder em breve.', 'success', {
-  title: 'Mensagem enviada',
-  duration: 4000
+
+
+// --- Navegação sem # no URL ---
+document.addEventListener("DOMContentLoaded", () => {
+  const inPageLinks = document.querySelectorAll('a[href^="#"]');
+
+  inPageLinks.forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const targetId = a.getAttribute("href");
+      // ignora se for só "#"
+      if (!targetId || targetId === "#") return;
+
+      const el = document.querySelector(targetId);
+      if (!el) return;
+
+      // impede o hash no URL
+      e.preventDefault();
+
+      // compensa o header fixo (ajusta se necessário)
+      const header = document.querySelector("nav");
+      const offset = header ? header.offsetHeight : 0;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
+
+      // limpa o hash do URL (mantém path + query)
+      const clean = window.location.pathname + window.location.search;
+      history.replaceState(null, "", clean);
+    });
+  });
+
+  // Se a página for aberta já com hash (ex: link externo), faz scroll e limpa
+  if (window.location.hash) {
+    const el = document.querySelector(window.location.hash);
+    if (el) {
+      const header = document.querySelector("nav");
+      const offset = header ? header.offsetHeight : 0;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+      const clean = window.location.pathname + window.location.search;
+      history.replaceState(null, "", clean);
+    }
+  }
 });
-showToast('Não foi possível enviar. Tenta novamente ou usa o email direto.', 'error', {
-  title: 'Falha no envio',
-  duration: 5000
-});
-*/
+
+
+// --- Clique no logo: scroll até ao topo ---
+const logoLink = document.querySelector('a[href="/"], a[href="#"], .logostage-link');
+if (logoLink) {
+  logoLink.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // scroll suave para o topo
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+    // limpa qualquer hash no URL
+    const clean = window.location.pathname + window.location.search;
+    history.replaceState(null, "", clean);
+  });
+}
