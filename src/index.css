@@ -103,12 +103,21 @@ html, body {
 }
 
 /* CTA gradient (botão do formulário) */
-.gradient-mensagem {
-  background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 50%, rgba(36,196,218,1) 100%);
-  transition: background 0.6s ease;
+.gradient-mensagem{
+  background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
+  background-size: 200% 100%;        /* permite “deslizar” o gradiente */
+  background-position: 0% 50%;       /* posição inicial */
+  transition: background-position 1.2s cubic-bezier(.22,.61,.36,1); /* mais fluido e lento */
+  will-change: background-position;
 }
-.gradient-mensagem:hover {
-  background: linear-gradient(-45deg, rgba(36,196,218,1) 0%, rgba(45,170,205,1) 50%, rgba(67,104,172,1) 100%);
+
+.gradient-mensagem:hover{
+  background-position: 100% 50%;     /* desliza para a direita no hover */
+}
+
+/* opcional: feedback mais rápido no clique */
+.gradient-mensagem:active{
+  transition-duration: .2s;
 }
 
 /* Social hover */
@@ -187,4 +196,8 @@ html, body {
 @keyframes scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .gradient-mensagem{ transition: none; }
 }
