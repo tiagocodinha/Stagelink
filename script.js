@@ -212,7 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* --- Formulário de contacto + EmailJS --- */
   const form = document.getElementById("contactForm");
-  const btn = document.getElementById("sendBtn");
+  const btn  = document.getElementById("sendBtn");
+
   if (form && btn) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -222,34 +223,62 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = form.message?.value?.trim();
 
       if (!name || !email || !message) {
-        showToast("Preenche todos os campos, por favor.", "error", {
+        showToast?.("Preenche todos os campos, por favor.", "error", {
           title: "Campos em falta",
           duration: 4000,
         });
         return;
       }
 
+      // 1) valida reCAPTCHA
+      if (typeof grecaptcha === "undefined") {
+        showToast?.("reCAPTCHA não carregou. Atualiza a página e tenta de novo.", "error", {
+          title: "reCAPTCHA",
+          duration: 4500,
+        });
+        return;
+      }
+
+      const recaptchaToken = grecaptcha.getResponse(); // para um único widget
+      if (!recaptchaToken) {
+        showToast?.("Confirma que não és um robô.", "error", {
+          title: "Validação necessária",
+          duration: 3500,
+        });
+        return;
+      }
+
+      // 2) envia via EmailJS com o token do reCAPTCHA
       btn.disabled = true;
       const originalText = btn.innerText;
       btn.innerText = "A enviar...";
 
       try {
-        const serviceId = "service_iyooo0p";
+        const serviceId  = "service_iyooo0p";
         const templateId = "template_4wi67kr";
 
-        await emailjs.send(serviceId, templateId, { name, email, message });
+        await emailjs.send(serviceId, templateId, {
+          name,
+          email,
+          message,
+          // O EmailJS valida o token no servidor usando o Secret Key que colocaste no template
+          "g-recaptcha-response": recaptchaToken,
+        });
 
-        showToast("Vamos responder em breve.", "success", {
+        showToast?.("Vamos responder em breve.", "success", {
           title: "Mensagem enviada",
           duration: 4000,
         });
         form.reset();
+        grecaptcha.reset(); // limpa o checkbox
       } catch (err) {
         console.error("EmailJS ERROR:", err);
-        showToast("Não foi possível enviar. Tenta novamente ou usa o email direto.", "error", {
+        showToast?.("Não foi possível enviar. Tenta novamente ou usa o email direto.", "error", {
           title: "Falha no envio",
           duration: 5000,
         });
+        // se quiseres, também podes dar reset ao recaptcha no erro:
+        grecaptcha.reset();
       } finally {
         btn.disabled = false;
         btn.innerText = originalText;
