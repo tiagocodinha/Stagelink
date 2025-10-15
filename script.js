@@ -439,3 +439,45 @@ if (logoLink) {
   btns.forEach((b) => b.classList.add('filter-hover'));
 })();
 
+
+
+
+// === Destaca automaticamente o link ativo na navbar (apenas homepage) ===
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".nav-link");
+  const path = window.location.pathname;
+
+  // Só executar na homepage (raiz ou /index.html)
+  if (path !== "/" && !path.endsWith("/index.html")) return;
+
+  // Secções a observar
+  const sectionIds = ["inicio", "servicos", "eventos", "sobre", "contactos"];
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      const id = visible.target.id;
+      const activeLink = document.querySelector(`.nav-link[href*="#${id}"]`);
+
+      if (activeLink) {
+        links.forEach(l => l.classList.remove("active"));
+        activeLink.classList.add("active");
+      }
+    },
+    {
+      threshold: [0.5, 0.6, 0.75],
+      rootMargin: "-20% 0px -20% 0px",
+    }
+  );
+
+  // Observar cada secção visível na homepage
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+});
