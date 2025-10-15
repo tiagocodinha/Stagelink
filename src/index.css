@@ -115,11 +115,6 @@ html, body {
   background-position: 100% 50%;     /* desliza para a direita no hover */
 }
 
-/* opcional: feedback mais rápido no clique */
-.gradient-mensagem:active{
-  transition-duration: .2s;
-}
-
 /* Social hover */
 .social-icon {
   transition: transform 0.3s ease;
