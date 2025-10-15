@@ -321,3 +321,92 @@ if (logoLink) {
     history.replaceState(null, "", clean);
   });
 }
+
+
+
+
+
+
+/* --- Filtro de Projetos com hover azul e categoria ativa --- */
+(function initPortfolioFilter() {
+  const btns = document.querySelectorAll('#portfolio-filters button');
+  const items = Array.from(document.querySelectorAll('.portfolio-item'));
+  if (!btns.length || !items.length) return;
+
+  // Helpers de animação
+  const fadeIn = (el, duration = 350) =>
+    el.animate(
+      [{ opacity: 0, transform: 'scale(0.98)' }, { opacity: 1, transform: 'scale(1)' }],
+      { duration, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'forwards' }
+    ).finished;
+
+  const fadeOut = (el, duration = 250) =>
+    el.animate(
+      [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(0.98)' }],
+      { duration, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }
+    ).finished;
+
+  // Atualiza visual dos botões
+  const setActiveBtn = (active) => {
+    btns.forEach((b) => {
+      b.classList.remove('bg-cyan-500', 'text-white', 'shadow-sm', 'active-filter');
+      b.classList.add('bg-gray-100', 'text-gray-800', 'filter-hover');
+    });
+    active.classList.add('bg-cyan-500', 'text-white', 'shadow-sm', 'active-filter');
+    active.classList.remove('bg-gray-100', 'text-gray-800', 'filter-hover');
+  };
+
+  // Mostrar/Esconder com animação
+  const showItem = async (el) => {
+    el.style.display = '';
+    await fadeIn(el);
+  };
+  const hideItem = async (el) => {
+    await fadeOut(el);
+    el.style.display = 'none';
+  };
+
+  // Estado inicial
+  items.forEach((el) => {
+    el.style.opacity = 1;
+    el.style.transform = 'scale(1)';
+    el.style.display = '';
+  });
+
+  // Estado inicial do botão "Todos"
+  const defaultBtn = document.querySelector('[data-filter="*"]');
+  if (defaultBtn) setActiveBtn(defaultBtn);
+
+  let running = false;
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (running) return;
+      running = true;
+
+      setActiveBtn(btn);
+
+      const filter = btn.getAttribute('data-filter');
+      const className = filter === '*' ? null : filter.slice(1);
+
+      const toShow = [];
+      const toHide = [];
+
+      items.forEach((el) => {
+        const has = className ? el.classList.contains(className) : true;
+        const isHidden = el.style.display === 'none';
+        if (has && isHidden) toShow.push(el);
+        if (!has && !isHidden) toHide.push(el);
+      });
+
+      await Promise.all(toHide.map(hideItem));
+      await Promise.all(toShow.map(showItem));
+
+      running = false;
+    });
+  });
+
+  // Inicializa hover base
+  btns.forEach((b) => b.classList.add('filter-hover'));
+})();
+

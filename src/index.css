@@ -196,3 +196,19 @@ html, body {
 @media (prefers-reduced-motion: reduce){
   .gradient-mensagem{ transition: none; }
 }
+
+
+
+
+/* Hover azul apenas em botões inativos (sobrepõe Tailwind) */
+#portfolio-filters button.filter-hover:not(.active-filter):hover {
+  background-color: #06b6d4 !important; /* cyan-500 */
+  color: #fff !important;
+  transition: background-color .25s ease, color .25s ease;
+}
+
+/* Botão ativo mantém azul mesmo em hover */
+#portfolio-filters button.active-filter:hover {
+  background-color: #06b6d4 !important;
+  color: #fff !important;
+}
