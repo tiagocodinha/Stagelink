@@ -1,43 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Stagelink">
-  <meta name="robots" content="index, follow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Stagelink" />
+  <meta name="robots" content="index, follow" />
   <title>Stagelink - Marketing Digital & Produção de Eventos</title>
-  <meta name="description" content="Transformamos ideias em resultados digitais. Marketing Digital e Eventos Corporativos que impulsionam o seu negócio ao próximo nível.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Transformamos ideias em resultados digitais. Marketing Digital e Eventos Corporativos que impulsionam o seu negócio ao próximo nível." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="src/index.css">
-  
 
-  <script>
-  function toggleMobileMenu() {
-    const menu = document.querySelector('.mobile-menu');
-    menu.classList.toggle('active');
-  }
-
-  // Fecha o menu móvel ao clicar em qualquer link
-  function closeMobileMenu() {
-    const menu = document.querySelector('.mobile-menu');
-    if (menu.classList.contains('active')) {
-      menu.classList.remove('active');
-    }
-  }
-
-  // Adiciona o evento de clique para fechar o menu em todos os links
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileLinks = document.querySelectorAll('.mobile-menu a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-  });
-</script>
-
-
-
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="src/index.css" />
 </head>
 <body>
   <div class="min-h-screen bg-white">
@@ -46,9 +23,9 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
           <a href="#">
-            <img src="images/logo_black.png" alt="Logo" class="h-14 logostage">
+            <img src="images/logo_black.png" alt="Logo Stagelink" class="h-14 logostage" />
           </a>
-          
+
           <!-- Desktop Navigation -->
           <div class="desktop-menu hidden md:flex space-x-8">
             <a href="#sobre" class="nav-link">Sobre</a>
@@ -58,7 +35,7 @@
           </div>
 
           <!-- Mobile menu button -->
-          <button class="mobile-menu-button md:hidden" onclick="toggleMobileMenu()">
+          <button class="mobile-menu-button md:hidden" aria-label="Menu" aria-controls="mobile-menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -67,7 +44,7 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <div class="mobile-menu md:hidden">
+      <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
           <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
@@ -84,34 +61,27 @@
           <div>
             <h1 class="text-5xl font-bold mb-6">Transformamos ideias em resultados digitais</h1>
             <p class="text-xl mb-8">Marketing digital e eventos corporativos que impulsionam o seu negócio ao próximo nível.</p>
-            <button class="bg-white text-black px-1 py-1 rounded-full font-semibold flex items-center group">
-              <a href="#contactos" class="text-black px-8 py-3 rounded-full font-semibold flex items-center group">
-                Fale Conosco
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </button>
+            <a href="#contactos" class="bg-white text-black px-8 py-3 rounded-full font-semibold inline-flex items-center group">
+              Fale Conosco
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
           <div class="hidden md:block">
-            <img 
-              src="images/conferencia.webp"
-              alt="Conferência"
-              class="rounded-lg shadow-xl"
-            />
+            <img src="images/conferencia.webp" alt="Conferência" class="rounded-lg shadow-xl" />
           </div>
         </div>
       </div>
     </section>
 
-
     <!-- About Section -->
     <section id="sobre" class="py-40 bg-white text-black">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="intro-title">SOMOS A<br>STAGELINK.</h2>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="intro-title">SOMOS A<br>STAGELINK.</h2>
           </div>
           <div>
             <p class="intro-description text-lg mb-6">
@@ -212,21 +182,20 @@
         <h2 class="intro-title-service text-6xl font-bold text-center mb-16">Os Nossos Eventos.</h2>
         <div class="relative carousel-container">
           <div class="overflow-hidden rounded-lg shadow-xl aspect-video">
-            <img src="images/mp/mp1.jpg" alt="Michael Page evento corporativo" class="carousel-slide active w-full h-full object-cover"/>
-            <img src="images/mp/mp2.jpg" alt="CEO Michael Page" class="carousel-slide w-full h-full object-cover"/>
-            <img src="images/lpl/lpl1.jpg" alt="Catering em Evento" class="carousel-slide w-full h-full object-cover"/>
-            <img src="images/lpl/lpl3.jpg" alt="Catering Corporativo" class="carousel-slide w-full h-full object-cover"/>
-            <img src="images/lpl/lpl2.jpg" alt="Evento Corporativo" class="carousel-slide w-full h-full object-cover"/>
+            <img src="images/mp/mp1.jpg" alt="Michael Page evento corporativo" class="carousel-slide active w-full h-full object-cover" />
+            <img src="images/mp/mp2.jpg" alt="CEO Michael Page" class="carousel-slide w-full h-full object-cover" />
+            <img src="images/lpl/lpl1.jpg" alt="Catering em Evento" class="carousel-slide w-full h-full object-cover" />
+            <img src="images/lpl/lpl3.jpg" alt="Catering Corporativo" class="carousel-slide w-full h-full object-cover" />
+            <img src="images/lpl/lpl2.jpg" alt="Evento Corporativo" class="carousel-slide w-full h-full object-cover" />
           </div>
 
-
           <!-- Navigation Buttons -->
-          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+          <button class="carousel-prev absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors" aria-label="Slide anterior">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
-          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+          <button class="carousel-next absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors" aria-label="Próximo slide">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -237,26 +206,24 @@
         </div>
       </div>
     </section>
-    
 
-            <!-- Logos Section -->
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-4xl font-bold text-center mb-16">Quem Confia em Nós.</h2>
-    <div class="logo-carousel">
-      <div class="logo-track">
-        <div class="logo-item"><img src="images/lplegends.png" alt="Liga Portugal Legends Logo" class="logo-liga logo-black"></div>
-        <div class="logo-item"><img src="images/airways.png" alt="Liga Portugal Legends Logo" class="logo-liga logo-black"></div>
-        <div class="logo-item"><img src="images/mp.png" alt="Michael Page Logo" class="logo-michael logo-black"></div>
-        <div class="logo-item"><img src="images/falrui.png" alt="Falrui Logo" class="logo-black"></div>
-        <div class="logo-item"><img src="images/climarsol.png" alt="Climarsol Logo" class="logo-climarsol logo-black"></div>
-        <div class="logo-item"><img src="images/ag.png" alt="Athlete Gate Logo" class="logo-black"></div>
-        <div class="logo-item"><img src="images/nalu.png" alt="Nalu Logo" class="logo-black"></div>
+    <!-- Logos Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16">Quem Confia em Nós.</h2>
+        <div class="logo-carousel">
+          <div class="logo-track">
+            <div class="logo-item"><img src="images/lplegends.png" alt="Liga Portugal Legends Logo" class="logo-liga logo-black"></div>
+            <div class="logo-item"><img src="images/airways.png" alt="Airways Aviation Logo" class="logo-liga logo-black"></div>
+            <div class="logo-item"><img src="images/mp.png" alt="Michael Page Logo" class="logo-michael logo-black"></div>
+            <div class="logo-item"><img src="images/falrui.png" alt="Falrui Logo" class="logo-black"></div>
+            <div class="logo-item"><img src="images/climarsol.png" alt="Climarsol Logo" class="logo-climarsol logo-black"></div>
+            <div class="logo-item"><img src="images/ag.png" alt="Athlete Gate Logo" class="logo-black"></div>
+            <div class="logo-item"><img src="images/nalu.png" alt="Nalu Logo" class="logo-black"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- Contact Section -->
     <section id="contactos" class="py-10 mt-5">
@@ -264,9 +231,6 @@
         <div class="grid md:grid-cols-2 gap-12">
           <div>
             <h2 class="text-4xl font-bold mb-6">CONTACTE-NOS.</h2>
-            <p class="text-lg mb-8">
-              
-            </p>
             <div class="space-y-4">
               <p class="flex items-center">
                 <span class="font-semibold mr-2">Email:</span>
@@ -278,41 +242,41 @@
               </p>
               <p class="flex items-center">
                 <span class="font-semibold mr-2">Morada:</span>
-                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Artur+Feliciano,+Edifíco+Camarção,+Loja+11+2450-027+Famalicão" target="_blank">
+                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Artur+Feliciano,+Edifíco+Camarção,+Loja+11+2450-027+Famalicão" target="_blank" rel="noopener">
                   Rua Artur Feliciano, Edifíco Camarção, Loja 11 2450-027 Famalicão
                 </a>
               </p>
             </div>
           </div>
-          <form id="contactForm" class="space-y-6">
+
+          <form id="contactForm" class="space-y-6" novalidate>
             <div>
               <input type="text" placeholder="Nome" id="name" name="name" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"/>
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
             </div>
             <div>
               <input type="email" placeholder="Email" id="email" name="email" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"/>
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
             </div>
             <div>
               <textarea placeholder="Mensagem" id="message" name="message" rows="4" required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"></textarea>
             </div>
             <button type="submit" id="sendBtn"
-              class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition-colors gradient-mensagem">
+              class="w-full text-white py-3 rounded-lg hover:bg-gray-900 transition-colors gradient-mensagem">
               Enviar Mensagem
             </button>
           </form>
         </div>
       </div>
     </section>
-          
 
     <!-- Footer -->
     <footer class="bg-black text-white py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-4 gap-8">
           <div>
-            <img src="images/logo_white.png" alt="Logo" class="h-14" />
+            <img src="images/logo_white.png" alt="Logo Stagelink branco" class="h-14" />
             <p class="text-gray-400">
               Transformando negócios através do marketing digital e eventos corporativos.
             </p>
@@ -338,11 +302,11 @@
           <div>
             <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
             <div class="flex space-x-4">
-              <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank">
-                <img src="images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon">
+              <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener">
+                <img src="images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon" />
               </a>
-              <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank">
-                <img src="images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon">
+              <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener">
+                <img src="images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon" />
               </a>
             </div>
           </div>
@@ -354,141 +318,12 @@
     </footer>
   </div>
 
-
-  <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-  </script>
-
-  <script>
-    (function () {
-      emailjs.init({ publicKey: "w8cq1CUL3lCf5PJgq" });
-    })();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('contactForm');
-      const btn  = document.getElementById('sendBtn');
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault(); // impede o refresh da página
-
-        // (opcional) validação simples
-        if (!form.name.value || !form.email.value || !form.message.value) {
-          alert('Preenche todos os campos, por favor.');
-          return;
-        }
-
-        // desativa botão enquanto envia
-        btn.disabled = true;
-        btn.innerText = 'A enviar...';
-
-        try {
-          const serviceId  = 'service_iyooo0p';
-          const templateId = 'template_4wi67kr';
-
-          // Envia com os campos do form (os "name" têm de bater no template)
-          const result = await emailjs.send(serviceId, templateId, {
-            name: form.name.value,
-            email: form.email.value,
-            message: form.message.value,
-          });
-
-          console.log('EmailJS OK:', result);
-          alert('Email enviado com sucesso!');
-          form.reset();
-        } catch (err) {
-          console.error('EmailJS ERROR:', err);
-          alert('Não foi possível enviar. Verifica a configuração e tenta novamente.');
-        } finally {
-          btn.disabled = false;
-          btn.innerText = 'Enviar Mensagem';
-        }
-      });
-    });
-  </script>
-
-
-  <script type="text/javascript">
-    (function(){
-        emailjs.init({
-          publicKey: "w8cq1CUL3lCf5PJgq",
-        });
-    })();
-  </script>
-  <script src="script.js"></script>
-
-  <script>
-      // Mobile menu toggle
-  function toggleMobileMenu() {
-    const mobileMenu = document.querySelector('.mobile-menu');
-    mobileMenu.classList.toggle('active');
-  }
-
-  // Carousel functionality
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dotsContainer = document.getElementById('carousel-dots');
-  let slideInterval = setInterval(nextSlide, 5000); // Auto-advance slides every 5 seconds
-
-  // Create dots
-  slides.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.className = `w-3 h-3 rounded-full transition-colors ${
-      index === 0 ? 'bg-black' : 'bg-gray-300'
-    }`;
-    dot.onclick = () => goToSlide(index);
-    dotsContainer.appendChild(dot);
-  });
-
-  function updateSlides() {
-    slides.forEach((slide, index) => {
-      slide.classList.remove('active');
-      if (index === currentSlide) {
-        slide.classList.add('active');
-      }
-    });
-
-    // Update dots
-    const dots = dotsContainer.children;
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].className = `w-3 h-3 rounded-full transition-colors ${
-        i === currentSlide ? 'bg-black' : 'bg-gray-300'
-      }`;
-    }
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSlides();
-  }
-
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSlides();
-  }
-
-  function goToSlide(index) {
-    currentSlide = index;
-    updateSlides();
-  }
-
-  function pauseSlideshow() {
-    clearInterval(slideInterval);
-  }
-
-  function resumeSlideshow() {
-    slideInterval = setInterval(nextSlide, 5000); // Adjust the interval as needed
-  }
-
-  slides.forEach(slide => {
-    slide.addEventListener('mouseenter', pauseSlideshow);
-    slide.addEventListener('mouseleave', resumeSlideshow);
-  });
-  </script>
-
   <!-- Toast container (fixo no topo-direito) -->
-  <div id="toast-root"
-     class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none">
-  </div>
+  <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- JS personalizado -->
+  <script src="script.js" defer></script>
 </body>
 </html>

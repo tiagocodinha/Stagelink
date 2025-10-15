@@ -2,227 +2,189 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-  .mobile-menu {
-      display: none;
-  }
-  .mobile-menu.active {
-      display: block;
-  }
-
-  .nav-link {
-    position: relative;
-    color: #1a202c; /* Cor do texto */
-    text-decoration: none;
-    transition: color 0.6s ease, transform 0.6s ease; /* Aumenta a duração da transição */
-  }
-  
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -2px;
-    left: 0%;
-    background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 39%, rgba(36,196,218,1) 100%);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease; /* Mantém a duração da transição do sublinhado */
-  }
-  
-  .nav-link:hover {
-    color: #4a5568; /* Cor do texto ao passar o mouse */
-    transform: translateY(-2px);
-  }
-  
-  .nav-link:hover::after {
-    transform: scaleX(1);
-  }
-
-  .intro-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 60px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #000;
+/* Base */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  scroll-behavior: smooth;
 }
 
+.nav-link {
+  position: relative;
+  color: #1a202c;
+  text-decoration: none;
+  transition: color 0.6s ease, transform 0.6s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 39%, rgba(36,196,218,1) 100%);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover {
+  color: #4a5568;
+  transform: translateY(-2px);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Typography blocks */
+.intro-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
 .intro-description {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 200;
   line-height: 1.2;
   color: #000;
 }
-
-.service-title-main {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #ffffff;
-}
-
 .service-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
   color: #ffffff;
 }
-
 .service-description {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 13px;
   font-weight: 200;
   color: #ffffff;
 }
 
-  
-  .logo-carousel {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
+/* Logo carousel */
+.logo-carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.logo-track {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+.logo-track:hover {
+  animation-play-state: paused;
+}
+.logo-item {
+  flex: 0 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-black {
+  width: 8rem;
+  height: auto;
+  object-fit: contain;
+  filter: invert(1) brightness(0);
+}
+.logo-climarsol {
+  width: 200px;
+  height: auto;
+}
+.logo-michael {
+  width: 180px;
+  height: auto;
+}
+.logo-liga {
+  width: 200px;
+  height: auto;
+}
 
+/* CTA gradient (botão do formulário) */
+.gradient-mensagem {
+  background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 50%, rgba(36,196,218,1) 100%);
+  transition: background 0.6s ease;
+}
+.gradient-mensagem:hover {
+  background: linear-gradient(-45deg, rgba(36,196,218,1) 0%, rgba(45,170,205,1) 50%, rgba(67,104,172,1) 100%);
+}
+
+/* Social hover */
+.social-icon {
+  transition: transform 0.3s ease;
+}
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.carousel-slide {
+  display: none;
+  transition: transform 1s ease-in-out;
+}
+.carousel-slide.active {
+  display: block;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+}
+.mobile-menu.active {
+  display: block;
+}
+
+/* Utilities for group translate */
+.group:hover .group-hover\:translate-x-1 {
+  transform: translateX(0.25rem);
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Responsive tweaks */
+@media (max-width: 840px) {
   .logo-track {
-    display: flex;
-    animation: scroll 20s linear infinite;
+    gap: 2rem;
   }
-
-  .logo-track:hover {
-    animation-play-state: paused;
+  .logo {
+    content: none;
+    background-image: url("images/logo_white.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 56px;
+    width: auto;
   }
-  
-  .logo-item {
-    flex: 0 0 25%; /* 4 logos por vez */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .intro-title,
+  .intro-title-service {
+    font-size: 40px;
+    text-align: center;
   }
-  
-  .logo-black {
-    width: 8rem; /* Ajuste o tamanho conforme necessário */
-    height: rem; /* Ajuste o tamanho conforme necessário */
-    object-fit: contain;
-    filter: invert(1) brightness(0);
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-button {
+    display: none;
   }
-
-  .logo-climarsol {
-    width: 200px; /* Ajuste conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
+}
+@media (max-width: 767px) {
+  .desktop-menu {
+    display: none;
   }
+}
 
-  .logo-michael {
-    width: 180px; /* Ajuste conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
-  }
-
-  .logo-liga {
-    width: 200px; /* Ajuste conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
-  }
-
-  .gradient-mensagem {
-    background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 50%, rgba(36,196,218,1) 100%);
-    transition: background 0.6s ease;
-  }
-  
-  .gradient-mensagem:hover {
-    background: linear-gradient(-45deg, rgba(36,196,218,1) 0%, rgba(45,170,205,1) 50%, rgba(67,104,172,1) 100%);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    }
-    .social-icon {
-      transition: transform 0.3s ease;
-    }
-  
-    .social-icon:hover {
-      transform: scale(1.2);
-    }
-
-    .group:hover .group-hover\:translate-x-1 {
-      transform: translateX(0.25rem);
-    }
-    .transition-transform {
-      transition-property: transform;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 150ms;
-    }
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1rem;
-    }
-    .carousel-slide {
-      display: none;
-      transition: transform 1s ease-in-out;
-    }
-    .carousel-slide.active {
-      display: block;
-    }
-    .mobile-menu {
-      display: none;
-    }
-    .mobile-menu.active {
-      display: block;
-    }
-  
-
-  @media (max-width: 840px) {
-    .logo-track {
-        gap: 2rem; /* Increase gap between logos on smaller screens */
-    }
-
-    .logo {
-      content: none;
-      background-image: url('images/logo_white.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      height: 56px; /* Substituir altura do h-14 */
-      width: auto;
-    }
-  
-
-    .intro-title {
-      font-size: 40px; /* Reduz o tamanho para melhor adaptação */
-      text-align: center; /* Centraliza o texto, se necessário */
-    }
-
-  
-    .intro-title-service {
-      font-size: 40px; /* Reduz o tamanho para melhor adaptação */
-      text-align: center; /* Centraliza o texto, se necessário */
-    }
-  }
-
-  
-  @media (min-width: 768px) {
-    .mobile-menu-button {
-      display: none;
-    }
-  }
-  @media (max-width: 767px) {
-    .desktop-menu {
-      display: none;
-    }
-  }
-
-  
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  } 
+/* Logos marquee keyframes */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
