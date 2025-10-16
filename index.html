@@ -15,6 +15,46 @@
 
   <!-- CSS personalizado -->
   <link rel="stylesheet" href="src/index.css" />
+
+  <!-- Fixes: evitar faixa branca no mobile e “piscar” no desktop -->
+  <style>
+    /* 1) Mobile menu fora do fluxo (sem faixa branca quando fechado) */
+    nav .nav-wrap { position: relative; } /* wrapper relativo para menu absoluto */
+
+    #mobile-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;               /* logo abaixo da barra */
+      z-index: 40;
+
+      /* estado fechado */
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      overflow: hidden;
+
+      transition: max-height .3s ease,
+                  opacity .28s cubic-bezier(.22,.61,.36,1),
+                  transform .28s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+    #mobile-menu.is-open {
+      max-height: 70vh;        /* suficiente para todos os links */
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    @media (min-width: 768px){
+      #mobile-menu{ display: none !important; }
+    }
+
+    /* 2) Remover “saltinho” no hover do link (cortava o hover e piscava) */
+    .nav-link:hover { transform: none !important; }
+  </style>
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -23,7 +63,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-3VRDW42JV6');
 </script>
 
@@ -31,37 +70,55 @@
   <div class="min-h-screen bg-white">
     <!-- Navigation -->
     <nav class="fixed w-full bg-white shadow-md z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-wrap">
         <div class="flex justify-between h-16 items-center">
-          <a href="/">
+          <a href="/" class="logo-link">
             <img src="images/logo_black.png" alt="Logo Stagelink" class="h-14 logostage" />
           </a>
 
           <!-- Desktop Navigation -->
-          <div class="desktop-menu hidden md:flex space-x-8">
-            <a href="#sobre" class="nav-link">Sobre</a>
-            <a href="#servicos" class="nav-link">Serviços</a>
-            <a href="#eventos" class="nav-link">Eventos</a>
-            <a href="#contactos" class="nav-link">Contactos</a>
+          <div class="hidden md:flex space-x-8 items-center">
+            <a href="#sobre" class="nav-link">SOBRE</a>
+            <a href="#servicos" class="nav-link">SERVIÇOS</a>
+            <a href="#eventos" class="nav-link">EVENTOS</a>
+            <a href="#contactos" class="nav-link">CONTACTOS</a>
+
+            <!-- Separador -->
+            <div class="w-[2px] h-6 bg-[#2daacd] rounded-full"></div>
+
+            <!-- Novo link -->
+            <a href="/projetos/" class="nav-link font-medium text-gray-800 hover:text-[#2daacd] transition-colors duration-300">
+              PROJETOS
+            </a>
           </div>
 
           <!-- Mobile menu button -->
-          <button class="mobile-menu-button md:hidden" aria-label="Menu" aria-controls="mobile-menu">
+          <button class="mobile-menu-button md:hidden" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           </button>
         </div>
-      </div>
 
-      <!-- Mobile Navigation -->
-      <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
-          <a href="#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
-          <a href="/projetos/" class="block px-3 py-2 text-gray-900">Projetos</a>
-          <a href="#eventos" class="block px-3 py-2 text-gray-900">Eventos</a>
-          <a href="#contactos" class="block px-3 py-2 text-gray-900">Contactos</a>
+        <!-- Mobile Navigation (fica ABSOLUTE dentro do wrapper relativo) -->
+        <div
+          id="mobile-menu"
+          aria-hidden="true"
+          class="md:hidden bg-white border-t border-gray-200 transform-gpu">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SOBRE</a>
+            <a href="#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SERVIÇOS</a>
+            <a href="#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">EVENTOS</a>
+            <a href="#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">CONTACTOS</a>
+
+            <!-- Linha horizontal -->
+            <hr class="my-2 border-t-2 border-[#2daacd] w-full">
+
+            <!-- Projetos -->
+            <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-semibold hover:text-[#2daacd] rounded-md">
+              PROJETOS
+            </a>
+          </div>
         </div>
       </div>
     </nav>
@@ -165,17 +222,16 @@
       <!-- CTA para Projetos -->
       <div class="mt-12 mb-1 flex justify-center">
         <a href="/projetos/"
-          class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
+           class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
           Vê os Nossos Projetos
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-              viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </a>
-  </div>
-
+      </div>
     </section>
 
     <!-- Image Carousel Section -->
@@ -254,18 +310,18 @@
           <form id="contactForm" class="space-y-6" novalidate>
             <div>
               <input type="text" placeholder="Nome" id="name" name="name" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
             </div>
             <div>
               <input type="email" placeholder="Email" id="email" name="email" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black" />
             </div>
             <div>
               <textarea placeholder="Mensagem" id="message" name="message" rows="4" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"></textarea>
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"></textarea>
             </div>
             <button type="submit" id="sendBtn"
-              class="w-full text-white py-3 rounded-lg gradient-mensagem focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                    class="w-full text-white py-3 rounded-lg gradient-mensagem focus:outline-none focus:ring-2 focus:ring-cyan-400">
               Enviar Mensagem
             </button>
             <!-- reCAPTCHA -->
@@ -334,5 +390,25 @@
   <!-- Google reCAPTCHA v2 -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+  <!-- Guard simples para o menu (evita registar handlers duplicados) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn  = document.querySelector(".mobile-menu-button");
+      const menu = document.getElementById("mobile-menu");
+      if (!btn || !menu || menu.dataset.inited === "1") return;
+      menu.dataset.inited = "1";
+
+      const open = () => { menu.classList.add("is-open"); btn.setAttribute("aria-expanded","true");  document.body.classList.add("overflow-hidden"); };
+      const close = () => { menu.classList.remove("is-open"); btn.setAttribute("aria-expanded","false"); document.body.classList.remove("overflow-hidden"); };
+      const toggle = () => (menu.classList.contains("is-open") ? close() : open());
+
+      btn.addEventListener("click", (e) => { e.stopPropagation(); e.stopImmediatePropagation(); toggle(); }, { passive:true });
+      menu.querySelectorAll("a").forEach(a => a.addEventListener("click", close, { passive:true }));
+      document.addEventListener("click", (e) => {
+        if (menu.classList.contains("is-open") && !menu.contains(e.target) && !btn.contains(e.target)) close();
+      }, true);
+      document.addEventListener("keydown", (e) => e.key === "Escape" && close());
+    });
+  </script>
 </body>
 </html>

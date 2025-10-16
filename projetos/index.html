@@ -26,183 +26,243 @@
 </script>
 
 <body class="bg-white text-black">
-  <!-- Navbar -->
-  <nav class="fixed w-full bg-white shadow-md z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-        <a href="../" class="logo-link">
-          <img src="/images/logo_black.png" alt="Logo Stagelink" class="h-14 logostage"/>
+  
+  <!-- Navbar (sem item Projetos, links para a homepage) -->
+  <nav class="fixed inset-x-0 top-0 bg-white shadow-md z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo -->
+      <a href="https://stagelink.pt" class="logo-link">
+        <img src="/images/logo_black.png" alt="Logo Stagelink" class="h-14" />
+      </a>
+
+      <!-- Desktop -->
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="https://stagelink.pt/#sobre" class="nav-link">SOBRE</a>
+        <a href="https://stagelink.pt/#servicos" class="nav-link">SERVIÇOS</a>
+        <a href="https://stagelink.pt/#eventos" class="nav-link">EVENTOS</a>
+        <a href="https://stagelink.pt/#contactos" class="nav-link">CONTACTOS</a>
+        <div class="w-[2px] h-6 bg-[#2daacd] rounded-full"></div>
+        <a href="/projetos/" class="nav-link font-medium text-gray-800 hover:text-[#2daacd]" aria-current="page">
+          PROJETOS
         </a>
-
-        <!-- Desktop -->
-        <div class="hidden md:flex space-x-8 items-center">
-          <a href="/#sobre" class="nav-link">Sobre</a>
-          <a href="/#servicos" class="nav-link">Serviços</a>
-          <a href="/#eventos" class="nav-link">Eventos</a>
-          <a href="/#contactos" class="nav-link">Contactos</a>
-        </div>
-
-        <!-- Mobile -->
-        <button class="mobile-menu-button md:hidden" aria-label="Menu" aria-controls="mobile-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
       </div>
-    </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="/#sobre" class="block px-3 py-2 text-gray-900">Sobre</a>
-        <a href="/#servicos" class="block px-3 py-2 text-gray-900">Serviços</a>
-        <a href="/#eventos" class="block px-3 py-2 text-gray-900">Eventos</a>
-        <a href="/#contactos" class="block px-3 py-2 text-gray-900">Contactos</a>
-      </div>
+      <!-- Botão hambúrguer -->
+      <button
+        class="mobile-menu-button md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2daacd]"
+        aria-label="Abrir menu" aria-controls="mobile-menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
-  </nav>
+  </div>
 
-    <!-- Hero -->
-    <header class="pt-24 bg-black text-white">
+  <!-- Mobile menu (overlay, não empurra layout) -->
+  <div id="mobile-menu"
+       class="mobile-menu md:hidden absolute top-16 inset-x-0 bg-white border-t border-gray-200 z-40 hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="https://stagelink.pt/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SOBRE</a>
+      <a href="https://stagelink.pt/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SERVIÇOS</a>
+      <a href="https://stagelink.pt/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">EVENTOS</a>
+      <a href="https://stagelink.pt/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">CONTACTOS</a>
+      <hr class="my-2 border-t-2 border-[#2daacd] w-full rounded-full">
+      <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-semibold hover:text-[#2daacd] rounded-md" aria-current="page">
+        PROJETOS
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Hero / Título -->
+  <header class="pt-24 bg-black text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Os Nossos Projetos.</h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl">
+      <h1 class="text-4xl md:text-6xl font-extrabold">Os Nossos Projetos.</h1>
+      <p class="mt-4 text-lg text-gray-300">
         Explore o que já criámos para os nossos clientes — de eventos corporativos a campanhas digitais e branding.
-        </p>
+      </p>
     </div>
-    </header>
+  </header>
 
-    <!-- Filtros -->
-    <section class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div class="flex flex-wrap gap-3" id="portfolio-filters" role="tablist" aria-label="Filtros de projetos">
-        <button class="px-4 py-2 rounded-full text-sm font-medium text-white bg-cyan-500 shadow-sm" data-filter="*">Todos</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200" data-filter=".eventos">Eventos</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200" data-filter=".marketing">Marketing Digital</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200" data-filter=".branding">Branding</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200" data-filter=".video">Vídeo</button>
-        </div>
-    </div>
-    </section>
-
-  <!-- Grelha de Projetos -->
-  <main class="bg-white pb-20">
+  <!-- Grelha 3 colunas -->
+  <main class="py-14 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div id="portfolio-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Card 1 -->
-        <article class="portfolio-item eventos corporativo rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/mp/mp1.jpg" alt="Conferência Anual Michael Page" class="w-full h-full object-cover"/>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Conferência Anual Michael Page</h3>
-            <p class="mt-2 text-sm text-gray-600">Organização completa de conferência corporativa com gestão de palco, audiovisual e catering.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Eventos</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Corporativo</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Conferências</span>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        <!-- CARD - exemplo vídeo -->
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="video"
+          data-title="Liga Portugal Legends"
+          data-client="Liga Portugal Legends"
+          data-tags="Evento, Aftermovie"
+          data-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        >
+          <img src="/images/lpl/lpl1.jpg" alt="Liga Portugal Legends"
+               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Liga Portugal Legends</p>
+              <h3 class="text-lg font-bold">Aftermovie</h3>
+              <p class="text-xs text-gray-600 mt-1">Vídeo</p>
             </div>
           </div>
         </article>
 
-        <!-- Card 2 -->
-        <article class="portfolio-item marketing video rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/lpl/lpl1.jpg" alt="Vídeo Promocional - Campanha Digital" class="w-full h-full object-cover"/>
-            <span class="absolute top-3 right-3 text-xs px-2 py-1 rounded-full bg-cyan-500 text-white">Vídeo</span>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Vídeo Promocional — Campanha Digital</h3>
-            <p class="mt-2 text-sm text-gray-600">Produção de vídeo para campanha com storytelling e planos aéreos.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Marketing Digital</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Vídeo</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Produção</span>
+        <!-- CARD - exemplo imagem única -->
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image"
+          data-title="Michael Page"
+          data-client="Michael Page"
+          data-tags="Evento, Produção"
+          data-src="/images/mp/mp1.jpg"
+        >
+          <img src="/images/mp/mp2.jpg" alt="Michael Page"
+               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Michael Page</p>
+              <h3 class="text-lg font-bold">Evento Corporativo</h3>
+              <p class="text-xs text-gray-600 mt-1">Fotografia</p>
             </div>
           </div>
         </article>
 
-        <!-- Card 3 -->
-        <article class="portfolio-item eventos rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/lpl/lpl2.jpg" alt="Lançamento de Produto Tech Startup" class="w-full h-full object-cover"/>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Lançamento de Produto — Tech Startup</h3>
-            <p class="mt-2 text-sm text-gray-600">Evento de lançamento com experiência imersiva, demonstrações e media coverage.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Eventos</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Lançamento</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Tecnologia</span>
+        <!-- CARD - exemplo galeria -->
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="gallery"
+          data-title="Catering & Produção"
+          data-client="Liga Portugal Legends"
+          data-tags="Produção, Catering, Evento"
+          data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg"
+        >
+          <img src="/images/lpl/lpl2.jpg" alt="Catering e Produção"
+               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Liga Portugal Legends</p>
+              <h3 class="text-lg font-bold">Catering & Produção</h3>
+              <p class="text-xs text-gray-600 mt-1">Galeria</p>
             </div>
           </div>
         </article>
 
-        <!-- Card 4 -->
-        <article class="portfolio-item branding marketing rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/mp/mp2.jpg" alt="Branding e Key Visual — Campanha" class="w-full h-full object-cover"/>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Branding & Key Visual — Campanha</h3>
-            <p class="mt-2 text-sm text-gray-600">Desenvolvimento de identidade visual, guidelines e materiais para ativação.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Branding</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Marketing Digital</span>
+        <!-- +++ DUPLICA ESTES CARDS COM OS TEUS DADOS +++ -->
+
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image"
+          data-title="Airways Aviation"
+          data-client="Airways Aviation"
+          data-tags="Branding, Evento"
+          data-src="/images/airways.png"
+        >
+          <img src="/images/airways.png" alt="Airways Aviation"
+               class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Airways Aviation</p>
+              <h3 class="text-lg font-bold">Branding & Evento</h3>
+              <p class="text-xs text-gray-600 mt-1">Imagem</p>
             </div>
           </div>
         </article>
 
-        <!-- Card 5 -->
-        <article class="portfolio-item eventos video rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/lpl/lpl3.jpg" alt="Aftermovie — Evento Corporativo" class="w-full h-full object-cover"/>
-            <span class="absolute top-3 right-3 text-xs px-2 py-1 rounded-full bg-cyan-500 text-white">Vídeo</span>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Aftermovie — Evento Corporativo</h3>
-            <p class="mt-2 text-sm text-gray-600">Captação multi-câmara, edição dinâmica e versão social first.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Eventos</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Vídeo</span>
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image"
+          data-title="Falrui"
+          data-client="Falrui"
+          data-tags="Cobertura, Evento"
+          data-src="/images/falrui.png"
+        >
+          <img src="/images/falrui.png" alt="Falrui"
+               class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Falrui</p>
+              <h3 class="text-lg font-bold">Cobertura de Evento</h3>
+              <p class="text-xs text-gray-600 mt-1">Imagem</p>
             </div>
           </div>
         </article>
 
-        <!-- Card 6 -->
-        <article class="portfolio-item marketing rounded-2xl overflow-hidden shadow ring-1 ring-black/5 bg-white">
-          <div class="relative aspect-video overflow-hidden">
-            <img src="/images/conferencia.webp" alt="Campanha de Performance — Leads B2B" class="w-full h-full object-cover"/>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Campanha Performance — Leads B2B</h3>
-            <p class="mt-2 text-sm text-gray-600">Estratégia full-funnel com otimização criativa e tracking avançado.</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Marketing Digital</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">B2B</span>
-              <span class="px-2 py-1 text-xs rounded-full bg-gray-100">Performance</span>
+        <article
+          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="gallery"
+          data-title="Michael Page"
+          data-client="Michael Page"
+          data-tags="Evento, Galeria"
+          data-gallery="/images/mp/mp1.jpg,/images/mp/mp2.jpg"
+        >
+          <img src="/images/mp/mp1.jpg" alt="Michael Page Galeria"
+               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
+          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-xs tracking-wide text-gray-600 uppercase">Michael Page</p>
+              <h3 class="text-lg font-bold">Galeria de Evento</h3>
+              <p class="text-xs text-gray-600 mt-1">Galeria</p>
             </div>
           </div>
         </article>
+
       </div>
     </div>
   </main>
 
-  <!-- CTA Contactos -->
-  <section class="py-20 bg-black text-white text-center">
+  <!-- CTA para contactos (antes do footer) -->
+  <section class="py-16 bg-black text-white text-center">
     <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">
-        Gostava de criar algo connosco?
-      </h2>
-      <p class="text-lg text-gray-300 mb-10">
-        Fale connosco e descubra como podemos transformar o seu próximo evento ou projeto em algo memorável.
-      </p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Gostava de criar algo connosco?</h2>
+      <p class="text-lg text-gray-300 mb-8">Fale connosco e descubra como podemos transformar o seu próximo projeto.</p>
       <a href="https://stagelink.pt/#contactos"
-        class="inline-block px-10 py-4 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-105">
+         class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
         Contacte-nos
       </a>
     </div>
   </section>
+
+  <!-- MODAL (Popup) -->
+  <div id="portfolio-modal" class="fixed inset-0 z-[60] hidden">
+    <!-- backdrop -->
+    <div class="absolute inset-0 bg-black/70"></div>
+
+    <!-- content -->
+    <div class="relative z-[61] max-w-5xl mx-auto my-10 px-4">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 border-b">
+          <div>
+            <p id="pm-client" class="text-xs uppercase tracking-wide text-gray-500"></p>
+            <h3 id="pm-title" class="text-xl font-bold"></h3>
+            <p id="pm-tags" class="text-xs text-gray-500 mt-0.5"></p>
+          </div>
+          <button id="pm-close" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Fechar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div id="pm-body" class="p-4">
+          <!-- O script.js injeta aqui:
+               - <iframe> quando data-kind="video"
+               - <img> quando data-kind="image"
+               - um pequeno carrossel quando data-kind="gallery" -->
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- Footer -->
