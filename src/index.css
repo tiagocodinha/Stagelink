@@ -9,33 +9,65 @@ html, body {
   scroll-behavior: smooth;
 }
 
+/* Nav links (sem translateY no hover para não “piscar”) */
 .nav-link {
   position: relative;
   color: #1a202c;
   text-decoration: none;
-  transition: color 0.6s ease, transform 0.6s ease;
+  transition: color 0.3s ease;
 }
 .nav-link::after {
   content: "";
   position: absolute;
+  left: 0;
+  bottom: -4px;
   width: 100%;
   height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(-45deg, rgba(67,104,172,1) 0%, rgba(45,170,205,1) 39%, rgba(36,196,218,1) 100%);
+  background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.3s ease;
 }
-.nav-link:hover {
-  color: #4a5568;
-  transform: translateY(-2px);
+.nav-link:hover { color: #2daacd; }
+.nav-link:hover::after { transform: scaleX(1); }
+.nav-link.active { color: #2daacd; }
+.nav-link.active::after { transform: scaleX(1); }
+
+/* Wrapper da nav para posicionar o menu mobile absoluto */
+nav .nav-wrap { position: relative; }
+
+/* Mobile menu (overlay absoluto, sem empurrar layout) */
+.mobile-menu{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 40;
+
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  overflow: hidden;
+
+  transition: max-height .3s ease,
+              opacity .28s cubic-bezier(.22,.61,.36,1),
+              transform .28s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
-.nav-link:hover::after {
-  transform: scaleX(1);
+.mobile-menu.is-open{
+  max-height: 70vh;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (min-width: 768px){
+  .mobile-menu{ display: none !important; }
 }
 
-/* Typography blocks */
+/* Typography */
 .intro-title {
   font-family: "Montserrat", sans-serif;
   font-size: 60px;
@@ -65,44 +97,16 @@ html, body {
 }
 
 /* Logo carousel */
-.logo-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-.logo-track {
-  display: flex;
-  animation: scroll 20s linear infinite;
-}
-.logo-track:hover {
-  animation-play-state: paused;
-}
-.logo-item {
-  flex: 0 0 25%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.logo-black {
-  width: 8rem;
-  height: auto;
-  object-fit: contain;
-  filter: invert(1) brightness(0);
-}
-.logo-climarsol {
-  width: 200px;
-  height: auto;
-}
-.logo-michael {
-  width: 180px;
-  height: auto;
-}
-.logo-liga {
-  width: 200px;
-  height: auto;
-}
+.logo-carousel { overflow: hidden; position: relative; width: 100%; }
+.logo-track { display: flex; animation: scroll 20s linear infinite; }
+.logo-track:hover { animation-play-state: paused; }
+.logo-item { flex: 0 0 25%; display: flex; justify-content: center; align-items: center; }
+.logo-black { width: 8rem; height: auto; object-fit: contain; filter: invert(1) brightness(0); }
+.logo-climarsol { width: 200px; height: auto; }
+.logo-michael { width: 180px; height: auto; }
+.logo-liga { width: 200px; height: auto; }
 
-/* CTA gradient (botão do formulário) */
+/* CTA gradient */
 .gradient-mensagem{
   background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
   background-size: 300% 100%;
@@ -112,60 +116,25 @@ html, body {
   color:#fff;
   border:none;
 }
-
-/* Hover: desliza o gradiente de forma fluida */
-.gradient-mensagem:hover{
-  background-position: 100% 50%;
-}
-
-/* Estado disabled: bloqueia hover e indica inatividade */
-.gradient-mensagem:disabled{
-  opacity: .7;
-  cursor: not-allowed;
-  background-position: 0% 50%;
-}
-
-
-
+.gradient-mensagem:hover{ background-position: 100% 50%; }
+.gradient-mensagem:disabled{ opacity: .7; cursor: not-allowed; background-position: 0% 50%; }
 
 /* Social hover */
-.social-icon {
-  transition: transform 0.3s ease;
-}
-.social-icon:hover {
-  transform: scale(1.2);
-}
+.social-icon { transition: transform 0.3s ease; }
+.social-icon:hover { transform: scale(1.2); }
 
 /* Carousel */
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-}
-.carousel-slide {
-  display: none;
-  transition: transform 1s ease-in-out;
-}
-.carousel-slide.active {
-  display: block;
-}
-
+.carousel-container { position: relative; overflow: hidden; border-radius: 1rem; }
+.carousel-slide { display: none; transition: transform 1s ease-in-out; }
+.carousel-slide.active { display: block; }
 
 /* Utilities for group translate */
-.group:hover .group-hover\:translate-x-1 {
-  transform: translateX(0.25rem);
-}
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
+.group:hover .group-hover\:translate-x-1 { transform: translateX(0.25rem); }
+.transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
 
 /* Responsive tweaks */
 @media (max-width: 840px) {
-  .logo-track {
-    gap: 2rem;
-  }
+  .logo-track { gap: 2rem; }
   .logo {
     content: none;
     background-image: url("images/logo_white.png");
@@ -175,45 +144,20 @@ html, body {
     height: 56px;
     width: auto;
   }
-  .intro-title,
-  .intro-title-service {
-    font-size: 40px;
-    text-align: center;
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-menu-button {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
-  .desktop-menu {
-    display: none;
-  }
+  .intro-title, .intro-title-service { font-size: 40px; text-align: center; }
 }
 
 /* Logos marquee keyframes */
-@keyframes scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-@media (prefers-reduced-motion: reduce){
-  .gradient-mensagem{ transition: none; }
-}
+@media (prefers-reduced-motion: reduce){ .gradient-mensagem{ transition: none; } }
 
-
-
-
-/* Hover azul apenas em botões inativos (sobrepõe Tailwind) */
+/* (Opcional) filtros do portfólio */
 #portfolio-filters button.filter-hover:not(.active-filter):hover {
-  background-color: #06b6d4 !important; /* cyan-500 */
+  background-color: #06b6d4 !important;
   color: #fff !important;
   transition: background-color .25s ease, color .25s ease;
 }
-
-/* Botão ativo mantém azul mesmo em hover */
 #portfolio-filters button.active-filter:hover {
   background-color: #06b6d4 !important;
   color: #fff !important;
@@ -222,62 +166,157 @@ html, body {
 
 
 
-.nav-link {
+
+/* === PROJETOS: pill sempre visível + zoom no hover === */
+.nav-link.pill-projetos {        /* mantém sem sublinhado animado */
   position: relative;
-  color: #1a202c;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease;
+}
+.nav-link.pill-projetos::after { /* desliga a linha azul dos outros links */
+  display: none;
 }
 
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
+/* aparência do pill */
+.pill-projetos{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.7rem;            /* ~py-2.5 px-4.5 */
+  border-radius: 9999px;               /* full */
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: #fff !important;
+  background: linear-gradient(90deg,#79E6EA 0%, #2DAACD 50%, #2AA0B2 100%);
+  box-shadow: 0 6px 16px rgba(45,170,205,.25);
+  transform: translateZ(0);            /* evita flicker em alguns browsers */
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  will-change: transform;
 }
 
-/* hover */
-.nav-link:hover {
-  color: #2daacd;
+/* hover / focus (zoom suave) */
+.pill-projetos:hover,
+.pill-projetos:focus-visible{
+  transform: scale(1.06);
+  box-shadow: 0 10px 22px rgba(45,170,205,.32);
+  filter: saturate(1.05);
+  outline: none;
 }
-.nav-link:hover::after {
-  transform: scaleX(1);
+
+/* versão no menu mobile: ocupar só o necessário e dar um espacinho */
+#mobile-menu .pill-projetos{
+  display: inline-flex;
+  margin: .25rem .75rem 0;
 }
 
-/* ativo permanente */
-.nav-link.active { color: #2daacd; }
-.nav-link.active::after { transform: scaleX(1); }
 
 
-
-
-/* Mobile menu: transição suave sem display:none */
-.mobile-menu{
-  /* estado fechado por defeito */
-  opacity: 0;
-  transform: translateY(-0.5rem);
-  pointer-events: none;
-
-  /* animação */
-  transition: opacity .28s cubic-bezier(.22,.61,.36,1),
-              transform .28s cubic-bezier(.22,.61,.36,1);
-  will-change: opacity, transform;
-  backface-visibility: hidden;
+/* ======= Secção Serviços – look premium (sem alterar copy) ======= */
+.section-dark{
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(36,196,218,.12) 0%, transparent 60%),
+              radial-gradient(900px 500px at 90% 0%, rgba(67,104,172,.12) 0%, transparent 60%),
+              #0a0a0a;
+}
+.blob{
+  position:absolute; filter: blur(50px); opacity: .35; pointer-events:none;
   transform: translateZ(0);
 }
-.mobile-menu.is-open{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.blob-left{ left:-240px; top:-120px; width:520px; height:520px;
+  background: radial-gradient(circle at 30% 30%, #24c4da, #2daacd 55%, transparent 60%);
+  animation: float1 9s ease-in-out infinite alternate;
+}
+.blob-right{ right:-260px; top:-160px; width:520px; height:520px;
+  background: radial-gradient(circle at 70% 40%, #4368ac, #2daacd 55%, transparent 60%);
+  animation: float2 10s ease-in-out infinite alternate;
+}
+@keyframes float1{ to{ transform: translate(10px, 18px);} }
+@keyframes float2{ to{ transform: translate(-12px, 14px);} }
+
+.heading-decor{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: .002em;
+  display: inline-block;
+  position: relative;
+}
+.heading-decor::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-12px; height:4px; width:160px;
+  border-radius:999px;
+  background: linear-gradient(90deg,#4368ac 0%, #2daacd 50%, #24c4da 100%);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04) inset;
 }
 
-/* escondido em desktop */
-@media (min-width: 768px){
-  .mobile-menu{ display: none !important; }
+.service-card{
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 22px 18px;
+  min-height: 210px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.35);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  overflow: hidden;
+}
+.service-card::before{
+  content:""; position:absolute; inset:-1px; border-radius: inherit;
+  background: linear-gradient(120deg, rgba(36,196,218,.35), rgba(45,170,205,.18) 40%, rgba(67,104,172,.3) 80%);
+  opacity: 0; transition: opacity .25s ease;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  padding: 1px; pointer-events:none;
+}
+.service-card:hover{
+  transform: translateY(-6px);
+  border-color: rgba(36,196,218,.35);
+  box-shadow: 0 16px 40px rgba(36,196,218,.20);
+}
+.service-card:hover::before{ opacity: 1; }
+
+.service-title{
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+.service-copy{
+  margin-top: 8px;
+  font-size: .94rem;
+  line-height: 1.45;
+  color: #e5e7eb;
+}
+
+/* Ícone em “pill” gradiente */
+.icon-badge{
+  width: 48px; height: 48px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, #24c4da 0%, #2daacd 55%, #4368ac 100%);
+  box-shadow: 0 8px 24px rgba(36,196,218,.35);
+}
+.icon{
+  width: 26px; height: 26px;
+  fill: none; stroke: #ffffff; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* CTA pill */
+.pill-cta{
+  padding: .85rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  color:#fff;
+  background: linear-gradient(90deg,#4368ac 0%, #2daacd 50%, #24c4da 100%);
+  box-shadow: 0 10px 26px rgba(45,170,205,.30);
+  transform: translateZ(0);
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+.pill-cta:hover{
+  transform: scale(1.05);
+  box-shadow: 0 18px 38px rgba(45,170,205,.38);
+  filter: saturate(1.05);
+}
+.pill-cta svg{ display:block; }
+
+@media (max-width: 640px){
+  .service-card{ padding: 18px 16px; }
+  .icon-badge{ width: 44px; height: 44px; }
+  .icon{ width: 24px; height: 24px; }
 }

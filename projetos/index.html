@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- CSS global do site -->
   <link rel="stylesheet" href="/src/index.css" />
 </head>
 
@@ -21,88 +20,65 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-3VRDW42JV6');
 </script>
 
 <body class="bg-white text-black">
-  
-  <!-- Navbar (sem item Projetos, links para a homepage) -->
+  <!-- Navbar -->
   <nav class="fixed inset-x-0 top-0 bg-white shadow-md z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16 items-center">
-      <!-- Logo -->
-      <a href="https://stagelink.pt" class="logo-link">
-        <img src="/images/logo_black.png" alt="Logo Stagelink" class="h-14" />
-      </a>
-
-      <!-- Desktop -->
-      <div class="hidden md:flex space-x-8 items-center">
-        <a href="https://stagelink.pt/#sobre" class="nav-link">SOBRE</a>
-        <a href="https://stagelink.pt/#servicos" class="nav-link">SERVIÇOS</a>
-        <a href="https://stagelink.pt/#eventos" class="nav-link">EVENTOS</a>
-        <a href="https://stagelink.pt/#contactos" class="nav-link">CONTACTOS</a>
-        <div class="w-[2px] h-6 bg-[#2daacd] rounded-full"></div>
-        <a href="/projetos/" class="nav-link font-medium text-gray-800 hover:text-[#2daacd]" aria-current="page">
-          PROJETOS
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-wrap">
+      <div class="flex justify-between h-16 items-center">
+        <a href="https://stagelink.pt" class="logo-link">
+          <img src="/images/logo_black.png" alt="Logo Stagelink" class="h-14" />
         </a>
+
+        <div class="hidden md:flex space-x-8 items-center">
+          <a href="https://stagelink.pt/#sobre" class="nav-link">SOBRE</a>
+          <a href="https://stagelink.pt/#servicos" class="nav-link">SERVIÇOS</a>
+          <a href="https://stagelink.pt/#eventos" class="nav-link">EVENTOS</a>
+          <a href="https://stagelink.pt/#contactos" class="nav-link">CONTACTOS</a>
+          <a href="/projetos/" class="nav-link pill-projetos" aria-current="page">PROJETOS</a>
+        </div>
+
+        <button class="mobile-menu-button md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2daacd]" aria-label="Abrir menu" aria-controls="mobile-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
       </div>
 
-      <!-- Botão hambúrguer -->
-      <button
-        class="mobile-menu-button md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2daacd]"
-        aria-label="Abrir menu" aria-controls="mobile-menu" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+      <!-- Mobile menu (usa mesmas classes/JS) -->
+      <div id="mobile-menu" class="mobile-menu md:hidden absolute bg-white border-t border-gray-200">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a href="https://stagelink.pt/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SOBRE</a>
+          <a href="https://stagelink.pt/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SERVIÇOS</a>
+          <a href="https://stagelink.pt/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">EVENTOS</a>
+          <a href="https://stagelink.pt/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">CONTACTOS</a>
+          <hr class="my-2 border-t-2 border-[#2daacd] w-full rounded-full">
+          <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-semibold hover:text-[#2daacd] rounded-md" aria-current="page">PROJETOS</a>
+        </div>
+      </div>
     </div>
-  </div>
+  </nav>
 
-  <!-- Mobile menu (overlay, não empurra layout) -->
-  <div id="mobile-menu"
-       class="mobile-menu md:hidden absolute top-16 inset-x-0 bg-white border-t border-gray-200 z-40 hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-      <a href="https://stagelink.pt/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SOBRE</a>
-      <a href="https://stagelink.pt/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SERVIÇOS</a>
-      <a href="https://stagelink.pt/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">EVENTOS</a>
-      <a href="https://stagelink.pt/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">CONTACTOS</a>
-      <hr class="my-2 border-t-2 border-[#2daacd] w-full rounded-full">
-      <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-semibold hover:text-[#2daacd] rounded-md" aria-current="page">
-        PROJETOS
-      </a>
-    </div>
-  </div>
-</nav>
-
-
-  <!-- Hero / Título -->
+  <!-- Hero -->
   <header class="pt-24 bg-black text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h1 class="text-4xl md:text-6xl font-extrabold">Os Nossos Projetos.</h1>
-      <p class="mt-4 text-lg text-gray-300">
-        Explore o que já criámos para os nossos clientes — de eventos corporativos a campanhas digitais e branding.
-      </p>
+      <p class="mt-4 text-lg text-gray-300">Explore o que já criámos para os nossos clientes — de eventos corporativos a campanhas digitais e branding.</p>
     </div>
   </header>
 
-  <!-- Grelha 3 colunas -->
+  <!-- Grid -->
   <main class="py-14 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
-        <!-- CARD - exemplo vídeo -->
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="video"
-          data-title="Liga Portugal Legends"
-          data-client="Liga Portugal Legends"
-          data-tags="Evento, Aftermovie"
-          data-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        >
-          <img src="/images/lpl/lpl1.jpg" alt="Liga Portugal Legends"
-               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
-          <!-- Overlay -->
+        <!-- Cards de exemplo (duplica à vontade) -->
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="video" data-title="Liga Portugal Legends" data-client="Liga Portugal Legends"
+          data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
+          <img src="/images/lpl/lpl1.jpg" alt="Liga Portugal Legends" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -113,17 +89,10 @@
           </div>
         </article>
 
-        <!-- CARD - exemplo imagem única -->
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="image"
-          data-title="Michael Page"
-          data-client="Michael Page"
-          data-tags="Evento, Produção"
-          data-src="/images/mp/mp1.jpg"
-        >
-          <img src="/images/mp/mp2.jpg" alt="Michael Page"
-               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image" data-title="Michael Page" data-client="Michael Page" data-tags="Evento, Produção"
+          data-src="/images/mp/mp1.jpg">
+          <img src="/images/mp/mp2.jpg" alt="Michael Page" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -134,17 +103,10 @@
           </div>
         </article>
 
-        <!-- CARD - exemplo galeria -->
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="gallery"
-          data-title="Catering & Produção"
-          data-client="Liga Portugal Legends"
-          data-tags="Produção, Catering, Evento"
-          data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg"
-        >
-          <img src="/images/lpl/lpl2.jpg" alt="Catering e Produção"
-               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="gallery" data-title="Catering & Produção" data-client="Liga Portugal Legends"
+          data-tags="Produção, Catering, Evento" data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg">
+          <img src="/images/lpl/lpl2.jpg" alt="Catering e Produção" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -155,18 +117,10 @@
           </div>
         </article>
 
-        <!-- +++ DUPLICA ESTES CARDS COM OS TEUS DADOS +++ -->
-
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="image"
-          data-title="Airways Aviation"
-          data-client="Airways Aviation"
-          data-tags="Branding, Evento"
-          data-src="/images/airways.png"
-        >
-          <img src="/images/airways.png" alt="Airways Aviation"
-               class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
+        <!-- Mais exemplos -->
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image" data-title="Airways Aviation" data-client="Airways Aviation" data-tags="Branding, Evento" data-src="/images/airways.png">
+          <img src="/images/airways.png" alt="Airways Aviation" class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -177,16 +131,9 @@
           </div>
         </article>
 
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="image"
-          data-title="Falrui"
-          data-client="Falrui"
-          data-tags="Cobertura, Evento"
-          data-src="/images/falrui.png"
-        >
-          <img src="/images/falrui.png" alt="Falrui"
-               class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="image" data-title="Falrui" data-client="Falrui" data-tags="Cobertura, Evento" data-src="/images/falrui.png">
+          <img src="/images/falrui.png" alt="Falrui" class="w-full h-64 object-contain bg-white group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -197,16 +144,9 @@
           </div>
         </article>
 
-        <article
-          class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="gallery"
-          data-title="Michael Page"
-          data-client="Michael Page"
-          data-tags="Evento, Galeria"
-          data-gallery="/images/mp/mp1.jpg,/images/mp/mp2.jpg"
-        >
-          <img src="/images/mp/mp1.jpg" alt="Michael Page Galeria"
-               class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
+        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
+          data-kind="gallery" data-title="Michael Page" data-client="Michael Page" data-tags="Evento, Galeria" data-gallery="/images/mp/mp1.jpg,/images/mp/mp2.jpg">
+          <img src="/images/mp/mp1.jpg" alt="Michael Page Galeria" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
           <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
             <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -221,24 +161,18 @@
     </div>
   </main>
 
-  <!-- CTA para contactos (antes do footer) -->
+  <!-- CTA -->
   <section class="py-16 bg-black text-white text-center">
     <div class="max-w-4xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Gostava de criar algo connosco?</h2>
       <p class="text-lg text-gray-300 mb-8">Fale connosco e descubra como podemos transformar o seu próximo projeto.</p>
-      <a href="https://stagelink.pt/#contactos"
-         class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
-        Contacte-nos
-      </a>
+      <a href="https://stagelink.pt/#contactos" class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">Contacte-nos</a>
     </div>
   </section>
 
-  <!-- MODAL (Popup) -->
+  <!-- Modal -->
   <div id="portfolio-modal" class="fixed inset-0 z-[60] hidden">
-    <!-- backdrop -->
     <div class="absolute inset-0 bg-black/70"></div>
-
-    <!-- content -->
     <div class="relative z-[61] max-w-5xl mx-auto my-10 px-4">
       <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b">
@@ -248,22 +182,13 @@
             <p id="pm-tags" class="text-xs text-gray-500 mt-0.5"></p>
           </div>
           <button id="pm-close" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Fechar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/></svg>
           </button>
         </div>
-
-        <div id="pm-body" class="p-4">
-          <!-- O script.js injeta aqui:
-               - <iframe> quando data-kind="video"
-               - <img> quando data-kind="image"
-               - um pequeno carrossel quando data-kind="gallery" -->
-        </div>
+        <div id="pm-body" class="p-4"></div>
       </div>
     </div>
   </div>
-
 
   <!-- Footer -->
   <footer class="bg-black text-white py-12">
@@ -294,25 +219,16 @@
         <div>
           <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
           <div class="flex space-x-4">
-            <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener">
-              <img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon"/>
-            </a>
-            <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener">
-              <img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon"/>
-            </a>
+            <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon"/></a>
+            <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon"/></a>
           </div>
         </div>
       </div>
-      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-        <p>&copy; 2025 Stagelink.</p>
-      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"><p>&copy; 2025 Stagelink.</p></div>
     </div>
   </footer>
 
-  <!-- Toast container (se usares toasts globais) -->
   <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
-
-  <!-- JS global do site -->
   <script src="/script.js" defer></script>
 </body>
 </html>
