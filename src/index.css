@@ -15,6 +15,7 @@ html, body {
   color: #1a202c;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-weight: 500
 }
 .nav-link::after {
   content: "";
@@ -43,7 +44,7 @@ nav .nav-wrap { position: relative; }
   left: 0;
   right: 0;
   z-index: 40;
-
+  font-weight: 500;
   max-height: 0;
   opacity: 0;
   transform: translateY(-8px);
@@ -362,3 +363,4 @@ nav .nav-wrap { position: relative; }
   background-position: 100% 50%;
   box-shadow: 0 10px 26px rgba(45,170,205,.45);
 }
+

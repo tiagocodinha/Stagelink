@@ -55,16 +55,41 @@
 
         <!-- Mobile Navigation (overlay absoluto) -->
         <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-200 transform-gpu" aria-hidden="true">
-          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SOBRE</a>
-            <a href="#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">SERVIÇOS</a>
-            <a href="#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">EVENTOS</a>
-            <a href="#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md">CONTACTOS</a>
-            <hr class="my-2 border-t-2 border-[#2daacd] w-full">
-            <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-semibold hover:text-[#2daacd] rounded-md">PROJETOS</a>
+          <div class="px-2 pt-2 pb-6 space-y-2 sm:px-3">
+            <a href="#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SOBRE</a>
+            <a href="#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SERVIÇOS</a>
+            <a href="#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">EVENTOS</a>
+            <a href="#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">CONTACTOS</a>
+
+            <!-- Linha antes de Projetos -->
+            <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
+
+            <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-bold hover:text-[#2daacd] rounded-md">PROJETOS</a>
+
+            <!-- Linha depois de Projetos -->
+            <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
+
+            <!-- Bloco de contactos -->
+            <div class="mobile-contacts mt-6 px-3 space-y-3 text-gray-700">
+              <p class="flex items-center gap-2">
+                <!-- Ícone telefone -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2 5.5C2 4.12 3.12 3 4.5 3H7l2.3 4.6L7.7 9.3a13.02 13.02 0 005.8 5.8l1.7-1.6L20 17v2.5c0 1.38-1.12 2.5-2.5 2.5C9.6 22 2 14.4 2 5.5z"/>
+                </svg>
+                <a href="tel:+351915542170" class="text-sm font-normal hover:text-[#2daacd] leading-tight">+351 915 542 170</a>
+              </p>
+
+              <p class="flex items-center gap-2">
+                <!-- Ícone email -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline stroke-linecap="round" stroke-linejoin="round" points="22,6 12,13 2,6"/>
+                </svg>
+                <a href="mailto:geral@stagelink.pt" class="text-sm font-normal hover:text-[#2daacd] leading-tight">geral@stagelink.pt</a>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
     </nav>
 
     <!-- Hero Section (video background) -->
