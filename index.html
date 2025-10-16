@@ -67,10 +67,20 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="pt-20 bg-black text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+    <!-- Hero Section (video background) -->
+    <section id="inicio" class="relative pt-20 text-white bg-black">
+      <!-- background video -->
+      <div class="hero-video-wrap absolute inset-0 z-0 overflow-hidden"> <!-- <-- z-0 -->
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+          <source src="images/backg.mp4" type="video/mp4" />
+          O seu navegador não suporta vídeo em HTML5.
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- conteúdo com z-index acima do vídeo -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32"> <!-- <-- z-10 -->
+        <div class="max-w-3xl mx-auto text-center">
           <div>
             <h1 class="text-5xl font-bold mb-6">Transformamos ideias em resultados digitais</h1>
             <p class="text-xl mb-8">Marketing digital e eventos corporativos que impulsionam o seu negócio ao próximo nível.</p>
@@ -82,12 +92,10 @@
               </svg>
             </a>
           </div>
-          <div class="hidden md:block">
-            <img src="images/conferencia.webp" alt="Conferência" class="rounded-lg shadow-xl" />
-          </div>
         </div>
       </div>
     </section>
+
 
     <!-- About Section -->
     <section id="sobre" class="py-40 bg-white text-black">

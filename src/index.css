@@ -320,3 +320,38 @@ nav .nav-wrap { position: relative; }
   .icon-badge{ width: 44px; height: 44px; }
   .icon{ width: 24px; height: 24px; }
 }
+
+
+
+
+/* ===== Hero video background ===== */
+.hero-video-wrap { pointer-events: none; }
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* cobre toda a área */
+  object-position: center;
+  filter: brightness(0.85) saturate(1.05); /* ligeiro tratamento */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45); /* controla a “transparência” do vídeo */
+}
+
+/* Se o utilizador prefere menos movimento, congela o vídeo */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { animation: none; }
+}
+
+/* Opcional: em dados móveis, se quiseres, podes esconder o vídeo
+   e deixar apenas o poster (retira os comentários se quiseres usar).
+@media (max-width: 640px) {
+  .hero-video { display: none; }
+  .hero-overlay { background: rgba(0,0,0,.6); }
+}
+*/
