@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Modal do Portfólio (página /projetos) */
   (function portfolioModal() {
-    const items = document.querySelectorAll(".portfolio-item");
+    const items = document.querySelectorAll('.portfolio-item:not([data-disable-popup="1"])');
     const modal = document.getElementById("portfolio-modal");
     if (!items.length || !modal) return;
 
