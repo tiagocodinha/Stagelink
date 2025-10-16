@@ -364,3 +364,78 @@ nav .nav-wrap { position: relative; }
   box-shadow: 0 10px 26px rgba(45,170,205,.45);
 }
 
+
+
+/* ============================
+   Mobile-only upgrades
+   ============================ */
+@media (max-width: 840px) {
+  /* Logótipos maiores e com mais espaço */
+  .logo-carousel .logo-track { gap: 2.5rem !important; }
+
+  /* Overrides das larguras dos logos só em mobile */
+  .logo-black     { width: 10rem !important; }   /* antes 8rem */
+  .logo-michael   { width: 11rem !important; }
+  .logo-liga      { width: 12rem !important; }
+  .logo-climarsol { width: 12rem !important; }
+
+  /* Separador mobile – fino com degradé nas cores da marca */
+  .mobile-divider{
+    display:block;
+    width:100%;
+    height:1px;
+    border:0;
+    margin: 24px 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #2daacd 25%,
+      #4368ac 75%,
+      transparent 100%
+    );
+    opacity:.75;
+  }
+
+  /* Versão um pouco mais forte (entre morada e form) */
+  .mobile-divider--strong{
+    height:2px;
+    opacity:.95;
+  }
+}
+
+/* Em ecrãs maiores, estes separadores não aparecem */
+@media (min-width: 840px){
+  .mobile-divider,
+  .mobile-divider--strong{ display:none; }
+}
+
+
+
+/* Ajuste de tamanhos e largura do texto no mobile */
+@media (max-width: 840px) {
+  /* Título principal */
+  #inicio h1 {
+    font-size: 1.75rem !important; /* antes era ~text-5xl (3rem) */
+    line-height: 1.2 !important;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Subtítulo */
+  .hero-subcopy {
+    font-size: 0.95rem !important; /* ligeiramente menor */
+    line-height: 1.4 !important;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+
+/* Ajuste de espaçamento do botão no hero apenas em mobile */
+@media (max-width: 640px) {
+  #inicio .hero-btn {
+    margin-top: 6rem !important; /* aumenta espaço entre o texto e o botão */
+  }
+}
