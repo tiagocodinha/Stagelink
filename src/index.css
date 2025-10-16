@@ -332,15 +332,14 @@ nav .nav-wrap { position: relative; }
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;           /* cobre toda a área */
-  object-position: center;
-  filter: brightness(0.85) saturate(1.05); /* ligeiro tratamento */
+  object-fit: cover;
+  filter: brightness(0.75) saturate(1.05); /* ligeiramente mais escuro */
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.45); /* controla a “transparência” do vídeo */
+  background: rgba(0, 0, 0, 0.6); /* transparência equilibrada */
 }
 
 /* Se o utilizador prefere menos movimento, congela o vídeo */
@@ -348,10 +347,18 @@ nav .nav-wrap { position: relative; }
   .hero-video { animation: none; }
 }
 
-/* Opcional: em dados móveis, se quiseres, podes esconder o vídeo
-   e deixar apenas o poster (retira os comentários se quiseres usar).
-@media (max-width: 640px) {
-  .hero-video { display: none; }
-  .hero-overlay { background: rgba(0,0,0,.6); }
+
+
+.hero-btn {
+  background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(45,170,205,.35);
+  transition: background-position 0.6s ease, box-shadow 0.3s ease;
+  background-size: 200% 100%;
+  background-position: 0% 50%;
 }
-*/
+
+.hero-btn:hover {
+  background-position: 100% 50%;
+  box-shadow: 0 10px 26px rgba(45,170,205,.45);
+}
