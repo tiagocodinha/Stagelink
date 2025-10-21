@@ -440,3 +440,221 @@ nav .nav-wrap { position: relative; }
   }
 }
 
+
+
+
+
+/* ====== Hero: espaçamento responsivo e folga inferior em ecrãs largos ====== */
+.hero-content{
+  /* substitui o antigo space-y por gap consistente */
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+  row-gap: clamp(1rem, 3.2vw, 2.75rem);
+
+  /* top e bottom padding que não colam ao fundo */
+  padding-top: clamp(5rem, 10vh, 8rem) !important;
+  padding-bottom: clamp(4rem, 12vh, 10rem); /* dá “ar” ao CTA no fundo */
+
+  /* respeita notches (iOS) */
+  padding-bottom: max(env(safe-area-inset-bottom), clamp(4rem, 12vh, 10rem));
+}
+
+/* Em ecrãs MUITO largos, acrescenta ainda mais folga para o CTA não “descer” */
+@media (min-width: 1440px){
+  .hero-content{
+    row-gap: clamp(1.25rem, 2.2vw, 2.5rem);
+    padding-bottom: clamp(6rem, 14vh, 12rem);
+  }
+}
+@media (min-width: 1920px){
+  .hero-content{
+    padding-bottom: clamp(8rem, 16vh, 14rem);
+  }
+}
+
+/* Mantém o tweak mobile que já tinhas para dar espaço ao botão em ecrãs pequenos */
+@media (max-width: 640px) {
+  #inicio .hero-btn { margin-top: 6rem !important; }
+}
+
+/* ====== Título de categoria nos projetos ====== */
+.category-heading {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.category-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;          /* texto pequeno mas legível */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.category-heading span {
+  height: 1px;
+  flex-grow: 1;
+  background: linear-gradient(90deg, #2daacd 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* em fundo claro (se tiveres outras páginas brancas) */
+.bg-white .category-title { color: #000; }
+.bg-white .category-heading span {
+  background: linear-gradient(90deg, #2daacd 0%, transparent 100%);
+  opacity: 0.8;
+}
+
+
+
+
+/* ===== Moldura central limpa (sem divisória) ===== */
+:root {
+  --page-max: 3080px;
+  --page-pad: clamp(24px, 5vw, 64px);
+}
+
+body {
+  background: #fff; /* fundo branco total */
+}
+
+/* Contêiner principal centrado */
+.site-frame {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  background: #fff;
+  min-height: 100dvh;
+  padding-inline: var(--page-pad);
+
+  /* 🔥 REMOVIDO: sem borda, sem sombra, sem recorte */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+/* Navbar sem bordas arredondadas nem sombra */
+.site-frame nav {
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+
+
+
+/* ===== Footer ocupa toda a largura ===== */
+footer {
+  width: 100vw;                  /* ocupa toda a janela */
+  margin-left: calc(50% - 50vw); /* “escapa” da moldura */
+  background: #000 !important;   /* fundo preto total */
+  color: #fff;
+}
+
+/* Mantém o conteúdo alinhado com o resto do site */
+footer > div {
+  max-width: 1080px;             /* o mesmo valor de --page-max */
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 64px);
+}
+
+
+
+
+/* ===== CTA full width com degradé forte até preto ===== */
+#cta {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  /* fundo com degradé mais marcado */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.95) 0%,
+      rgba(10, 10, 10, 1) 40%,
+      rgba(0, 0, 0, 1) 70%,
+      #000 100%
+    ),
+    radial-gradient(circle at 20% 30%, rgba(36, 196, 218, 0.25), transparent 65%),
+    radial-gradient(circle at 80% 70%, rgba(45, 170, 205, 0.18), transparent 70%);
+  background-blend-mode: normal;
+}
+
+/* blobs do CTA */
+#cta .blob-left,
+#cta .blob-right {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+#cta .blob-left {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -150px;
+}
+
+#cta .blob-right {
+  width: 480px;
+  height: 480px;
+  bottom: -140px;
+  right: -160px;
+}
+
+
+/* ===== Footer com linha igual em cima e em baixo ===== */
+/* ===== Footer full width com linhas alinhadas ===== */
+footer {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: #000;
+  color: #fff;
+  position: relative;
+}
+
+/* Conteúdo centralizado */
+footer > div {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 64px);
+}
+
+/* Linha superior e inferior com mesma largura do conteúdo */
+footer::before,
+footer::after {
+  content: "";
+  display: block;
+  width: calc(100% - clamp(48px, 10vw, 128px)); /* igual ao padding-inline x2 */
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-inline: auto;
+}
+
+footer::before {
+  margin-bottom: 2rem; /* espaço antes do conteúdo */
+}
+
+footer::after {
+  margin-top: 2rem; /* espaço depois do conteúdo */
+}
+
+/* Remove a linha duplicada dentro do HTML, se existir */
+footer .border-t {
+  border: none !important;
+}
+
+/* Texto e cor */
+footer .text-gray-400 {
+  color: rgba(255, 255, 255, 0.7);
+}
+

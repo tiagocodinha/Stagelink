@@ -23,15 +23,17 @@
   <link rel="stylesheet" href="/src/index.css" />
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-white">
 
   <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJNCBMWC"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
      
+
+  <div class="site-frame">
   <!-- Navbar -->
-  <nav class="fixed inset-x-0 top-0 bg-white shadow-md z-50">
+  <nav class="sticky top-0 bg-white shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-wrap">
       <div class="flex justify-between h-16 items-center">
         <a href="https://stagelink.pt" class="logo-link">
@@ -93,21 +95,29 @@
   </nav>
 
   <!-- Hero -->
-  <header class="pt-24 bg-black text-white">
+  <header class="pt-24 bg-white text-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h1 class="text-4xl md:text-6xl font-extrabold">Os Nossos Projetos.</h1>
-      <p class="mt-4 text-lg text-gray-300">Explore o que já criámos para os nossos clientes — de eventos corporativos a campanhas digitais e branding.</p>
+      <p class="mt-4 text-lg text-gray-500">Explore o que já criámos para os nossos clientes, de eventos corporativos a campanhas digitais e branding.</p>
     </div>
   </header>
 
   <!-- Grid -->
-  <main class="py-14 bg-gradient-to-b from-black to-[#24c4da]">
+  <main class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Secção de categoria -->
+      <div class="category-heading mb-8 flex items-center gap-3">
+        <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">
+          Social Media Management
+        </h3>
+        <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
+      </div>
+
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
         <!-- Cards de exemplo (duplica à vontade) -->
         <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-disable-popup="1"
           data-kind="video" data-title="Airways Aviation" data-client="Airways Aviation"
           data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
           <img src="content/airways/aiways.webp" alt="Liga Portugal Legends" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
@@ -122,7 +132,6 @@
         </article>
 
         <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-disable-popup="1"
           data-kind="image" data-title="Liga Portugal Legends" data-client="Liga Portugal Legends" data-tags="Evento, Produção"
           data-src="/images/mp/mp1.jpg">
           <img src="content/lpl/lpl.webp" alt="Michael Page" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
@@ -137,7 +146,6 @@
         </article>
 
         <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-disable-popup="1"
           data-kind="gallery" data-title="Catering & Produção" data-client="Liga Portugal Legends"
           data-tags="Produção, Catering, Evento" data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg">
           <img src="content/falrui/falrui.webp" alt="Catering e Produção" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
@@ -158,11 +166,19 @@
   </main>
 
   <!-- CTA -->
-  <section class="pt-28 pb-20 text-center bg-white text-black">
-    <div class="max-w-4xl mx-auto px-6">
+  <section id="cta" class="relative overflow-hidden section-dark text-center text-white">
+    <div class="blob blob-left" aria-hidden="true"></div>
+    <div class="blob blob-right" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 py-28">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Gostava de criar algo connosco?</h2>
-      <p class="text-lg text-gray-500 mb-8">Fale connosco e descubra como podemos transformar o seu próximo projeto.</p>
-      <a href="https://stagelink.pt/#contactos" class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">Contacte-nos</a>
+      <p class="text-lg text-zinc-300 mb-8">
+        Fale connosco e descubra como podemos transformar o seu próximo projeto.
+      </p>
+      <a href="https://stagelink.pt/#contactos"
+        class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
+        Contacte-nos
+      </a>
     </div>
   </section>
 
@@ -226,5 +242,6 @@
 
   <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
   <script src="/script.js" defer></script>
+  </div>
 </body>
 </html>
