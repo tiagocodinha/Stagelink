@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="pt-PT">
 <head>
-
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,132 +12,126 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Política de Privacidade — Stagelink</title>
-  <meta name="description" content="Política de Privacidade da Stagelink aplicável aos websites www.stagelink.pt." />
+  <meta name="description" content="Política de Privacidade da Stagelink aplicável ao website www.stagelink.pt." />
+
+  <!-- Fonte + Tailwind (iguais à homepage) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS global -->
   <link rel="stylesheet" href="../src/index.css" />
 
+  <!-- CSS específico desta página -->
   <style>
-  /* =========================================
-     STAGELINK — PÁGINA DE PRIVACIDADE / LEGAL
-     ========================================= */
-  .privacy-container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 4rem 1rem;
-    font-family: "Montserrat", sans-serif;
-    color: #111827;
-    line-height: 1.6;
-  }
-
-  .privacy-container h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    color: #000;
-  }
-
-  .privacy-container p {
-    margin-bottom: 1rem;
-    color: #1f2937;
-  }
-
-  .privacy-container h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    color: #000;
-    position: relative;
-  }
-
-  .privacy-container h2::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    height: 3px;
-    width: 120px;
-    background: linear-gradient(90deg, #4368ac 0%, #2daacd 50%, #24c4da 100%);
-    border-radius: 999px;
-  }
-
-  .privacy-container ul {
-    margin: 1rem 0 1.5rem 1.25rem;
-    list-style: disc;
-  }
-
-  .privacy-container ul li {
-    margin-bottom: 0.5rem;
-    color: #1f2937;
-  }
-
-  .privacy-container strong {
-    color: #000;
-    font-weight: 700;
-  }
-
-  .privacy-container a {
-    color: #2daacd;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .privacy-container a:hover {
-    text-decoration: underline;
-    color: #24c4da;
-  }
-
-  .privacy-container em {
-    color: #4b5563;
-  }
-
-  .privacy-container .last-updated {
-    display: inline-block;
-    font-size: 0.75rem;
-    background: #eef2ff;
-    color: #3730a3;
-    padding: 0.25rem 0.6rem;
-    border-radius: 0.5rem;
-    margin-top: 0.75rem;
-  }
-
-  .privacy-container footer {
-    border-top: 1px solid #e5e7eb;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    font-size: 0.875rem;
-    color: #6b7280;
-    text-align: center;
-  }
-
-  @media (max-width: 768px) {
-    .privacy-container {
-      padding: 2.5rem 1.25rem;
+    /* ===== Correção: forçar Montserrat no CookieYes (widget de cookies) ===== */
+    .cky-consent-container, .cky-modal, .cky-preference-overlay,
+    .cky-box, .cky-btn, .cky-btn:hover, .cky-title, .cky-accordion,
+    .cky-switch, .cky-preference-body, .cky-preference-footer,
+    .cky-preference-header, .cky-preference-title,
+    .cky-preference-body * , .cky-consent-container * {
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+      letter-spacing: .01em;
     }
-    .privacy-container h1 {
-      font-size: 2rem;
+
+    /* ===== Container do conteúdo legal ===== */
+    .privacy-container{
+      --pad-x: clamp(24px, 5vw, 64px);
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      font-family: "Montserrat", sans-serif;
+      color:#111827;
+      line-height:1.7;
     }
-    .privacy-container h2::after {
-      width: 90px;
+    .privacy-container header h1{
+      font-weight:800; color:#000;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height:1.15;
+      letter-spacing:.002em;
     }
-  }
+    .privacy-container p{ margin:.75rem 0 1rem; color:#1f2937; }
+    .privacy-container h2{
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      font-weight:800; color:#000;
+      margin:2.25rem 0 .85rem; position:relative;
+    }
+    .privacy-container h2::after{
+      content:""; position:absolute; left:0; bottom:-8px;
+      height:3px; width:140px; border-radius:999px;
+      background: linear-gradient(90deg,#4368ac 0%, #2daacd 50%, #24c4da 100%);
+    }
+    .privacy-container ul{ margin:.5rem 0 1.25rem 1.25rem; list-style:disc; }
+    .last-updated{
+      display:inline-block; font-size:.75rem;
+      background:#eef2ff; color:#3730a3;
+      padding:.25rem .6rem; border-radius:.5rem; margin-top:.5rem;
+    }
+
+    /* Rodapé local (div) — não usa <footer> para não herdar o full-bleed global */
+    .legal-footer{
+      margin: clamp(32px, 8vw, 72px) auto 56px;
+      max-width: 1080px;
+      padding: 0 var(--pad-x, 24px);
+      border-top: 1px solid #e5e7eb;
+      text-align:center; color:#6b7280; font-size:.93rem;
+    }
+    .legal-footer a{ color:#2daacd; text-decoration:none; }
+    .legal-footer a:hover{ text-decoration:underline; }
   </style>
 </head>
 
 <body class="bg-white text-gray-900">
-
   <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJNCBMWC"
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJNCBMWC"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <main class="privacy-container">
+  <!-- ===== NAVBAR (igual à homepage) ===== -->
+  <nav class="fixed w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-wrap">
+      <div class="flex justify-between h-16 items-center">
+        <a href="https://stagelink.pt" class="logo-link">
+          <img src="/images/logo_black.png" alt="Logo Stagelink" class="h-14 logostage" />
+        </a>
+
+        <!-- Desktop -->
+        <div class="hidden md:flex space-x-8 items-center">
+          <a href="/#sobre" class="nav-link">SOBRE</a>
+          <a href="/#servicos" class="nav-link">SERVIÇOS</a>
+          <a href="/#eventos" class="nav-link">EVENTOS</a>
+          <a href="/#contactos" class="nav-link">CONTACTOS</a>
+          <a href="/projetos/" class="nav-link pill-projetos">PROJETOS</a>
+        </div>
+
+        <!-- Mobile button -->
+        <button class="mobile-menu-button md:hidden" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu (mesmo markup usado no site) -->
+      <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-200 transform-gpu" aria-hidden="true">
+        <div class="px-2 pt-2 pb-6 space-y-2 sm:px-3">
+          <a href="/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SOBRE</a>
+          <a href="/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SERVIÇOS</a>
+          <a href="/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">EVENTOS</a>
+          <a href="/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">CONTACTOS</a>
+
+          <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
+          <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-bold hover:text-[#2daacd] rounded-md">PROJETOS</a>
+          <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== CONTEÚDO ===== -->
+  <main class="pt-24 privacy-container">
     <header class="mb-8">
       <h1>Política de Privacidade</h1>
-      <p>
-        Aplicável ao website
-        <a href="https://www.stagelink.pt" rel="noopener">www.stagelink.pt</a>
-      </p>
+      <p>Aplicável ao website <a href="https://www.stagelink.pt" rel="noopener">www.stagelink.pt</a></p>
       <span class="last-updated">Última atualização: 20 outubro 2025</span>
     </header>
 
@@ -158,7 +151,6 @@
       <h2>1. Tipos de dados que angariamos</h2>
       <ul>
         <li><strong>Dados de conta e perfil</strong>: nome, email profissional, avatar, função/equipa, preferências.</li>
-        <li><strong>Dados da plataforma de aprovação</strong>: títulos/descrições de projetos, ficheiros, comentários, histórico de revisões, estados e etiquetas.</li>
         <li><strong>Dados técnicos e de utilização</strong>: endereço IP, user-agent, páginas visitadas, tempo de sessão, dispositivo e sistema operativo.</li>
         <li><strong>Comunicações</strong>: mensagens enviadas via formulários ou email e respetivos registos.</li>
         <li><strong>Faturação/contratual (B2B)</strong>: dados de empresa, NIF e contactos de faturação (quando aplicável).</li>
@@ -249,15 +241,15 @@
         Podemos atualizar periodicamente esta Política. A versão vigente será publicada nos nossos websites com a data correspondente.
       </p>
     </section>
-
-    <footer>
-      © <span id="year"></span> Stagelink, Lda — Marketing digital e eventos corporativos ·
-      <a href="mailto:geral@stagelink.pt">geral@stagelink.pt</a>
-    </footer>
   </main>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <!-- Rodapé local (não herda o footer full-width global) -->
+  <div class="legal-footer">
+    © <span id="year"></span> Stagelink.
+  </div>
+
+  <!-- JS global (para o menu mobile funcionar igual) -->
+  <script src="/script.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
