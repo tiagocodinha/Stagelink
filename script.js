@@ -363,4 +363,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     btns.forEach((b) => b.classList.add('filter-hover'));
   })();
+
+    /* Spotlight no hero: vídeo a 100% no ponto do cursor */
+  (function heroSpotlight(){
+    const hero = document.getElementById('inicio');
+    const overlay = document.querySelector('#inicio .hero-overlay');
+    if (!hero || !overlay) return;
+
+    // atualiza as CSS vars --mx / --my em %
+    const update = (clientX, clientY) => {
+      const r = hero.getBoundingClientRect();
+      const x = ((clientX - r.left) / r.width) * 100;
+      const y = ((clientY - r.top)  / r.height) * 100;
+      overlay.style.setProperty('--mx', `${x}%`);
+      overlay.style.setProperty('--my', `${y}%`);
+    };
+
+    // segue o rato
+    hero.addEventListener('mousemove', (e) => update(e.clientX, e.clientY));
+    hero.addEventListener('mouseenter', (e) => update(e.clientX, e.clientY));
+
+    // Mobile / touch: foca ao centro e ajusta tamanho/escuridão
+    const isTouch = matchMedia('(pointer: coarse)').matches;
+    if (isTouch) {
+      overlay.style.setProperty('--mx', '50%');
+      overlay.style.setProperty('--my', '50%');
+      overlay.style.setProperty('--spot', '300px'); // foco maior em ecrãs pequenos
+      overlay.style.setProperty('--dark', '0.5');
+    }
+  })();
 });

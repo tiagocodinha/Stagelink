@@ -336,11 +336,37 @@ nav .nav-wrap { position: relative; }
   filter: brightness(0.75) saturate(1.05); /* ligeiramente mais escuro */
 }
 
-.hero-overlay {
+/* Overlay do hero com spotlight no cursor */
+.hero-overlay{
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* transparência equilibrada */
+
+  /* variáveis controladas por JS */
+  --mx: 50%;
+  --my: 50%;
+  --spot: 240px;   /* raio do foco – ajusta a gosto */
+  --dark: 0.60;    /* intensidade da sombra fora do foco */
+
+  /* círculo transparente onde está o rato + escuro no resto */
+  background:
+    radial-gradient(
+      circle var(--spot) at var(--mx) var(--my),
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 45%,
+      rgba(0,0,0,var(--dark)) 60%,
+      rgba(0,0,0,var(--dark)) 100%
+    );
+
+  /* não bloquear cliques/scroll e animar suave */
+  pointer-events: none;
+  transition: background-position .06s linear;
 }
+
+/* (opcional) se preferires o vídeo um pouco menos escuro de base */
+.hero-video {
+  filter: brightness(0.85) saturate(1.05);
+}
+
 
 /* Se o utilizador prefere menos movimento, congela o vídeo */
 @media (prefers-reduced-motion: reduce) {
@@ -656,4 +682,7 @@ footer .border-t {
 footer .text-gray-400 {
   color: rgba(255, 255, 255, 0.7);
 }
+
+
+
 
