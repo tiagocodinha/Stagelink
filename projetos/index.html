@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KJNCBMWC');</script>
+  <script>
+    (function (w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJNCBMWC');
+  </script>
   <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8" />
@@ -15,21 +15,22 @@
   <meta name="robots" content="index, follow" />
   <title>Stagelink - Projetos | Marketing Digital & Produção de Eventos</title>
   <meta name="description" content="Transformamos ideias em resultados digitais. Marketing Digital e Eventos Corporativos que impulsionam o seu negócio ao próximo nível." />
-
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts & Tailwind -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="/src/index.css" />
 </head>
-
 <body class="bg-white">
-
   <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJNCBMWC"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-     
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJNCBMWC" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Navbar -->
   <nav class="fixed top-0 left-0 right-0 w-full bg-white shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav-wrap">
@@ -53,196 +54,175 @@
         </button>
       </div>
 
-      <!-- Mobile menu (usa mesmas classes/JS) -->
+      <!-- Mobile menu -->
       <div id="mobile-menu" class="mobile-menu md:hidden absolute bg-white border-t border-gray-200">
-      <div class="px-2 pt-2 pb-6 space-y-2 sm:px-3">
-        <a href="https://stagelink.pt/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SOBRE</a>
-        <a href="https://stagelink.pt/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SERVIÇOS</a>
-        <a href="https://stagelink.pt/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">EVENTOS</a>
-        <a href="https://stagelink.pt/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">CONTACTOS</a>
+        <div class="px-2 pt-2 pb-6 space-y-2 sm:px-3">
+          <a href="https://stagelink.pt/#sobre" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SOBRE</a>
+          <a href="https://stagelink.pt/#servicos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">SERVIÇOS</a>
+          <a href="https://stagelink.pt/#eventos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">EVENTOS</a>
+          <a href="https://stagelink.pt/#contactos" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md font-semibold">CONTACTOS</a>
+          <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
+          <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-bold hover:text-[#2daacd] rounded-md">PROJETOS</a>
+          <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
 
-        <!-- Linha antes de Projetos -->
-        <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
-
-        <a href="/projetos/" class="block px-3 py-2 text-gray-900 font-bold hover:text-[#2daacd] rounded-md">PROJETOS</a>
-
-        <!-- Linha depois de Projetos -->
-        <hr class="my-3 border-t-2 border-[#2daacd] w-full rounded-full">
-
-        <!-- Bloco de contactos -->
-        <div class="mobile-contacts mt-6 px-3 space-y-3 text-gray-700">
-          <p class="flex items-center gap-2">
-            <!-- Ícone telefone -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2 5.5C2 4.12 3.12 3 4.5 3H7l2.3 4.6L7.7 9.3a13.02 13.02 0 005.8 5.8l1.7-1.6L20 17v2.5c0 1.38-1.12 2.5-2.5 2.5C9.6 22 2 14.4 2 5.5z"/>
-            </svg>
-            <a href="tel:+351915542170" class="text-sm font-normal hover:text-[#2daacd] leading-tight">+351 915 542 170</a>
-          </p>
-
-          <p class="flex items-center gap-2">
-            <!-- Ícone email -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline stroke-linecap="round" stroke-linejoin="round" points="22,6 12,13 2,6"/>
-            </svg>
-            <a href="mailto:geral@stagelink.pt" class="text-sm font-normal hover:text-[#2daacd] leading-tight">geral@stagelink.pt</a>
-          </p>
+          <div class="mobile-contacts mt-6 px-3 space-y-3 text-gray-700">
+            <p class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2 5.5C2 4.12 3.12 3 4.5 3H7l2.3 4.6L7.7 9.3a13.02 13.02 0 005.8 5.8l1.7-1.6L20 17v2.5c0 1.38-1.12 2.5-2.5 2.5C9.6 22 2 14.4 2 5.5z"/>
+              </svg>
+              <a href="tel:+351915542170" class="text-sm font-normal hover:text-[#2daacd] leading-tight">+351 915 542 170</a>
+            </p>
+            <p class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline stroke-linecap="round" stroke-linejoin="round" points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:geral@stagelink.pt" class="text-sm font-normal hover:text-[#2daacd] leading-tight">geral@stagelink.pt</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
   <div class="site-frame">
-
-  <!-- Hero -->
-  <header class="pt-24 bg-white text-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 class="text-4xl md:text-6xl font-extrabold">Os Nossos Projetos.</h1>
-      <p class="mt-4 text-lg text-gray-500">Explore o que já criámos para os nossos clientes, de eventos corporativos a campanhas digitais e branding.</p>
-    </div>
-  </header>
-
-  <!-- Grid -->
-  <main class="py-14 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <!-- Secção de categoria -->
-      <div class="category-heading mb-8 flex items-center gap-3">
-        <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">
-          Social Media Management
-        </h3>
-        <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
+    <!-- Hero -->
+    <header class="pt-24 bg-white text-black">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 class="text-4xl md:text-6xl font-extrabold">Os Nossos Projetos.</h1>
+        <p class="mt-4 text-lg text-gray-00">Explore o que já criámos para os nossos clientes, de eventos corporativos a campanhas digitais e branding.</p>
       </div>
+    </header>
 
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Grid -->
+    <main class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="category-heading mb-8 flex items-center gap-3">
+          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Social Media Management</h3>
+          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
+        </div>
 
-        <!-- Cards de exemplo (duplica à vontade) -->
-        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="video" data-title="Airways Aviation" data-client="Airways Aviation"
-          data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="content/airways/aiways.webp" alt="Liga Portugal Legends" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-xs tracking-wide text-gray-600 uppercase">Airways Aviation (PT + FR)</p>
-              <h3 class="text-lg font-bold">Social Media | Content Creation</h3>
-              <p class="text-xs text-gray-600 mt-1">Social Media Management & Media Production</p>
+        <div class="proj-grid">
+          <!-- AIRWAYS -->
+          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="Airways Aviation" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
+            <div class="proj-media">
+              <img src="content/airways/aiways.webp" alt="Airways Aviation" class="proj-img">
+              <div class="proj-dim"></div>
+              <img src="/images/airways.png" alt="Airways Aviation" class="proj-logo" onerror="this.style.display='none'">
             </div>
-          </div>
-        </article>
-
-        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="image" data-title="Liga Portugal Legends" data-client="Liga Portugal Legends" data-tags="Evento, Produção"
-          data-src="/images/mp/mp1.jpg">
-          <img src="content/lpl/lpl.webp" alt="Michael Page" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-xs tracking-wide text-gray-600 uppercase">Liga Portugal Legends</p>
-              <h3 class="text-lg font-bold">Event Coverage</h3>
-              <p class="text-xs text-gray-600 mt-1">Photo & Video</p>
+            <div class="proj-info">
+              <h3 class="proj-title">Social Media | Content Creation</h3>
+              <p class="proj-sub">Social Media Management &amp; Media Production</p>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="relative group rounded-xl overflow-hidden shadow-sm bg-white portfolio-item cursor-pointer"
-          data-kind="gallery" data-title="Catering & Produção" data-client="Liga Portugal Legends"
-          data-tags="Produção, Catering, Evento" data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg">
-          <img src="content/falrui/falrui.webp" alt="Catering e Produção" class="w-full h-64 object-cover group-hover:scale-[1.03] transition-transform duration-300"/>
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-            <div class="backdrop-blur-sm bg-white/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-xs tracking-wide text-gray-600 uppercase">Falrui</p>
-              <h3 class="text-lg font-bold">Social Media | Content Creation</h3>
-              <p class="text-xs text-gray-600 mt-1">Social Media Management & Graphic Design</p>
+          <!-- LIGA PORTUGAL LEGENDS -->
+          <article class="proj-card" data-disable-popup="1" data-kind="image" data-title="Liga Portugal Legends" data-client="Liga Portugal Legends" data-tags="Evento, Produção" data-src="/images/mp/mp1.jpg">
+            <div class="proj-media">
+              <img src="content/lpl/lpl.webp" alt="Liga Portugal Legends" class="proj-img">
+              <div class="proj-dim"></div>
+              <img src="/images/lplegends.png" alt="Liga Portugal Legends" class="proj-logo" onerror="this.style.display='none'">
             </div>
+            <div class="proj-info">
+              <h3 class="proj-title">Event Coverage</h3>
+              <p class="proj-sub">Photo &amp; Video</p>
+            </div>
+          </article>
+
+          <!-- FALRUI -->
+          <article class="proj-card" data-disable-popup="1" data-kind="gallery" data-title="Falrui" data-client="Falrui" data-tags="Social, Design" data-gallery="/images/lpl/lpl2.jpg,/images/lpl/lpl3.jpg,/images/lpl/lpl1.jpg">
+            <div class="proj-media">
+              <img src="content/falrui/falrui.webp" alt="Falrui" class="proj-img">
+              <div class="proj-dim"></div>
+              <img src="/images/falrui.png" alt="Falrui" class="proj-logo" onerror="this.style.display='none'">
+            </div>
+            <div class="proj-info">
+              <h3 class="proj-title">Social Media | Content Creation</h3>
+              <p class="proj-sub">Social Media Management &amp; Graphic Design</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <!-- CTA -->
+    <section id="cta" class="relative overflow-hidden section-dark text-center text-white">
+      <div class="blob blob-left" aria-hidden="true"></div>
+      <div class="blob blob-right" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 py-28">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Gostava de criar algo connosco?</h2>
+        <p class="text-lg text-zinc-300 mb-8">Fale connosco e descubra como podemos transformar o seu próximo projeto.</p>
+        <a href="https://stagelink.pt/#contactos" class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
+          Contacte-nos
+        </a>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="portfolio-modal" class="fixed inset-0 z-[80] hidden">
+      <!-- backdrop -->
+      <div class="absolute inset-0 bg-black/70"></div>
+
+      <!-- sheet -->
+      <div class="relative z-[81] flex items-center justify-center p-3 sm:my-10 sm:px-4 h-full">
+        <div class="modal-panel bg-white w-full h-auto max-h-[86vh] sm:max-w-5xl rounded-2xl shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-4 sm:px-5 py-4 border-b">
+            <div class="min-w-0">
+              <p id="pm-client" class="text-[11px] uppercase tracking-wide text-gray-500 truncate"></p>
+              <h3 id="pm-title" class="text-lg sm:text-xl font-bold truncate"></h3>
+              <p id="pm-tags" class="text-[11px] text-gray-500 mt-0.5 truncate"></p>
+            </div>
+            <button id="pm-close" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Fechar">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/></svg>
+            </button>
           </div>
-        </article>
-
-        
-
+          <div id="pm-body" class="p-0 sm:p-4 overflow-auto max-h-[calc(86vh-56px)]"></div>
+        </div>
       </div>
     </div>
-  </main>
 
-  <!-- CTA -->
-  <section id="cta" class="relative overflow-hidden section-dark text-center text-white">
-    <div class="blob blob-left" aria-hidden="true"></div>
-    <div class="blob blob-right" aria-hidden="true"></div>
-
-    <div class="relative z-10 max-w-4xl mx-auto px-6 py-28">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Gostava de criar algo connosco?</h2>
-      <p class="text-lg text-zinc-300 mb-8">
-        Fale connosco e descubra como podemos transformar o seu próximo projeto.
-      </p>
-      <a href="https://stagelink.pt/#contactos"
-        class="inline-block px-8 py-3 rounded-full font-semibold text-white gradient-mensagem transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black">
-        Contacte-nos
-      </a>
-    </div>
-  </section>
-
-  <!-- Modal -->
-  <div id="portfolio-modal" class="fixed inset-0 z-[60] hidden">
-    <div class="absolute inset-0 bg-black/70"></div>
-    <div class="relative z-[61] max-w-5xl mx-auto my-10 px-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="flex items-center justify-between px-5 py-4 border-b">
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
           <div>
-            <p id="pm-client" class="text-xs uppercase tracking-wide text-gray-500"></p>
-            <h3 id="pm-title" class="text-xl font-bold"></h3>
-            <p id="pm-tags" class="text-xs text-gray-500 mt-0.5"></p>
+            <img src="/images/logo_white.png" alt="Logo Stagelink branco" class="h-14"/>
+            <p class="text-gray-400">Transformando negócios através do marketing digital e eventos corporativos.</p>
           </div>
-          <button id="pm-close" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Fechar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/></svg>
-          </button>
-        </div>
-        <div id="pm-body" class="p-4"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-black text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-4 gap-8">
-        <div>
-          <img src="/images/logo_white.png" alt="Logo Stagelink branco" class="h-14"/>
-          <p class="text-gray-400">Transformando negócios através do marketing digital e eventos corporativos.</p>
-        </div>
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
-          <ul class="space-y-2">
-            <li><a href="/#sobre" class="text-gray-400 hover:text-white">Sobre</a></li>
-            <li><a href="/#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
-            <li><a href="/#eventos" class="text-gray-400 hover:text-white">Eventos</a></li>
-            <li><a href="/#contactos" class="text-gray-400 hover:text-white">Contactos</a></li>
-            <li><a href="/projetos/" class="text-gray-400 hover:text-white">Projetos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Serviços</h4>
-          <ul class="space-y-2">
-            <li class="text-gray-400">Marketing Digital</li>
-            <li class="text-gray-400">Eventos Corporativos</li>
-            <li class="text-gray-400">Consultoria Estratégica</li>
-            <li class="text-gray-400">Gestão de Redes Sociais</li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
-          <div class="flex space-x-4">
-            <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon"/></a>
-            <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon"/></a>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+            <ul class="space-y-2">
+              <li><a href="/#sobre" class="text-gray-400 hover:text-white">Sobre</a></li>
+              <li><a href="/#servicos" class="text-gray-400 hover:text-white">Serviços</a></li>
+              <li><a href="/#eventos" class="text-gray-400 hover:text-white">Eventos</a></li>
+              <li><a href="/#contactos" class="text-gray-400 hover:text-white">Contactos</a></li>
+              <li><a href="/projetos/" class="text-gray-400 hover:text-white">Projetos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Serviços</h4>
+            <ul class="space-y-2">
+              <li class="text-gray-400">Marketing Digital</li>
+              <li class="text-gray-400">Eventos Corporativos</li>
+              <li class="text-gray-400">Consultoria Estratégica</li>
+              <li class="text-gray-400">Gestão de Redes Sociais</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
+            <div class="flex space-x-4">
+              <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon"/></a>
+              <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon"/></a>
+            </div>
           </div>
         </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"><p>&copy; 2025 Stagelink.</p></div>
       </div>
-      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"><p>&copy; 2025 Stagelink.</p></div>
-    </div>
-  </footer>
+    </footer>
 
-  <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
-  <script src="/script.js" defer></script>
+    <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+    <script src="/script.js" defer></script>
   </div>
 </body>
 </html>

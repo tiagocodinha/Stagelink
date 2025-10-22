@@ -686,3 +686,221 @@ footer .text-gray-400 {
 
 
 
+/* ===== PROJETOS – RESET MINIMO ===== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+img { display:block; max-width:100%; height:auto; }
+
+/* IMPORTANTE: remove qualquer “card” alternativo antigo */
+.portfolio-item { display:none !important; }
+
+/* ===== CARDS .proj-* ===== */
+.proj-grid{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns: repeat(1,minmax(0,1fr));
+}
+@media (min-width:768px){ .proj-grid{ grid-template-columns: repeat(2,1fr);} }
+@media (min-width:1024px){ .proj-grid{ grid-template-columns: repeat(3,1fr);} }
+
+.proj-card{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  background:transparent;            
+  box-shadow:0 6px 22px rgba(0,0,0,.08);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.proj-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 38px rgba(0,0,0,.14);
+}
+
+/* Media – agora MAIS ALTO (4:3) */
+.proj-media{
+  position:relative;
+  aspect-ratio:4 / 3;  /* antes: 16/9 */
+  width:100%;
+  border-radius:inherit;
+  overflow:hidden;
+}
+@media (min-width:1280px){
+  .proj-media{ aspect-ratio:5 / 4; } /* ainda mais alto em ecrãs grandes */
+}
+@media (max-width:1024px){
+  .proj-media{ aspect-ratio:3 / 2; } /* equilíbrio em tablets */
+}
+@media (max-width:640px){
+  .proj-media{ aspect-ratio:4 / 3; } /* mantém em mobile */
+}
+
+.proj-img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+}
+
+/* Escurecimento suave da imagem */
+.proj-dim{
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.35);
+  transition:opacity .3s ease;
+}
+.proj-card:hover .proj-dim{ opacity:.22; }
+
+/* Logo centrado; no hover sobe um pouco */
+.proj-logo{
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%, -50%) scale(1);
+  max-width:min(60%,260px); height:auto;
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.35));
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+  pointer-events:none;
+}
+.proj-card:hover .proj-logo{
+  transform:translate(-50%, calc(-50% - 32px)) scale(.92);
+}
+
+/* Pill de informação (descrição sobreposta) */
+.proj-info{
+  position:absolute; left:20px; right:20px; bottom:18px;
+  padding:16px 18px;
+  translate:0 22px; opacity:0;
+  transition:translate .35s cubic-bezier(.22,.61,.36,1), opacity .35s ease;
+}
+.proj-card:hover .proj-info{ translate:0 0; opacity:1; }
+.proj-info::before{
+  content:""; position:absolute; inset:0;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(6px);
+  border-radius:14px;
+  box-shadow:0 10px 26px rgba(0,0,0,.22);
+  z-index:-1;
+}
+
+/* Tipografia */
+.proj-client{
+  margin:0 0 6px;
+  font:600 11px/1.2 Montserrat,system-ui,sans-serif;
+  letter-spacing:.06em; text-transform:uppercase; color:#374151;
+}
+.proj-title{
+  margin:0 0 4px;
+  font:800 20px/1.25 Montserrat,system-ui,sans-serif; color:#0f172a;
+}
+.proj-sub{
+  margin:0;
+  font:500 13px/1.35 Montserrat,system-ui,sans-serif; color:#334155;
+}
+
+
+
+/* ===== Modal (popup) – comportamento mobile ===== */
+#portfolio-modal { z-index: 80; }
+
+@media (max-width: 640px){
+  /* folga no topo/laterais em mobile */
+  #portfolio-modal > .relative { padding: 12px !important; }
+
+  /* painel realmente mais baixo */
+  #portfolio-modal .modal-panel{
+    height: auto !important;
+    max-height: 86vh !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+  }
+
+  /* header compacto */
+  #portfolio-modal .modal-panel .border-b { padding: 10px 14px !important; }
+  #portfolio-modal #pm-title  { font-size: 1rem; }
+  #portfolio-modal #pm-client,
+  #portfolio-modal #pm-tags   { font-size: .70rem; }
+
+  /* corpo com scroll interno e sem alturas fixas herdadas */
+  #pm-body{
+    height: auto !important;
+    max-height: calc(86vh - 56px) !important;
+    overflow: auto;
+  }
+
+  /* media dentro do modal contida */
+  #pm-body iframe,
+  #pm-body img{
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+}
+
+/* ===== Projetos – logo sobe mais no mobile para aparecer por trás do modal ===== */
+@media (max-width: 640px){
+  .proj-logo{ max-width: 60%; }
+  .proj-card:hover .proj-logo,
+  .proj-card.is-open .proj-logo{
+    /* sobe mais um bocado */
+    transform: translate(-50%, calc(-50% - 52px)) scale(.9);
+  }
+}
+
+
+
+
+
+
+
+
+
+/* ===== Projetos – Hero full-bleed (sem “moldura”) ===== */
+.site-frame > header {
+  position: relative;
+  /* rompe o padding lateral do .site-frame */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+
+  /* visuais */
+  overflow: hidden;
+  background: #000;   /* fallback */
+  color: #fff;        /* força texto branco sobre overlay */
+}
+
+/* imagem de fundo */
+.site-frame > header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/images/stagelinkoffice.webp") center 30% / cover no-repeat;
+  /* ↑ ligeiro ajuste vertical */
+  opacity: 0.5; /* controla a visibilidade da imagem */
+  z-index: 0;
+}
+
+/* véu escuro (suave) */
+.site-frame > header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* mais leve para deixar a imagem respirar */
+  z-index: 1;
+}
+
+/* conteúdo por cima do véu */
+.site-frame > header > .max-w-7xl {
+  position: relative;
+  z-index: 2;
+}
+
+/* garante contraste no texto */
+.site-frame > header h1 {
+  color: #fff;
+}
+.site-frame > header p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+
