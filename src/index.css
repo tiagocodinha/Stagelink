@@ -654,29 +654,7 @@ footer > div {
   padding-inline: clamp(24px, 5vw, 64px);
 }
 
-/* Linha superior e inferior com mesma largura do conteúdo */
-footer::before,
-footer::after {
-  content: "";
-  display: block;
-  width: calc(100% - clamp(48px, 10vw, 128px)); /* igual ao padding-inline x2 */
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-inline: auto;
-}
 
-footer::before {
-  margin-bottom: 2rem; /* espaço antes do conteúdo */
-}
-
-footer::after {
-  margin-top: 2rem; /* espaço depois do conteúdo */
-}
-
-/* Remove a linha duplicada dentro do HTML, se existir */
-footer .border-t {
-  border: none !important;
-}
 
 /* Texto e cor */
 footer .text-gray-400 {

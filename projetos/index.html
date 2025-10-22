@@ -108,7 +108,7 @@
             <div class="proj-media">
               <img src="content/airways/aiways.webp" alt="Airways Aviation" class="proj-img">
               <div class="proj-dim"></div>
-              <img src="/images/airways.png" alt="Airways Aviation" class="proj-logo" onerror="this.style.display='none'">
+              <img src="/projetos/content/logos/Airways.png" alt="Airways Aviation" class="proj-logo" onerror="this.style.display='none'">
             </div>
             <div class="proj-info">
               <h3 class="proj-title">Social Media | Content Creation</h3>
@@ -121,7 +121,7 @@
             <div class="proj-media">
               <img src="content/lpl/lpl.webp" alt="Liga Portugal Legends" class="proj-img">
               <div class="proj-dim"></div>
-              <img src="/images/lplegends.png" alt="Liga Portugal Legends" class="proj-logo" onerror="this.style.display='none'">
+              <img src="/projetos/content/logos/Airways.png" alt="Liga Portugal Legends" class="proj-logo" onerror="this.style.display='none'">
             </div>
             <div class="proj-info">
               <h3 class="proj-title">Event Coverage</h3>
@@ -134,7 +134,7 @@
             <div class="proj-media">
               <img src="content/falrui/falrui.webp" alt="Falrui" class="proj-img">
               <div class="proj-dim"></div>
-              <img src="/images/falrui.png" alt="Falrui" class="proj-logo" onerror="this.style.display='none'">
+              <img src="/projetos/content/logos/Falrui.png" alt="Falrui" class="proj-logo" onerror="this.style.display='none'">
             </div>
             <div class="proj-info">
               <h3 class="proj-title">Social Media | Content Creation</h3>
@@ -186,10 +186,15 @@
     <footer class="bg-black text-white py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-4 gap-8">
-          <div>
-            <img src="/images/logo_white.png" alt="Logo Stagelink branco" class="h-14"/>
-            <p class="text-gray-400">Transformando negócios através do marketing digital e eventos corporativos.</p>
+          <!-- Logo + texto -->
+          <div class="flex flex-col items-start gap-3 max-w-xs">
+            <img src="/images/logo_white.png" alt="Logo Stagelink branco" class="h-14 -ml-2 md:-ml-3" />
+            <p class="text-gray-400 leading-snug m-0">
+              Transformando negócios através do marketing digital e eventos corporativos.
+            </p>
           </div>
+
+          <!-- Links rápidos -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
             <ul class="space-y-2">
@@ -200,6 +205,8 @@
               <li><a href="/projetos/" class="text-gray-400 hover:text-white">Projetos</a></li>
             </ul>
           </div>
+
+          <!-- Serviços -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Serviços</h4>
             <ul class="space-y-2">
@@ -209,17 +216,29 @@
               <li class="text-gray-400">Gestão de Redes Sociais</li>
             </ul>
           </div>
+
+          <!-- Redes Sociais -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
             <div class="flex space-x-4">
-              <a href="https://www.instagram.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon"/></a>
-              <a href="https://www.facebook.com/stagelink.pt/" class="text-gray-400 hover:text-white" target="_blank" rel="noopener"><img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon"/></a>
+              <a href="https://www.instagram.com/stagelink.pt/" target="_blank" rel="noopener">
+                <img src="/images/icons/instagram.png" alt="instagram" class="w-6 h-6 social-icon" />
+              </a>
+              <a href="https://www.facebook.com/stagelink.pt/" target="_blank" rel="noopener">
+                <img src="/images/icons/facebook.png" alt="facebook" class="w-6 h-6 social-icon" />
+              </a>
             </div>
           </div>
         </div>
-        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"><p>&copy; 2025 Stagelink.</p></div>
+
+        <!-- Linha + copyright -->
+        <div class="mt-12">
+          <div class="h-px bg-white/10"></div>
+          <p class="text-center text-gray-400 text-sm pt-6">&copy; 2025 Stagelink.</p>
+        </div>
       </div>
     </footer>
+
 
     <div id="toast-root" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
     <script src="/script.js" defer></script>
