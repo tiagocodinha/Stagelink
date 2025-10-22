@@ -579,3 +579,105 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
 });
+
+
+
+
+
+
+
+/* -------- Projetos: filtros simples (1 grelha, sem headings) -------- */
+(function projectsSimpleFilters(){
+  const container = document.querySelector('#proj-filters .max-w-7xl');
+  const scope  = document.querySelector('main .max-w-7xl .proj-grid');
+  if(!container || !scope) return;
+
+  // Recolhe categorias únicas (permite múltiplas por card)
+  const cards = Array.from(scope.querySelectorAll('.proj-card'));
+  const cats = Array.from(
+    new Set(
+      cards
+        .flatMap(c => (c.dataset.cat || '').split(','))
+        .map(s => s.trim())
+        .filter(Boolean)
+    )
+  );
+
+  // Constrói UI dos filtros
+  const wrap = document.createElement('div');  wrap.className = 'pf-wrap';
+  const rail = document.createElement('div');  rail.className = 'pf-rail';
+  const indicator = document.createElement('div'); indicator.className = 'pf-indicator';
+  rail.appendChild(indicator);
+
+  const mk = (label)=>{ const b=document.createElement('button');
+    b.type='button'; b.className='pf-chip'; b.dataset.value=label; b.textContent=label; return b; };
+
+  const btnAll = mk('ALL'); rail.appendChild(btnAll);
+  const btns = cats.map(c => mk(c)); btns.forEach(b=>rail.appendChild(b));
+  wrap.appendChild(rail); container.appendChild(wrap);
+
+  // Estado
+  let active = 'ALL', activeBtn = btnAll;
+
+  // Helpers
+  function setActive(btn){
+    activeBtn = btn;
+    rail.querySelectorAll('.pf-chip').forEach(x=>x.classList.remove('is-active'));
+    btn.classList.add('is-active');
+  }
+  function posIndicator(btn){
+    const br = btn.getBoundingClientRect();
+    const rr = rail.getBoundingClientRect();
+    const left = (br.left - rr.left) + rail.scrollLeft;
+    const top  = (getComputedStyle(rail).paddingTop.replace('px','')|0);
+
+    indicator.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+    indicator.style.width  = `${br.width}px`;
+    indicator.style.height = `${br.height}px`;
+  }
+  // Aplica filtro com suporte a múltiplas categorias
+  function apply(){
+    cards.forEach(c=>{
+      const cardCats = (c.dataset.cat || '').split(',').map(s => s.trim());
+      const show = (active==='ALL') || cardCats.includes(active);
+      c.style.display = show ? '' : 'none';
+    });
+  }
+  function center(btn){
+    const target = btn.offsetLeft - (rail.clientWidth/2 - btn.offsetWidth/2);
+    rail.scrollTo({left: Math.max(0, target), behavior: 'smooth'});
+  }
+
+  // Eventos dos chips
+  btnAll.addEventListener('click', ()=>{
+    active='ALL'; setActive(btnAll); posIndicator(btnAll); center(btnAll); apply();
+  });
+  btns.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      active = b.dataset.value; setActive(b); posIndicator(b); center(b); apply();
+    });
+  });
+
+  // Tag da categoria dentro do cartão (delegação)
+  scope.addEventListener('click', (e)=>{
+    const tag = e.target.closest('.card-tag');
+    if(!tag) return;
+    const val = tag.dataset.cat;
+    const btn = [...btns, btnAll].find(x => x.dataset.value === val) || btnAll;
+    (btn === btnAll) ? btnAll.click() : btn.click();
+  });
+
+  // Recalcular no resize/scroll do rail
+  const raf = (fn)=>{ let t=null; return (...a)=>{ if(t) cancelAnimationFrame(t); t=requestAnimationFrame(()=>fn(...a)); }; };
+  rail.addEventListener('scroll', raf(()=>posIndicator(activeBtn)), {passive:true});
+  window.addEventListener('resize', raf(()=>posIndicator(activeBtn)));
+  new ResizeObserver(raf(()=>posIndicator(activeBtn))).observe(rail);
+
+  // Init
+  setActive(btnAll);
+  (document.fonts?.ready || Promise.resolve()).then(()=>{
+    posIndicator(btnAll);
+    btnAll.scrollIntoView({behavior:'auto', inline:'start'});
+    apply();
+  });
+})();

@@ -953,3 +953,99 @@ img { display:block; max-width:100%; height:auto; }
 @media (max-width: 640px){
   .proj-media{ --logo-max-h: clamp(64px, 26%, 120px); }
 }
+
+
+
+
+
+
+
+/* ====== FILTROS PROJETOS — mobile/desktop fix ====== */
+#proj-filters{
+  margin-top: clamp(24px, 4vw, 48px);
+  margin-bottom: 6px;
+}
+#proj-filters > .max-w-7xl{ display:flex; justify-content:center; }
+
+/* caixa */
+.pf-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:stretch;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15,23,42,.06);
+  border-radius: 16px;
+  padding: .5rem .6rem .65rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,.06);
+  max-width: 100%;
+}
+
+/* rail (desktop pode partir linha; mobile é 1 linha só) */
+.pf-rail{
+  position:relative;
+  display:flex; align-items:center;
+  gap:.35rem;
+  padding:.22rem .22rem;
+  border-radius:999px;
+  background: rgba(15,23,42,.05);
+  overflow-x:auto; overflow-y:hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: .22rem;
+  flex-wrap: wrap;                 /* desktop default */
+}
+.pf-rail::-webkit-scrollbar{ display:none; }
+
+/* MOBILE: 1 linha obrigatória com scroll horizontal */
+@media (max-width: 840px){
+  .pf-rail{
+    flex-wrap: nowrap;             /* <- não quebra */
+    white-space: nowrap;
+  }
+}
+
+/* chips */
+.pf-chip{
+  position:relative; z-index:1;
+  appearance:none; border:0; outline:0;
+  padding:.44rem .78rem;
+  border-radius:9999px;
+  font:700 12px/1.1 Montserrat, system-ui, sans-serif;
+  letter-spacing:.02em;
+  color:#0f172a; background: transparent;
+  cursor:pointer; white-space:nowrap;
+  transition: transform .18s ease, color .18s ease;
+  scroll-snap-align:center;
+  flex: 0 0 auto;                  /* não encolhe no mobile */
+}
+.pf-chip:hover{ transform: translateY(-1px); }
+.pf-chip.is-active{ color:#fff; }
+
+/* indicador (JS posiciona) */
+.pf-indicator{
+  position:absolute; z-index:0;
+  left:0; top:0; width:0; height:0;
+  border-radius:9999px;
+  background: linear-gradient(90deg,#4368ac 0%, #2daacd 50%, #24c4da 100%);
+  box-shadow: 0 12px 28px rgba(45,170,205,.28);
+  transform: translate3d(0,0,0);
+  transition: transform .25s cubic-bezier(.22,.61,.36,1),
+              width .25s cubic-bezier(.22,.61,.36,1),
+              height .18s ease;
+}
+
+/* 1º heading visível encostado ao rail */
+.category-heading.pf-first-visible{ margin-top: 8px !important; }
+
+/* Mobile tweaks visuais */
+@media (max-width: 840px){
+  .pf-wrap{ padding:.44rem .5rem .58rem; border-radius:14px; }
+  .pf-chip{ padding:.36rem .62rem; font-size:.74rem; }
+  .pf-wrap::before,.pf-wrap::after{
+    content:""; position:absolute; top:0; bottom:0; width:26px; pointer-events:none;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+  }
+  .pf-wrap::before{ left:0; }
+  .pf-wrap::after{ right:0; transform: scaleX(-1); }
+}
