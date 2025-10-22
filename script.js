@@ -301,7 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-
   /* -------- Link ativo na homepage -------- */
   (function activeLinkOnHome() {
     const path = window.location.pathname;
@@ -341,179 +340,311 @@ document.addEventListener("DOMContentLoaded", () => {
     if (proj) proj.classList.add("active");
   })();
 
-  /* -------- Modal dos Projetos (suporta FEED: imagens + vídeos mistos) -------- */
-(function portfolioModalV2() {
-  const cards = document.querySelectorAll('.proj-card:not([data-disable-popup="1"])');
-  const modal = document.getElementById("portfolio-modal");
-  if (!cards.length || !modal) return;
+  /* -------- Modal dos Projetos (CASE STUDY + fallback) -------- */
+  (function portfolioModalV2() {
+    const cards = document.querySelectorAll('.proj-card:not([data-disable-popup="1"])');
+    const modal = document.getElementById("portfolio-modal");
+    if (!cards.length || !modal) return;
 
-  const pmTitle  = document.getElementById("pm-title");
-  const pmClient = document.getElementById("pm-client");
-  const pmTags   = document.getElementById("pm-tags");
-  const pmBody   = document.getElementById("pm-body");
-  const pmClose  = document.getElementById("pm-close");
+    const pmTitle  = document.getElementById("pm-title");
+    const pmClient = document.getElementById("pm-client");
+    const pmTags   = document.getElementById("pm-tags");
+    const pmBody   = document.getElementById("pm-body");
+    const pmClose  = document.getElementById("pm-close");
 
-  const open = () => {
-    modal.classList.remove("hidden");
-    document.body.classList.add("overflow-hidden");
-  };
-  const close = () => {
-    modal.classList.add("hidden");
-    document.body.classList.remove("overflow-hidden");
-    pmBody.innerHTML = ""; // limpa conteúdo (e pára vídeos)
-  };
+    const open = () => {
+      modal.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    };
+    const close = () => {
+      modal.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
+      pmBody.innerHTML = ""; // limpa conteúdo e pára vídeos
+    };
 
-  // Helpers
-  const makeIframe = (src) => {
-    const iframe = document.createElement("iframe");
-    iframe.src = src;
-    iframe.width = "100%";
-    iframe.allow =
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.allowFullscreen = true;
-    iframe.className = "rounded-xl w-full aspect-video";
-    return iframe;
-  };
-  const makeVideo = (src) => {
-    // Se for mp4 direto, usa <video>; senão iframe (YT/Vimeo embed)
-    if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
-      const v = document.createElement("video");
-      v.src = src;
-      v.controls = true;
-      v.playsInline = true;
-      v.className = "rounded-xl w-full";
-      v.style.maxHeight = "78vh";
-      return v;
+    // --- Helpers ---
+    const csv = (str="") => str.split("|").map(s=>s.trim()).filter(Boolean);
+
+    // URLs correctos p/ autoplay/mute/loop (YouTube/Vimeo)
+    function buildIframeSrc(raw) {
+      try {
+        const url = new URL(raw, location.origin);
+
+        // YouTube
+        if (/youtube\.com\/embed\//i.test(url.href)) {
+          const id = (url.pathname.split("/").pop() || "").split("?")[0];
+          url.searchParams.set("autoplay", "1");
+          url.searchParams.set("mute", "1");
+          url.searchParams.set("playsinline", "1");
+          url.searchParams.set("controls", "0");
+          url.searchParams.set("rel", "0");
+          url.searchParams.set("modestbranding", "1");
+          url.searchParams.set("loop", "1");
+          if (id) url.searchParams.set("playlist", id); // necessário p/ loop
+          return url.toString();
+        }
+
+        // Vimeo
+        if (/player\.vimeo\.com\/video\//i.test(url.href)) {
+          url.searchParams.set("autoplay", "1");
+          url.searchParams.set("muted", "1");
+          url.searchParams.set("loop", "1");
+          url.searchParams.set("background", "0");
+          url.searchParams.set("title", "0");
+          url.searchParams.set("byline", "0");
+          url.searchParams.set("portrait", "0");
+          return url.toString();
+        }
+        return raw;
+      } catch { return raw; }
     }
-    return makeIframe(src);
-  };
 
-  const parseFeed = (raw = "") => {
-    // separa por | e processa prefixos "video:" / "image:" (sem prefixo => image)
-    return raw
-      .split("|")
-      .map(s => s.trim())
-      .filter(Boolean)
-      .map(item => {
-        const m = item.match(/^(video|image)\s*:\s*(.+)$/i);
-        if (m) return { type: m[1].toLowerCase(), src: m[2].trim() };
-        return { type: "image", src: item }; // default
-      });
-  };
+    function makeVideoEl(src) {
+      // ficheiro direto => <video>
+      if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
+        const v = document.createElement("video");
+        v.src = src;
+        v.muted = true;
+        v.loop = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.controls = false;
+        v.setAttribute("muted","");
+        v.setAttribute("playsinline","");
+        v.className = "feed-video";
+        return v;
+      }
+      // YouTube/Vimeo => <iframe>
+      const iframe = document.createElement("iframe");
+      iframe.src = buildIframeSrc(src);
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.className = "feed-video";
+      return iframe;
+    }
 
-  // Lazy init de iframes (melhor performance)
-  const lazyMountIframes = (root) => {
-    const items = Array.from(root.querySelectorAll('[data-iframe-src]'));
-    if (!items.length) return;
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const holder = e.target;
-        const src = holder.getAttribute('data-iframe-src');
-        if (!src) return;
-        holder.replaceWith(makeIframe(src));
-        obs.unobserve(holder);
-      });
-    }, { root: root, rootMargin: "200px 0px", threshold: 0.01 });
-    items.forEach(el => io.observe(el));
-  };
-
-  // Clique no Card
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const kind   = (card.dataset.kind || "image").toLowerCase();
-      const title  = card.dataset.title  || "";
-      const client = card.dataset.client || "";
-      const tags   = card.dataset.tags   || "";
+    function buildCaseStudy(card) {
+      const title   = card.dataset.title  || "";
+      const client  = card.dataset.client || "";
+      const tags    = card.dataset.tags   || "";
+      const logo    = card.dataset.logo   || card.querySelector(".proj-logo")?.getAttribute("src") || "";
+      const ano     = card.dataset.ano    || "";
+      const sector  = card.dataset.sector || "";
+      const services= card.dataset.services || "";
+      const images  = (card.dataset.images || "").split("|").map(s=>s.trim()).filter(Boolean);
+      const reels   = (card.dataset.reels  || "").split("|").map(s=>s.trim()).filter(Boolean);
 
       pmTitle.textContent  = title;
       pmClient.textContent = client;
       pmTags.textContent   = tags;
       pmBody.innerHTML     = "";
 
-      if (kind === "feed") {
-        const feed = parseFeed(card.dataset.feed || "");
-        if (!feed.length) {
-          pmBody.innerHTML = `<p class="text-sm text-slate-600 p-4">Sem conteúdos neste momento.</p>`;
-        } else {
-          const list = document.createElement("div");
-          list.className = "feed-list";
-          feed.forEach(item => {
-            const post = document.createElement("article");
-            post.className = "feed-post";
+      const wrap = document.createElement("div");
+      wrap.className = "pm-case";
 
-            if (item.type === "video") {
-              // Montagem preguiçosa: cria placeholder que troca por iframe quando entra no viewport
-              const holder = document.createElement("div");
-              holder.className = "rounded-xl w-full aspect-video bg-slate-100";
-              holder.setAttribute("data-iframe-src", item.src);
-              post.appendChild(holder);
-            } else {
-              const img = document.createElement("img");
-              img.src = item.src;
-              img.alt = title || "Imagem";
-              img.loading = "lazy";
-              img.className = "rounded-xl w-full h-auto";
-              post.appendChild(img);
-            }
+      // ---------- HEADER (logo à ESQUERDA, info à DIREITA) ----------
+      const header = document.createElement("div");
+      header.className = "pm-header";
+      // layout direto aqui para não depender de CSS extra
+      header.style.display = "grid";
+      header.style.gridTemplateColumns = "200px 1fr";
+      header.style.gap = "20px";
+      header.style.alignItems = "center";
 
-            list.appendChild(post);
-          });
+      // LOGO (esquerda) – forçar preto
+      const logoCol = document.createElement("div");
+      logoCol.style.display = "flex";
+      logoCol.style.alignItems = "center";
+      logoCol.style.justifyContent = "flex-start";
+      logoCol.style.height = "100%";
 
-          pmBody.appendChild(list);
-          // ativa lazy iframes dentro do pmBody
-          lazyMountIframes(pmBody);
-        }
-
-      } else if (kind === "video") {
-        const src = card.dataset.src;
-        pmBody.appendChild(makeVideo(src));
-
-      } else if (kind === "image") {
-        const src = card.dataset.src;
+      if (logo) {
         const img = document.createElement("img");
-        img.src = src;
-        img.alt = title || "Imagem";
-        img.className = "w-full h-auto rounded-xl";
-        pmBody.appendChild(img);
-
-      } else if (kind === "gallery") {
-        const list = (card.dataset.gallery || "")
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean);
-
-        if (list.length) {
-          const wrap = document.createElement("div");
-          wrap.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
-          list.forEach((src) => {
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = title || "Galeria";
-            img.className = "w-full h-auto rounded-lg";
-            wrap.appendChild(img);
-          });
-          pmBody.appendChild(wrap);
-        }
+        img.src = logo;
+        img.alt = client || title || "Logo";
+        img.loading = "lazy";
+        img.style.maxHeight = "64px";
+        img.style.width = "auto";
+        // preto: remove cor e “pinta” a preto
+        img.style.filter = "grayscale(1) brightness(0) contrast(1000%) opacity(.9)";
+        logoCol.appendChild(img);
       }
 
-      open();
+      // INFO (direita)
+      const infoCol = document.createElement("div");
+
+      const infoGrid = document.createElement("div");
+      infoGrid.style.display = "grid";
+      infoGrid.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
+      infoGrid.style.gap = "18px";
+      infoGrid.style.background = "rgba(248,250,252,1)";     // slate-50
+      infoGrid.style.border = "1px solid rgba(226,232,240,.8)";
+      infoGrid.style.borderRadius = "16px";
+      infoGrid.style.padding = "18px 20px";
+      infoGrid.style.position = "relative";
+      infoGrid.style.overflow = "hidden";
+
+      const mk = (k, v) => {
+        const b = document.createElement("div");
+        const kk = document.createElement("div");
+        kk.textContent = k.toUpperCase();
+        kk.style.fontSize = "11px";
+        kk.style.letterSpacing = ".06em";
+        kk.style.fontWeight = "800";
+        kk.style.color = "#64748b"; // slate-500
+        kk.style.marginBottom = "6px";
+
+        const vv = document.createElement("div");
+        vv.textContent = v;
+        vv.style.fontWeight = "700";
+        vv.style.color = "#0f172a"; // slate-900
+        vv.style.lineHeight = "1.25";
+
+        b.appendChild(kk);
+        b.appendChild(vv);
+        return b;
+      };
+
+      if (services) infoGrid.appendChild(mk("Projeto", services));
+      if (ano)      infoGrid.appendChild(mk("Ano", ano));
+      if (sector)   infoGrid.appendChild(mk("Setor", sector));
+
+      infoCol.appendChild(infoGrid);
+
+      // monta o header na nova ordem
+      header.appendChild(logoCol);  // ← primeiro o LOGO (ESQUERDA)
+      header.appendChild(infoCol);  // ← depois as INFORMAÇÕES (DIREITA)
+      wrap.appendChild(header);
+      // ---------- /HEADER ----------
+
+      // Galeria (se existir)
+      if (images.length) {
+        const gal = document.createElement("div");
+        gal.className = "pm-gallery";
+        gal.style.display = "grid";
+        gal.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
+        gal.style.gap = "12px";
+        gal.style.margin = "18px 16px 6px";
+
+        images.forEach(src => {
+          const im = document.createElement("img");
+          im.src = src; im.alt = title || "Imagem";
+          im.loading = "lazy";
+          im.style.borderRadius = "12px";
+          im.style.width = "100%";
+          im.style.height = "auto";
+          gal.appendChild(im);
+        });
+        wrap.appendChild(gal);
+      }
+
+      // 3 telemóveis com reels (se existirem)
+      if (reels.length) {
+        const phones = document.createElement("div");
+        phones.className = "pm-phones";
+        phones.style.display = "grid";
+        phones.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
+        phones.style.gap = "24px";
+        phones.style.padding = "22px 16px 8px";
+
+        const sources = reels.slice(0, 3);
+        while (sources.length < 3 && reels.length) sources.push(reels[reels.length - 1]);
+
+        const makeVideoEl = (src) => {
+          if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
+            const v = document.createElement("video");
+            v.src = src;
+            v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = false;
+            v.setAttribute("muted",""); v.setAttribute("playsinline","");
+            v.style.width = "100%"; v.style.height = "100%"; v.style.objectFit = "cover";
+            return v;
+          }
+          const iframe = document.createElement("iframe");
+          const build = (raw) => {
+            try {
+              const u = new URL(raw, location.origin);
+              if (/youtube\.com\/embed\//i.test(u.href)) {
+                const id = (u.pathname.split("/").pop() || "").split("?")[0];
+                u.searchParams.set("autoplay","1");
+                u.searchParams.set("mute","1");
+                u.searchParams.set("playsinline","1");
+                u.searchParams.set("controls","0");
+                u.searchParams.set("rel","0");
+                u.searchParams.set("modestbranding","1");
+                u.searchParams.set("loop","1");
+                if (id) u.searchParams.set("playlist", id);
+                return u.toString();
+              }
+              if (/player\.vimeo\.com\/video\//i.test(u.href)) {
+                u.searchParams.set("autoplay","1");
+                u.searchParams.set("muted","1");
+                u.searchParams.set("loop","1");
+                u.searchParams.set("title","0");
+                u.searchParams.set("byline","0");
+                u.searchParams.set("portrait","0");
+                return u.toString();
+              }
+              return raw;
+            } catch { return raw; }
+          };
+          iframe.src = build(src);
+          iframe.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          iframe.style.width = "100%"; iframe.style.height = "100%"; iframe.style.border = "0";
+          return iframe;
+        };
+
+        sources.forEach(src => {
+          const phone = document.createElement("div");
+          phone.className = "phone";
+          phone.style.position = "relative";
+          phone.style.aspectRatio = "9 / 19.5";  // formato iPhone-ish
+          phone.style.borderRadius = "28px";
+          phone.style.background = "#0b0b0b";
+          phone.style.boxShadow = "0 18px 40px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.06)";
+
+          const screen = document.createElement("div");
+          screen.className = "screen";
+          screen.style.position = "absolute";
+          screen.style.inset = "12px 10px 14px";
+          screen.style.borderRadius = "22px";
+          screen.style.overflow = "hidden";
+          screen.appendChild(makeVideoEl(src));
+
+          phone.appendChild(screen);
+          phones.appendChild(phone);
+        });
+
+        wrap.appendChild(phones);
+      }
+
+      pmBody.appendChild(wrap);
+    }
+
+
+
+    // Click -> abre modal
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const isCase =
+          !!(card.dataset.logo || card.dataset.reels || card.dataset.images || card.dataset.services);
+        if (isCase) buildCaseStudy(card); else buildLegacy(card);
+        open();
+      });
     });
-  });
 
-  // Fechar (botão, ESC, clique fora do painel)
-  pmClose?.addEventListener("click", close);
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.classList.contains("hidden")) close();
-  });
+    // Fechar (botão, ESC, clique fora do painel)
+    pmClose?.addEventListener("click", close);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) close();
+    });
 
-  const panel = modal.querySelector(".modal-panel");
-  modal.addEventListener("mousedown", (e) => {
-    if (!panel) return;
-    if (!panel.contains(e.target)) close();
-  });
-})();
-
+    const panel = modal.querySelector(".modal-panel");
+    modal.addEventListener("mousedown", (e) => {
+      if (!panel) return;
+      if (!panel.contains(e.target)) close();
+    });
+  })();
 
   /* -------- Filtro antigo do portfólio (opcional) -------- */
   (function legacyPortfolioFilters() {
@@ -631,11 +762,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const track = document.querySelector('.logo-track');
     if (!track) return;
 
-    // [1] VELOCIDADE (px/seg) — menor = mais lento
-    const SPEED_PX_PER_SEC = 70;   // ex.: 120 rápido • 80 médio • 50 lento • 30 muito lento
-    const MIN_DURATION_S   = 20;   // duração mínima por loop (opcional)
+    const SPEED_PX_PER_SEC = 70;
+    const MIN_DURATION_S   = 20;
 
-    // Duplica uma vez
     if (![...track.children].some(n => n.classList?.contains('clone'))) {
       const originals = Array.from(track.children);
       originals.forEach(n => { const c = n.cloneNode(true); c.classList.add('clone'); track.appendChild(c); });
@@ -644,8 +773,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const setLoopWidth = () => {
       const loopPx = track.scrollWidth / 2;
       track.style.setProperty('--loop-px', `${loopPx}px`);
-
-      // [2] cálculo da duração com base na velocidade desejada
       const dur = Math.max(MIN_DURATION_S, loopPx / SPEED_PX_PER_SEC);
       track.style.setProperty('--marquee-duration', `${dur}s`);
     };
@@ -653,7 +780,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const onReady = () => setLoopWidth();
     if (document.readyState === 'complete') onReady(); else window.addEventListener('load', onReady);
 
-    // [3] recalcula em resize
     let rAF = null;
     window.addEventListener('resize', () => {
       if (rAF) cancelAnimationFrame(rAF);
@@ -661,12 +787,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
-});
-
-
-
-
-
+}); // DOMContentLoaded end
 
 
 /* -------- Projetos: filtros simples (1 grelha, sem headings) -------- */
@@ -675,7 +796,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const scope  = document.querySelector('main .max-w-7xl .proj-grid');
   if(!container || !scope) return;
 
-  // Recolhe categorias únicas (permite múltiplas por card)
   const cards = Array.from(scope.querySelectorAll('.proj-card'));
   const cats = Array.from(
     new Set(
@@ -686,7 +806,6 @@ document.addEventListener("DOMContentLoaded", () => {
     )
   );
 
-  // Constrói UI dos filtros
   const wrap = document.createElement('div');  wrap.className = 'pf-wrap';
   const rail = document.createElement('div');  rail.className = 'pf-rail';
   const indicator = document.createElement('div'); indicator.className = 'pf-indicator';
@@ -699,10 +818,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const btns = cats.map(c => mk(c)); btns.forEach(b=>rail.appendChild(b));
   wrap.appendChild(rail); container.appendChild(wrap);
 
-  // Estado
   let active = 'ALL', activeBtn = btnAll;
 
-  // Helpers
   function setActive(btn){
     activeBtn = btn;
     rail.querySelectorAll('.pf-chip').forEach(x=>x.classList.remove('is-active'));
@@ -718,7 +835,6 @@ document.addEventListener("DOMContentLoaded", () => {
     indicator.style.width  = `${br.width}px`;
     indicator.style.height = `${br.height}px`;
   }
-  // Aplica filtro com suporte a múltiplas categorias
   function apply(){
     cards.forEach(c=>{
       const cardCats = (c.dataset.cat || '').split(',').map(s => s.trim());
@@ -731,7 +847,6 @@ document.addEventListener("DOMContentLoaded", () => {
     rail.scrollTo({left: Math.max(0, target), behavior: 'smooth'});
   }
 
-  // Eventos dos chips
   btnAll.addEventListener('click', ()=>{
     active='ALL'; setActive(btnAll); posIndicator(btnAll); center(btnAll); apply();
   });
@@ -741,7 +856,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Tag da categoria dentro do cartão (delegação)
   scope.addEventListener('click', (e)=>{
     const tag = e.target.closest('.card-tag');
     if(!tag) return;
@@ -750,13 +864,11 @@ document.addEventListener("DOMContentLoaded", () => {
     (btn === btnAll) ? btnAll.click() : btn.click();
   });
 
-  // Recalcular no resize/scroll do rail
   const raf = (fn)=>{ let t=null; return (...a)=>{ if(t) cancelAnimationFrame(t); t=requestAnimationFrame(()=>fn(...a)); }; };
   rail.addEventListener('scroll', raf(()=>posIndicator(activeBtn)), {passive:true});
   window.addEventListener('resize', raf(()=>posIndicator(activeBtn)));
   new ResizeObserver(raf(()=>posIndicator(activeBtn))).observe(rail);
 
-  // Init
   setActive(btnAll);
   (document.fonts?.ready || Promise.resolve()).then(()=>{
     posIndicator(btnAll);
@@ -764,11 +876,3 @@ document.addEventListener("DOMContentLoaded", () => {
     apply();
   });
 })();
-
-
-
-
-
-
-
-
