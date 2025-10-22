@@ -568,7 +568,7 @@ nav .nav-wrap { position: relative; }
 }
 
 .category-heading span {
-  height: 1px;
+  height: 2px;
   flex-grow: 1;
   background: linear-gradient(90deg, #2daacd 0%, transparent 100%);
   opacity: 0.6;
