@@ -1176,3 +1176,14 @@ img { display:block; max-width:100%; height:auto; }
   border: 0 !important;                 /* sem borda */
   padding: clamp(10px, 1.6vw, 16px) 0 !important; /* um pouco menos de “moldura” */
 }
+
+
+
+/* ====== Cursor pointer nos cartões de projeto ====== */
+.proj-card {
+  cursor: pointer; /* mostra a mãozinha no hover */
+}
+.proj-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(0,0,0,.14);
+}
