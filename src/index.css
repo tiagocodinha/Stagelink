@@ -1049,3 +1049,36 @@ img { display:block; max-width:100%; height:auto; }
   .pf-wrap::before{ left:0; }
   .pf-wrap::after{ right:0; transform: scaleX(-1); }
 }
+
+
+
+
+
+
+/* ===== Feed no modal (posts em scroll) ===== */
+.feed-list{
+  display: grid;
+  grid-auto-rows: max-content;
+  gap: 14px;
+  padding: 6px;
+}
+
+.feed-post{
+  display: block;
+}
+
+#pm-body .feed-post img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 12px;
+}
+
+#pm-body .feed-post iframe,
+#pm-body .feed-post video{
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  aspect-ratio: 16/9;
+  background:#0b0b0b;
+}

@@ -341,96 +341,179 @@ document.addEventListener("DOMContentLoaded", () => {
     if (proj) proj.classList.add("active");
   })();
 
-  /* -------- Modal dos Projetos -------- */
-  (function portfolioModalV2() {
-    const cards = document.querySelectorAll('.proj-card:not([data-disable-popup="1"])');
-    const modal = document.getElementById("portfolio-modal");
-    if (!cards.length || !modal) return;
+  /* -------- Modal dos Projetos (suporta FEED: imagens + vídeos mistos) -------- */
+(function portfolioModalV2() {
+  const cards = document.querySelectorAll('.proj-card:not([data-disable-popup="1"])');
+  const modal = document.getElementById("portfolio-modal");
+  if (!cards.length || !modal) return;
 
-    const pmTitle = document.getElementById("pm-title");
-    const pmClient = document.getElementById("pm-client");
-    const pmTags = document.getElementById("pm-tags");
-    const pmBody = document.getElementById("pm-body");
-    const pmClose = document.getElementById("pm-close");
+  const pmTitle  = document.getElementById("pm-title");
+  const pmClient = document.getElementById("pm-client");
+  const pmTags   = document.getElementById("pm-tags");
+  const pmBody   = document.getElementById("pm-body");
+  const pmClose  = document.getElementById("pm-close");
 
-    const open = () => {
-      modal.classList.remove("hidden");
-      document.body.classList.add("overflow-hidden");
-    };
-    const close = () => {
-      modal.classList.add("hidden");
-      document.body.classList.remove("overflow-hidden");
-      pmBody.innerHTML = ""; // limpa conteúdo (e pára vídeos)
-    };
+  const open = () => {
+    modal.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+  };
+  const close = () => {
+    modal.classList.add("hidden");
+    document.body.classList.remove("overflow-hidden");
+    pmBody.innerHTML = ""; // limpa conteúdo (e pára vídeos)
+  };
 
-    // Clique no Card
-    cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const kind = card.dataset.kind || "image";
-        const title = card.dataset.title || "";
-        const client = card.dataset.client || "";
-        const tags = card.dataset.tags || "";
+  // Helpers
+  const makeIframe = (src) => {
+    const iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.width = "100%";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.className = "rounded-xl w-full aspect-video";
+    return iframe;
+  };
+  const makeVideo = (src) => {
+    // Se for mp4 direto, usa <video>; senão iframe (YT/Vimeo embed)
+    if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
+      const v = document.createElement("video");
+      v.src = src;
+      v.controls = true;
+      v.playsInline = true;
+      v.className = "rounded-xl w-full";
+      v.style.maxHeight = "78vh";
+      return v;
+    }
+    return makeIframe(src);
+  };
 
-        pmTitle.textContent = title;
-        pmClient.textContent = client;
-        pmTags.textContent = tags;
-        pmBody.innerHTML = "";
+  const parseFeed = (raw = "") => {
+    // separa por | e processa prefixos "video:" / "image:" (sem prefixo => image)
+    return raw
+      .split("|")
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map(item => {
+        const m = item.match(/^(video|image)\s*:\s*(.+)$/i);
+        if (m) return { type: m[1].toLowerCase(), src: m[2].trim() };
+        return { type: "image", src: item }; // default
+      });
+  };
 
-        if (kind === "video") {
-          const src = card.dataset.src;
-          const iframe = document.createElement("iframe");
-          iframe.src = src;
-          iframe.width = "100%";
-          iframe.height = "520";
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-          iframe.allowFullscreen = true;
-          iframe.className = "rounded-xl w-full aspect-video";
-          pmBody.appendChild(iframe);
-        } else if (kind === "image") {
-          const src = card.dataset.src;
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = title || "Imagem";
-          img.className = "w-full h-auto rounded-xl";
-          pmBody.appendChild(img);
-        } else if (kind === "gallery") {
-          const list = (card.dataset.gallery || "")
-            .split(",")
-            .map((s) => s.trim())
-            .filter(Boolean);
+  // Lazy init de iframes (melhor performance)
+  const lazyMountIframes = (root) => {
+    const items = Array.from(root.querySelectorAll('[data-iframe-src]'));
+    if (!items.length) return;
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const holder = e.target;
+        const src = holder.getAttribute('data-iframe-src');
+        if (!src) return;
+        holder.replaceWith(makeIframe(src));
+        obs.unobserve(holder);
+      });
+    }, { root: root, rootMargin: "200px 0px", threshold: 0.01 });
+    items.forEach(el => io.observe(el));
+  };
 
-          if (list.length) {
-            const wrap = document.createElement("div");
-            wrap.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
-            list.forEach((src) => {
+  // Clique no Card
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const kind   = (card.dataset.kind || "image").toLowerCase();
+      const title  = card.dataset.title  || "";
+      const client = card.dataset.client || "";
+      const tags   = card.dataset.tags   || "";
+
+      pmTitle.textContent  = title;
+      pmClient.textContent = client;
+      pmTags.textContent   = tags;
+      pmBody.innerHTML     = "";
+
+      if (kind === "feed") {
+        const feed = parseFeed(card.dataset.feed || "");
+        if (!feed.length) {
+          pmBody.innerHTML = `<p class="text-sm text-slate-600 p-4">Sem conteúdos neste momento.</p>`;
+        } else {
+          const list = document.createElement("div");
+          list.className = "feed-list";
+          feed.forEach(item => {
+            const post = document.createElement("article");
+            post.className = "feed-post";
+
+            if (item.type === "video") {
+              // Montagem preguiçosa: cria placeholder que troca por iframe quando entra no viewport
+              const holder = document.createElement("div");
+              holder.className = "rounded-xl w-full aspect-video bg-slate-100";
+              holder.setAttribute("data-iframe-src", item.src);
+              post.appendChild(holder);
+            } else {
               const img = document.createElement("img");
-              img.src = src;
-              img.alt = title || "Galeria";
-              img.className = "w-full h-auto rounded-lg";
-              wrap.appendChild(img);
-            });
-            pmBody.appendChild(wrap);
-          }
+              img.src = item.src;
+              img.alt = title || "Imagem";
+              img.loading = "lazy";
+              img.className = "rounded-xl w-full h-auto";
+              post.appendChild(img);
+            }
+
+            list.appendChild(post);
+          });
+
+          pmBody.appendChild(list);
+          // ativa lazy iframes dentro do pmBody
+          lazyMountIframes(pmBody);
         }
 
-        open();
-      });
-    });
+      } else if (kind === "video") {
+        const src = card.dataset.src;
+        pmBody.appendChild(makeVideo(src));
 
-    // Fechar (botão, ESC, clique fora)
-    pmClose?.addEventListener("click", close);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !modal.classList.contains("hidden")) close();
-    });
+      } else if (kind === "image") {
+        const src = card.dataset.src;
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = title || "Imagem";
+        img.className = "w-full h-auto rounded-xl";
+        pmBody.appendChild(img);
 
-    // Clique fora do painel (usar o painel real)
-    const panel = modal.querySelector(".modal-panel");
-    modal.addEventListener("mousedown", (e) => {
-      if (!panel) return;
-      if (!panel.contains(e.target)) close();
+      } else if (kind === "gallery") {
+        const list = (card.dataset.gallery || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+
+        if (list.length) {
+          const wrap = document.createElement("div");
+          wrap.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
+          list.forEach((src) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = title || "Galeria";
+            img.className = "w-full h-auto rounded-lg";
+            wrap.appendChild(img);
+          });
+          pmBody.appendChild(wrap);
+        }
+      }
+
+      open();
     });
-  })();
+  });
+
+  // Fechar (botão, ESC, clique fora do painel)
+  pmClose?.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) close();
+  });
+
+  const panel = modal.querySelector(".modal-panel");
+  modal.addEventListener("mousedown", (e) => {
+    if (!panel) return;
+    if (!panel.contains(e.target)) close();
+  });
+})();
+
 
   /* -------- Filtro antigo do portfólio (opcional) -------- */
   (function legacyPortfolioFilters() {
@@ -681,3 +764,11 @@ document.addEventListener("DOMContentLoaded", () => {
     apply();
   });
 })();
+
+
+
+
+
+
+
+
