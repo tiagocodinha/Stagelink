@@ -97,14 +97,38 @@
     <!-- Grid -->
     <main class="py-14 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="category-heading mb-8 flex items-center gap-3">
-          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Social Media Management</h3>
-          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
+
+      <!-- ORBIT FILTER (fora da caixa) -->
+      <section id="orbit-filter" class="relative py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="relative flex items-center justify-center">
+            <!-- Halo decorativo que muda de cor -->
+            <div class="orbit-halo" aria-hidden="true"></div>
+
+            <!-- Núcleo (Tudo) -->
+            <button class="orbit-core" data-filter="all" aria-pressed="true" aria-label="Mostrar tudo">
+              <span>Tudo</span>
+            </button>
+
+            <!-- Anel com os planetas (categorias) -->
+            <ul class="orbit-ring" role="tablist" aria-label="Filtrar projetos">
+              <!-- Ajusta os data-color como quiseres -->
+              <li><button class="orbit-planet is-active" data-filter="social"    data-color="#2daacd" role="tab">Social</button></li>
+              <li><button class="orbit-planet"          data-filter="corporate" data-color="#4368ac" role="tab">Corporate</button></li>
+              <li><button class="orbit-planet"          data-filter="coverage"  data-color="#24c4da" role="tab">Coverage</button></li>
+              <li><button class="orbit-planet"          data-filter="brand"     data-color="#0ea5e9" role="tab">Brand</button></li>
+              <li><button class="orbit-planet"          data-filter="web"       data-color="#06b6d4" role="tab">Web</button></li>
+            </ul>
+          </div>
+
         </div>
+      </section>
+
+
 
         <div class="proj-grid">
           <!-- AIRWAYS -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="Airways Aviation" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
+          <article class="proj-card" data-cats="social,coverage, coverage, brand, new" data-disable-popup="1" data-kind="video" data-title="Airways Aviation" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
             <div class="proj-media">
               <img src="content/airways/aiways.webp" alt="Airways Aviation" class="proj-img">
               <div class="proj-dim"></div>
@@ -209,119 +233,6 @@
 
 
         </div>
-
-        <div class="category-heading mb-8 mt-20 flex items-center gap-3">
-          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Corporate Events</h3>
-          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
-        </div>
-
-        <div class="proj-grid">
-        <!-- MICHAEL PAGE -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="Michael Page" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            <div class="proj-media">
-              <img src="content/airways/aiways.webp" alt="Michael Page" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/michaelpage.png" alt="Michael Page" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Social Media | Content Creation</h3>
-              <p class="proj-sub">Social Media Management &amp; Media Production</p>
-            </div>
-          </article>
-        </div>
-
-        <div class="category-heading mb-8 mt-20 flex items-center gap-3">
-          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Content Production</h3>
-          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
-        </div>
-
-        <div class="proj-grid">
-
-        <!-- LIGA PORTUGAL LEGENDS -->
-          <article class="proj-card" data-disable-popup="1" data-kind="image" data-title="Liga Portugal Legends" data-client="Liga Portugal Legends" data-tags="Evento, Produção" data-src="/images/mp/mp1.jpg">
-            <div class="proj-media">
-              <img src="content/lpl/lpl.webp" alt="Liga Portugal Legends" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/lpl.png" alt="Liga Portugal Legends" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Event Coverage</h3>
-              <p class="proj-sub">Photo &amp; Video</p>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="category-heading mb-8 mt-20 flex items-center gap-3">
-          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Brand Identity</h3>
-          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
-        </div>
-
-        <div class="proj-grid">
-
-          <!-- NALU -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="Nalu Beach Club" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            <div class="proj-media">
-              <img src="content/airways/aiways.webp" alt="Nalu Beach Club" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/nalu.png" alt="Nalu Beach Club" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Social Media | Content Creation</h3>
-              <p class="proj-sub">Social Media Management &amp; Media Production</p>
-            </div>
-          </article>
-
-          <!-- DVA ADVOGADOS -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="DVA Advogados" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            <div class="proj-media">
-              <img src="content/airways/aiways.webp" alt="DVA Advogados" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/dvaadvogados.png" alt="DVA Advogados" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Social Media | Content Creation</h3>
-              <p class="proj-sub">Social Media Management &amp; Media Production</p>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="category-heading mb-8 mt-20 flex items-center gap-3">
-          <h3 class="category-title uppercase tracking-wide font-semibold text-sm text-white">Web Solutions</h3>
-          <span class="flex-1 h-px bg-gradient-to-r from-[#2daacd] to-transparent opacity-70"></span>
-        </div>
-
-        <div class="proj-grid">
-
-          <!-- NALU -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="Nalu Beach Club" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            <div class="proj-media">
-              <img src="content/airways/aiways.webp" alt="Nalu Beach Club" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/nalu.png" alt="Nalu Beach Club" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Social Media | Content Creation</h3>
-              <p class="proj-sub">Social Media Management &amp; Media Production</p>
-            </div>
-          </article>
-          
-          <!-- DVA ADVOGADOS -->
-          <article class="proj-card" data-disable-popup="1" data-kind="video" data-title="DVA Advogados" data-client="Airways Aviation" data-tags="Evento, Aftermovie" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-            <div class="proj-media">
-              <img src="content/airways/aiways.webp" alt="DVA Advogados" class="proj-img">
-              <div class="proj-dim"></div>
-              <img src="/projetos/content/logos/dvaadvogados.png" alt="DVA Advogados" class="proj-logo" onerror="this.style.display='none'">
-            </div>
-            <div class="proj-info">
-              <h3 class="proj-title">Social Media | Content Creation</h3>
-              <p class="proj-sub">Social Media Management &amp; Media Production</p>
-            </div>
-          </article>
-
-        </div>
-
       </div>
     </main>
 
