@@ -929,3 +929,25 @@ img { display:block; max-width:100%; height:auto; }
 
 
 
+
+/* Limite de altura dos logos nos cartões */
+.proj-media{
+  /* controla o teto do logo por card (ajusta a teu gosto) */
+  --logo-max-h: clamp(80px, 24%, 160px);
+}
+
+.proj-logo{
+  max-height: var(--logo-max-h); /* <= altura máxima */
+  width: auto;                   /* mantém proporção */
+  max-width: 60%;                /* continua a não ocupar demais em largura */
+}
+
+/* Se quiseres um pouco maior em ecrãs grandes */
+@media (min-width: 1280px){
+  .proj-media{ --logo-max-h: clamp(100px, 22%, 180px); }
+}
+
+/* Em mobile pode ser útil reduzir um bocado */
+@media (max-width: 640px){
+  .proj-media{ --logo-max-h: clamp(64px, 26%, 120px); }
+}
