@@ -97,14 +97,61 @@ nav .nav-wrap { position: relative; }
   color: #ffffff;
 }
 
-/* Logo carousel */
-.logo-carousel { overflow: hidden; position: relative; width: 100%; }
-.logo-track { display: flex; animation: scroll 20s linear infinite; }
-.logo-item { flex: 0 0 25%; display: flex; justify-content: center; align-items: center; }
-.logo-black { width: 8rem; height: auto; object-fit: contain; filter: invert(1) brightness(0); }
-.logo-climarsol { width: 200px; height: auto; }
-.logo-michael { width: 180px; height: auto; }
-.logo-liga { width: 200px; height: auto; }
+/* === Carrossel de Logos: slots iguais, gap consistente, logos a PRETO === */
+.logo-carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(3rem, 6vw, 7rem);     /* espaço igual entre TODOS os slots */
+  width: max-content;              /* track segue o conteúdo real */
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.logo-item {
+  flex: 0 0 200px;                 /* LARGURA fixa do slot (desktop) */
+  width: 200px;
+  height: 72px;                    /* ALTURA fixa do slot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  display: block;
+  height: 100%;                    /* mesma ALTURA visual em todos */
+  width: auto;
+  object-fit: contain;
+
+  /* pinta tudo a PRETO (para PNG/SVG com fundo transparente) */
+  filter: saturate(0) brightness(0) contrast(999);
+  opacity: .95;
+}
+
+/* NÃO parar no hover */
+.logo-carousel:hover .logo-track { animation-play-state: running; }
+
+/* Loop perfeito (com duplicação no JS) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Mobile: slots ligeiramente menores */
+@media (max-width: 840px) {
+  .logo-item {
+    flex-basis: 140px;
+    width: 140px;
+    height: 56px;
+  }
+  .logo-track { gap: clamp(2rem, 6vw, 3rem); }
+}
+
 
 /* CTA gradient */
 .gradient-mensagem{

@@ -301,23 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-  /* -------- Clique no logo: scroll topo -------- */
-  (function logoScrollTop() {
-    const logoLink = document.querySelector('a.logo-link, a[href="/"], a[href="#"]');
-    if (!logoLink) return;
-
-    logoLink.addEventListener("click", (e) => {
-      const href = logoLink.getAttribute("href") || "";
-      const isAbsoluteHome = /^https?:\/\/[^/]+\/?$/.test(href);
-      if (isAbsoluteHome) return;
-
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
-      const clean = window.location.pathname + window.location.search;
-      history.replaceState(null, "", clean);
-    });
-  })();
 
   /* -------- Link ativo na homepage -------- */
   (function activeLinkOnHome() {
@@ -558,5 +541,15 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.style.setProperty("--spot", "300px");
       overlay.style.setProperty("--dark", "0.5");
     }
+  })();
+
+  /* -------- Logos marquee: duplicação para loop perfeito -------- */
+  (function logosMarqueeLoop() {
+    const track = document.querySelector('.logo-track');
+    if (!track) return;
+
+    // Duplica os nós (clones verdadeiros) para um ciclo sem “saltos”
+    const clones = Array.from(track.children).map(n => n.cloneNode(true));
+    clones.forEach(clone => track.appendChild(clone));
   })();
 });
