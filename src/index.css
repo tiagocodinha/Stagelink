@@ -109,7 +109,7 @@ nav .nav-wrap { position: relative; }
   align-items: center;
   gap: clamp(3rem, 6vw, 7rem);     /* espaço igual entre TODOS os slots */
   width: max-content;              /* track segue o conteúdo real */
-  animation: marquee 40s linear infinite;
+  animation: marquee 30s linear infinite;
   will-change: transform;
 }
 
