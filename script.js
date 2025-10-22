@@ -424,15 +424,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function buildCaseStudy(card) {
-      const title   = card.dataset.title  || "";
-      const client  = card.dataset.client || "";
-      const tags    = card.dataset.tags   || "";
-      const logo    = card.dataset.logo   || card.querySelector(".proj-logo")?.getAttribute("src") || "";
-      const ano     = card.dataset.ano    || "";
-      const sector  = card.dataset.sector || "";
-      const services= card.dataset.services || "";
-      const images  = (card.dataset.images || "").split("|").map(s=>s.trim()).filter(Boolean);
-      const reels   = (card.dataset.reels  || "").split("|").map(s=>s.trim()).filter(Boolean);
+      const title    = card.dataset.title  || "";
+      const client   = card.dataset.client || "";
+      const tags     = card.dataset.tags   || "";
+      const logo     = card.dataset.logo   || card.querySelector(".proj-logo")?.getAttribute("src") || "";
+      const services = card.dataset.services || "";
+      const images   = (card.dataset.images || "").split("|").map(s=>s.trim()).filter(Boolean);
+      const reels    = (card.dataset.reels  || "").split("|").map(s=>s.trim()).filter(Boolean);
 
       pmTitle.textContent  = title;
       pmClient.textContent = client;
@@ -442,22 +440,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const wrap = document.createElement("div");
       wrap.className = "pm-case";
 
-      // ---------- HEADER (logo à ESQUERDA, info à DIREITA) ----------
+      /* ---------- HEADER (LOGO + INFO) – mantém a CAIXA ---------- */
       const header = document.createElement("div");
-      header.className = "pm-header";
-      // layout direto aqui para não depender de CSS extra
       header.style.display = "grid";
       header.style.gridTemplateColumns = "200px 1fr";
       header.style.gap = "20px";
       header.style.alignItems = "center";
+      // a “caixa” que envolve logo + info:
+      header.style.background = "#fff";
+      header.style.border = "1px solid rgba(15,23,42,.08)";
+      header.style.borderRadius = "16px";
+      header.style.padding = "18px 20px";
+      header.style.boxShadow = "0 10px 26px rgba(2,8,20,.05)";
+      header.style.marginBottom = "16px";
 
-      // LOGO (esquerda) – forçar preto
+      // LOGO (esquerda, a preto)
       const logoCol = document.createElement("div");
       logoCol.style.display = "flex";
       logoCol.style.alignItems = "center";
       logoCol.style.justifyContent = "flex-start";
-      logoCol.style.height = "100%";
-
       if (logo) {
         const img = document.createElement("img");
         img.src = logo;
@@ -465,24 +466,16 @@ document.addEventListener("DOMContentLoaded", () => {
         img.loading = "lazy";
         img.style.maxHeight = "64px";
         img.style.width = "auto";
-        // preto: remove cor e “pinta” a preto
         img.style.filter = "grayscale(1) brightness(0) contrast(1000%) opacity(.9)";
         logoCol.appendChild(img);
       }
 
-      // INFO (direita)
+      // INFO (direita) — apenas “Projeto” (sem Ano/Sector)
       const infoCol = document.createElement("div");
-
       const infoGrid = document.createElement("div");
       infoGrid.style.display = "grid";
       infoGrid.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
-      infoGrid.style.gap = "18px";
-      infoGrid.style.background = "rgba(248,250,252,1)";     // slate-50
-      infoGrid.style.border = "1px solid rgba(226,232,240,.8)";
-      infoGrid.style.borderRadius = "16px";
-      infoGrid.style.padding = "18px 20px";
-      infoGrid.style.position = "relative";
-      infoGrid.style.overflow = "hidden";
+      infoGrid.style.gap = "16px";
 
       const mk = (k, v) => {
         const b = document.createElement("div");
@@ -500,52 +493,61 @@ document.addEventListener("DOMContentLoaded", () => {
         vv.style.color = "#0f172a"; // slate-900
         vv.style.lineHeight = "1.25";
 
-        b.appendChild(kk);
-        b.appendChild(vv);
+        b.appendChild(kk); b.appendChild(vv);
         return b;
       };
 
       if (services) infoGrid.appendChild(mk("Projeto", services));
-      if (ano)      infoGrid.appendChild(mk("Ano", ano));
-      if (sector)   infoGrid.appendChild(mk("Setor", sector));
+      // (INTENCIONAL) sem ano / setor
 
       infoCol.appendChild(infoGrid);
 
-      // monta o header na nova ordem
-      header.appendChild(logoCol);  // ← primeiro o LOGO (ESQUERDA)
-      header.appendChild(infoCol);  // ← depois as INFORMAÇÕES (DIREITA)
+      header.appendChild(logoCol);
+      header.appendChild(infoCol);
       wrap.appendChild(header);
-      // ---------- /HEADER ----------
+      /* ---------- /HEADER ---------- */
 
-      // Galeria (se existir)
+      /* ---------- GALERIA — imagens 4:5 com cover ---------- */
       if (images.length) {
         const gal = document.createElement("div");
-        gal.className = "pm-gallery";
         gal.style.display = "grid";
         gal.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
         gal.style.gap = "12px";
-        gal.style.margin = "18px 16px 6px";
+        gal.style.margin = "8px 0 6px";
 
         images.forEach(src => {
+          const cell = document.createElement("div");
+          cell.style.position = "relative";
+          cell.style.aspectRatio = "4 / 5";         // <-- 4:5
+          cell.style.borderRadius = "14px";
+          cell.style.overflow = "hidden";
+          cell.style.background = "#f3f4f6";
+
           const im = document.createElement("img");
-          im.src = src; im.alt = title || "Imagem";
+          im.src = src;
+          im.alt = title || "Imagem do projeto";
           im.loading = "lazy";
-          im.style.borderRadius = "12px";
+          im.style.position = "absolute";
+          im.style.inset = "0";
           im.style.width = "100%";
-          im.style.height = "auto";
-          gal.appendChild(im);
+          im.style.height = "100%";
+          im.style.objectFit = "cover";            // adapta-se ao 4:5
+          im.style.objectPosition = "center";
+
+          cell.appendChild(im);
+          gal.appendChild(cell);
         });
         wrap.appendChild(gal);
       }
+      /* ---------- /GALERIA ---------- */
 
-      // 3 telemóveis com reels (se existirem)
+      /* ---------- TELEMÓVEIS / REELS (mantém como já tinhas) ---------- */
       if (reels.length) {
         const phones = document.createElement("div");
-        phones.className = "pm-phones";
         phones.style.display = "grid";
         phones.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
         phones.style.gap = "24px";
-        phones.style.padding = "22px 16px 8px";
+        phones.style.padding = "22px 0 8px";
 
         const sources = reels.slice(0, 3);
         while (sources.length < 3 && reels.length) sources.push(reels[reels.length - 1]);
@@ -553,41 +555,35 @@ document.addEventListener("DOMContentLoaded", () => {
         const makeVideoEl = (src) => {
           if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
             const v = document.createElement("video");
-            v.src = src;
-            v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = false;
+            v.src = src; v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = false;
             v.setAttribute("muted",""); v.setAttribute("playsinline","");
             v.style.width = "100%"; v.style.height = "100%"; v.style.objectFit = "cover";
             return v;
           }
           const iframe = document.createElement("iframe");
-          const build = (raw) => {
-            try {
-              const u = new URL(raw, location.origin);
-              if (/youtube\.com\/embed\//i.test(u.href)) {
-                const id = (u.pathname.split("/").pop() || "").split("?")[0];
-                u.searchParams.set("autoplay","1");
-                u.searchParams.set("mute","1");
-                u.searchParams.set("playsinline","1");
-                u.searchParams.set("controls","0");
-                u.searchParams.set("rel","0");
-                u.searchParams.set("modestbranding","1");
-                u.searchParams.set("loop","1");
-                if (id) u.searchParams.set("playlist", id);
-                return u.toString();
-              }
-              if (/player\.vimeo\.com\/video\//i.test(u.href)) {
-                u.searchParams.set("autoplay","1");
-                u.searchParams.set("muted","1");
-                u.searchParams.set("loop","1");
-                u.searchParams.set("title","0");
-                u.searchParams.set("byline","0");
-                u.searchParams.set("portrait","0");
-                return u.toString();
-              }
-              return raw;
-            } catch { return raw; }
-          };
-          iframe.src = build(src);
+          try {
+            const u = new URL(src, location.origin);
+            if (/youtube\.com\/embed\//i.test(u.href)) {
+              const id = (u.pathname.split("/").pop() || "").split("?")[0];
+              u.searchParams.set("autoplay","1");
+              u.searchParams.set("mute","1");
+              u.searchParams.set("playsinline","1");
+              u.searchParams.set("controls","0");
+              u.searchParams.set("rel","0");
+              u.searchParams.set("modestbranding","1");
+              u.searchParams.set("loop","1");
+              if (id) u.searchParams.set("playlist", id);
+            }
+            if (/player\.vimeo\.com\/video\//i.test(u.href)) {
+              u.searchParams.set("autoplay","1");
+              u.searchParams.set("muted","1");
+              u.searchParams.set("loop","1");
+              u.searchParams.set("title","0");
+              u.searchParams.set("byline","0");
+              u.searchParams.set("portrait","0");
+            }
+            iframe.src = u.toString();
+          } catch { iframe.src = src; }
           iframe.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
           iframe.allowFullscreen = true;
           iframe.style.width = "100%"; iframe.style.height = "100%"; iframe.style.border = "0";
@@ -596,15 +592,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sources.forEach(src => {
           const phone = document.createElement("div");
-          phone.className = "phone";
           phone.style.position = "relative";
-          phone.style.aspectRatio = "9 / 19.5";  // formato iPhone-ish
+          phone.style.aspectRatio = "9 / 19.5";
           phone.style.borderRadius = "28px";
           phone.style.background = "#0b0b0b";
           phone.style.boxShadow = "0 18px 40px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.06)";
 
           const screen = document.createElement("div");
-          screen.className = "screen";
           screen.style.position = "absolute";
           screen.style.inset = "12px 10px 14px";
           screen.style.borderRadius = "22px";
@@ -617,9 +611,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         wrap.appendChild(phones);
       }
+      /* ---------- /TELEMÓVEIS ---------- */
 
       pmBody.appendChild(wrap);
     }
+
+
 
 
 

@@ -981,20 +981,26 @@ img { display:block; max-width:100%; height:auto; }
   max-width: 100%;
 }
 
-/* rail (desktop pode partir linha; mobile é 1 linha só) */
+/* RAIL – retirar a “caixa” pequena interna */
 .pf-rail{
   position:relative;
   display:flex; align-items:center;
   gap:.35rem;
-  padding:.22rem .22rem;
-  border-radius:999px;
-  background: rgba(15,23,42,.05);
+
+  /* 🔥 mata a caixa pequena */
+  background: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
   overflow-x:auto; overflow-y:hidden;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x proximity;
-  scroll-padding-inline: .22rem;
-  flex-wrap: wrap;                 /* desktop default */
+  scroll-padding-inline: 0;
+  flex-wrap: wrap;
 }
+
 .pf-rail::-webkit-scrollbar{ display:none; }
 
 /* MOBILE: 1 linha obrigatória com scroll horizontal */
