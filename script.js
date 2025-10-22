@@ -543,13 +543,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-  /* -------- Logos marquee: duplicação para loop perfeito -------- */
+  /* -------- Logos marquee: duplicação + loop com largura real -------- */
   (function logosMarqueeLoop() {
     const track = document.querySelector('.logo-track');
     if (!track) return;
 
-    // Duplica os nós (clones verdadeiros) para um ciclo sem “saltos”
-    const clones = Array.from(track.children).map(n => n.cloneNode(true));
-    clones.forEach(clone => track.appendChild(clone));
+    // [1] VELOCIDADE (px/seg) — menor = mais lento
+    const SPEED_PX_PER_SEC = 70;   // ex.: 120 rápido • 80 médio • 50 lento • 30 muito lento
+    const MIN_DURATION_S   = 20;   // duração mínima por loop (opcional)
+
+    // Duplica uma vez
+    if (![...track.children].some(n => n.classList?.contains('clone'))) {
+      const originals = Array.from(track.children);
+      originals.forEach(n => { const c = n.cloneNode(true); c.classList.add('clone'); track.appendChild(c); });
+    }
+
+    const setLoopWidth = () => {
+      const loopPx = track.scrollWidth / 2;
+      track.style.setProperty('--loop-px', `${loopPx}px`);
+
+      // [2] cálculo da duração com base na velocidade desejada
+      const dur = Math.max(MIN_DURATION_S, loopPx / SPEED_PX_PER_SEC);
+      track.style.setProperty('--marquee-duration', `${dur}s`);
+    };
+
+    const onReady = () => setLoopWidth();
+    if (document.readyState === 'complete') onReady(); else window.addEventListener('load', onReady);
+
+    // [3] recalcula em resize
+    let rAF = null;
+    window.addEventListener('resize', () => {
+      if (rAF) cancelAnimationFrame(rAF);
+      rAF = requestAnimationFrame(setLoopWidth);
+    });
   })();
+
 });

@@ -98,20 +98,22 @@ nav .nav-wrap { position: relative; }
 }
 
 /* === Carrossel de Logos: slots iguais, gap consistente, logos a PRETO === */
-.logo-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+/* ===== Logos: loop 100% contínuo baseado em px ===== */
+.logo-carousel { overflow: hidden; position: relative; width: 100%; }
+.logo-track {
+  display: flex; align-items: center;
+  gap: clamp(3rem, 6vw, 7rem);
+  width: max-content;
+  will-change: transform;
+  animation: marqueePX var(--marquee-duration, 30s) linear infinite;
 }
 
-.logo-track {
-  display: flex;
-  align-items: center;
-  gap: clamp(3rem, 6vw, 7rem);     /* espaço igual entre TODOS os slots */
-  width: max-content;              /* track segue o conteúdo real */
-  animation: marquee 30s linear infinite;
-  will-change: transform;
+/* novo keyframes: desloca exatamente a largura do 1º bloco */
+@keyframes marqueePX {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--loop-px, 0px))); }
 }
+
 
 .logo-item {
   flex: 0 0 200px;                 /* LARGURA fixa do slot (desktop) */
