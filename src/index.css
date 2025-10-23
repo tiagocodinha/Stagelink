@@ -1420,3 +1420,108 @@ img { display:block; max-width:100%; height:auto; }
     grid-template-columns: 1fr !important; /* mantém 1 por linha no mobile */
   }
 }
+
+
+
+
+
+
+
+/* --- PROJETOS: pill minimalista com gradiente suave --- */
+.proj-info.icons-only {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none; /* mantém o comportamento de hover original */
+}
+
+/* remove blur anterior e aplica apenas gradiente */
+.proj-info.icons-only::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    transparent 100%
+  );
+  z-index: -1;
+  backdrop-filter: none !important; /* remove qualquer blur herdado */
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* ícones centrados horizontalmente e um pouco acima do fundo */
+.proj-info.icons-only .proj-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px; /* ↑ sobe os ícones */
+  pointer-events: all; /* permite hover neles */
+}
+
+/* tamanho e leve sombra para contraste */
+.proj-info.icons-only .proj-icons img {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  transition: transform 0.25s ease;
+}
+.proj-info.icons-only .proj-icons img:hover {
+  transform: scale(1.08);
+}
+
+/* esconde textos */
+.proj-info.icons-only .proj-title,
+.proj-info.icons-only .proj-sub {
+  display: none !important;
+}
+
+/* mobile: ligeiramente menores e menos margem */
+@media (max-width: 640px) {
+  .proj-info.icons-only .proj-icons img {
+    width: 22px;
+    height: 22px;
+  }
+  .proj-info.icons-only .proj-icons {
+    margin-bottom: 10px;
+  }
+}
+
+
+/* --- Corrige flicker no hover das imagens --- */
+
+/* Zera qualquer transição/efeito no gradiente */
+.proj-info.icons-only::before {
+  transition: none !important;
+  will-change: none;
+}
+
+/* Remove qualquer blur herdado de outros seletores */
+.proj-info::before {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Evita repintura da imagem por sobreposição do gradient */
+.proj-card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Mantém gradiente fixo, sem alterar brilho da imagem */
+.proj-info.icons-only::before {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
