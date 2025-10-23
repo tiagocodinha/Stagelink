@@ -497,7 +497,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return b;
       };
 
-      if (services) infoGrid.appendChild(mk("Projeto", services));
+      if (services) {
+        const projeto = mk("Project", services);
+        projeto.style.gridColumn = "1 / -1"; // ocupa a largura total
+        infoGrid.appendChild(projeto);
+      }
+
       // (INTENCIONAL) sem ano / setor
 
       infoCol.appendChild(infoGrid);
@@ -541,57 +546,51 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       /* ---------- /GALERIA ---------- */
 
-      /* ---------- TELEMÓVEIS / REELS (mantém como já tinhas) ---------- */
+      // Reels (telemóveis)
       if (reels.length) {
         const phones = document.createElement("div");
+        phones.className = "pm-phones";
         phones.style.display = "grid";
-        phones.style.gridTemplateColumns = "repeat(3, minmax(0,1fr))";
         phones.style.gap = "24px";
-        phones.style.padding = "22px 0 8px";
+        phones.style.padding = "22px 16px 8px";
+        phones.style.alignItems = "center";
 
-        const sources = reels.slice(0, 3);
-        while (sources.length < 3 && reels.length) sources.push(reels[reels.length - 1]);
+        const count = Math.min(3, reels.length);
+
+        // 👉 Mantemos SEMPRE 3 colunas para preservar o mesmo tamanho
+        phones.style.gridTemplateColumns = "repeat(3, 1fr)";
+
+        const sources = reels.slice(0, count);
 
         const makeVideoEl = (src) => {
           if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) {
             const v = document.createElement("video");
-            v.src = src; v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = false;
-            v.setAttribute("muted",""); v.setAttribute("playsinline","");
-            v.style.width = "100%"; v.style.height = "100%"; v.style.objectFit = "cover";
+            v.src = src;
+            v.muted = true;
+            v.loop = true;
+            v.autoplay = true;
+            v.playsInline = true;
+            v.controls = false;
+            v.setAttribute("muted", "");
+            v.setAttribute("playsinline", "");
+            v.style.width = "100%";
+            v.style.height = "100%";
+            v.style.objectFit = "cover";
             return v;
           }
           const iframe = document.createElement("iframe");
-          try {
-            const u = new URL(src, location.origin);
-            if (/youtube\.com\/embed\//i.test(u.href)) {
-              const id = (u.pathname.split("/").pop() || "").split("?")[0];
-              u.searchParams.set("autoplay","1");
-              u.searchParams.set("mute","1");
-              u.searchParams.set("playsinline","1");
-              u.searchParams.set("controls","0");
-              u.searchParams.set("rel","0");
-              u.searchParams.set("modestbranding","1");
-              u.searchParams.set("loop","1");
-              if (id) u.searchParams.set("playlist", id);
-            }
-            if (/player\.vimeo\.com\/video\//i.test(u.href)) {
-              u.searchParams.set("autoplay","1");
-              u.searchParams.set("muted","1");
-              u.searchParams.set("loop","1");
-              u.searchParams.set("title","0");
-              u.searchParams.set("byline","0");
-              u.searchParams.set("portrait","0");
-            }
-            iframe.src = u.toString();
-          } catch { iframe.src = src; }
+          iframe.src = src;
           iframe.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
           iframe.allowFullscreen = true;
-          iframe.style.width = "100%"; iframe.style.height = "100%"; iframe.style.border = "0";
+          iframe.style.width = "100%";
+          iframe.style.height = "100%";
+          iframe.style.border = "0";
           return iframe;
         };
 
-        sources.forEach(src => {
+        sources.forEach((src, i) => {
           const phone = document.createElement("div");
+          phone.className = "phone";
           phone.style.position = "relative";
           phone.style.aspectRatio = "9 / 19.5";
           phone.style.borderRadius = "28px";
@@ -599,18 +598,32 @@ document.addEventListener("DOMContentLoaded", () => {
           phone.style.boxShadow = "0 18px 40px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.06)";
 
           const screen = document.createElement("div");
+          screen.className = "screen";
           screen.style.position = "absolute";
           screen.style.inset = "12px 10px 14px";
           screen.style.borderRadius = "22px";
           screen.style.overflow = "hidden";
           screen.appendChild(makeVideoEl(src));
-
           phone.appendChild(screen);
+
+          // 👉 Posicionamento para manter o tamanho:
+          if (count === 1) {
+            // único vídeo na coluna do meio
+            phone.style.gridColumn = "2 / span 1";
+          } else if (count === 2) {
+            // dois vídeos nas colunas 1 e 3
+            phone.style.gridColumn = i === 0 ? "1 / span 1" : "3 / span 1";
+          }
+          // count === 3 -> sem gridColumn: ocupam 1,2,3 normalmente
+
           phones.appendChild(phone);
         });
 
         wrap.appendChild(phones);
       }
+
+
+
       /* ---------- /TELEMÓVEIS ---------- */
 
       pmBody.appendChild(wrap);
@@ -869,7 +882,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setActive(btnAll);
   (document.fonts?.ready || Promise.resolve()).then(()=>{
     posIndicator(btnAll);
-    btnAll.scrollIntoView({behavior:'auto', inline:'start'});
     apply();
   });
 })();

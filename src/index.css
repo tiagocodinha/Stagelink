@@ -1193,3 +1193,97 @@ img { display:block; max-width:100%; height:auto; }
   transform: translateY(-2px);
   box-shadow: 0 14px 38px rgba(0,0,0,.14);
 }
+
+
+
+
+
+
+
+/* ===== Modal em formato mobile (até ~tablet) ===== */
+@media (max-width: 840px){
+  /* painel ocupa o ecrã e faz scroll vertical */
+  #portfolio-modal .modal-panel{
+    width: 100%;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+  }
+  /* corpo com scroll suave */
+  #pm-body{
+    height: calc(100dvh - 0px) !important;
+    max-height: calc(100dvh - 0px) !important;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* HEADER do case study em coluna única */
+  .pm-header{
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 16px !important;
+    margin-bottom: 14px !important;
+  }
+  .pm-logo{
+    justify-content: flex-start !important;
+  }
+  .pm-logo img{
+    max-height: 56px !important;
+    width: auto !important;
+    height: auto !important;    /* <- evita esticar */
+    object-fit: contain !important;
+    filter: none !important;    /* <- sem pintar a preto */
+  }
+
+  /* INFO em 1 coluna */
+  .pm-info{
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Galeria e vídeos: 1 por linha, largura total */
+  .pm-gallery{ grid-template-columns: 1fr !important; gap: 10px !important; }
+  .pm-gallery img{
+    height: auto !important;
+    aspect-ratio: 4 / 5;        /* mantém look vertical */
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .pm-phones{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 0 12px !important;
+  }
+  .phone{
+    aspect-ratio: 9 / 19;       /* vídeo vertical */
+  }
+
+  /* iframe/vídeo sem alturas mágicas */
+  #pm-body iframe,
+  #pm-body .feed-video{
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 9 / 16;       /* Reels/TikTok */
+    display: block;
+  }
+}
+
+/* Em desktop mantemos o layout “case study” bonito */
+.pm-logo img{
+  height: auto;                 /* <- garante que o logo nunca distorce */
+  width: auto;
+  max-height: 64px;
+  object-fit: contain;
+  filter: none;                 /* tira o grayscale/contraste */
+}
+
+
+/* Logo dos cartões: nunca esticar */
+.proj-logo{
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
