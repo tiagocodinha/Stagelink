@@ -807,22 +807,42 @@ document.addEventListener("DOMContentLoaded", () => {
 }); // DOMContentLoaded end
 
 
-/* -------- Projetos: filtros simples (1 grelha, sem headings) -------- */
+/* -------- Projetos: filtros simples + ordem aleatória -------- */
 (function projectsSimpleFilters(){
   const container = document.querySelector('#proj-filters .max-w-7xl');
   const scope  = document.querySelector('main .max-w-7xl .proj-grid');
   if(!container || !scope) return;
 
-  const cards = Array.from(scope.querySelectorAll('.proj-card'));
+  // 1) Recolhe os cartões e dá-lhes um "rank" aleatório
+  const allCards = Array.from(scope.querySelectorAll('.proj-card'));
+  const RESHUFFLE_EACH_CLICK = true; // ← põe true se quiseres baralhar em cada clique de filtro
+
+  function seedRandomRanks() {
+    allCards.forEach(c => c.dataset.rand = Math.random().toString().slice(2));
+  }
+  seedRandomRanks();
+
+  function appendInRandomOrder(cards) {
+    // ordena por rank e re-apende (sem flicker)
+    const frag = document.createDocumentFragment();
+    cards
+      .slice()
+      .sort((a,b) => (a.dataset.rand|0) - (b.dataset.rand|0))
+      .forEach(el => frag.appendChild(el));
+    scope.appendChild(frag);
+  }
+
+  // 2) Apanha categorias via data-cat
   const cats = Array.from(
     new Set(
-      cards
+      allCards
         .flatMap(c => (c.dataset.cat || '').split(','))
         .map(s => s.trim())
         .filter(Boolean)
     )
   );
 
+  // 3) UI mínima dos filtros (igual ao que tinhas)
   const wrap = document.createElement('div');  wrap.className = 'pf-wrap';
   const rail = document.createElement('div');  rail.className = 'pf-rail';
   const indicator = document.createElement('div'); indicator.className = 'pf-indicator';
@@ -846,41 +866,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const br = btn.getBoundingClientRect();
     const rr = rail.getBoundingClientRect();
     const left = (br.left - rr.left) + rail.scrollLeft;
-    const top  = (getComputedStyle(rail).paddingTop.replace('px','')|0);
-
+    const top  = (parseFloat(getComputedStyle(rail).paddingTop) || 0);
     indicator.style.transform = `translate3d(${left}px, ${top}px, 0)`;
     indicator.style.width  = `${br.width}px`;
     indicator.style.height = `${br.height}px`;
-  }
-  function apply(){
-    cards.forEach(c=>{
-      const cardCats = (c.dataset.cat || '').split(',').map(s => s.trim());
-      const show = (active==='ALL') || cardCats.includes(active);
-      c.style.display = show ? '' : 'none';
-    });
   }
   function center(btn){
     const target = btn.offsetLeft - (rail.clientWidth/2 - btn.offsetWidth/2);
     rail.scrollTo({left: Math.max(0, target), behavior: 'smooth'});
   }
 
-  btnAll.addEventListener('click', ()=>{
-    active='ALL'; setActive(btnAll); posIndicator(btnAll); center(btnAll); apply();
-  });
-  btns.forEach(b=>{
-    b.addEventListener('click', ()=>{
-      active = b.dataset.value; setActive(b); posIndicator(b); center(b); apply();
+  // 4) Aplica filtro + ordem aleatória
+  function apply(){
+    // (opcional) baralhar sempre que se clica num filtro
+    if (RESHUFFLE_EACH_CLICK) seedRandomRanks();
+
+    const wantAll = (active==='ALL');
+    const visible = [];
+
+    allCards.forEach(c=>{
+      const cardCats = (c.dataset.cat || '').split(',').map(s => s.trim());
+      const show = wantAll || cardCats.includes(active);
+      c.style.display = show ? '' : 'none';
+      if (show) visible.push(c);
     });
+
+    // Re-apende os visíveis na ordem aleatória
+    appendInRandomOrder(visible);
+  }
+
+  // 5) Eventos
+  btnAll.addEventListener('click', ()=>{ active='ALL'; setActive(btnAll); posIndicator(btnAll); center(btnAll); apply(); });
+  btns.forEach(b=>{
+    b.addEventListener('click', ()=>{ active=b.dataset.value; setActive(b); posIndicator(b); center(b); apply(); });
   });
 
-  scope.addEventListener('click', (e)=>{
-    const tag = e.target.closest('.card-tag');
-    if(!tag) return;
-    const val = tag.dataset.cat;
-    const btn = [...btns, btnAll].find(x => x.dataset.value === val) || btnAll;
-    (btn === btnAll) ? btnAll.click() : btn.click();
-  });
-
+  // 6) Inicialização
   const raf = (fn)=>{ let t=null; return (...a)=>{ if(t) cancelAnimationFrame(t); t=requestAnimationFrame(()=>fn(...a)); }; };
   rail.addEventListener('scroll', raf(()=>posIndicator(activeBtn)), {passive:true});
   window.addEventListener('resize', raf(()=>posIndicator(activeBtn)));
@@ -889,6 +910,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setActive(btnAll);
   (document.fonts?.ready || Promise.resolve()).then(()=>{
     posIndicator(btnAll);
+    // primeira randomização global
+    appendInRandomOrder(allCards);
     apply();
   });
 })();
