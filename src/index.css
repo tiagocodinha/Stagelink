@@ -1397,3 +1397,26 @@ img { display:block; max-width:100%; height:auto; }
   /* ---------- Tira o cabeçalho do modal para ganhar espaço ---------- */
   #portfolio-modal .modal-panel > .border-b{ display: none !important; }
 }
+
+
+
+
+/* Michael Page: galeria horizontal 1-a-1 e sem reels */
+.pm-case.case-michael .pm-phones { display: none !important; }
+
+.pm-case.case-michael .pm-gallery{
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.pm-case.case-michael .pm-gallery > *{
+  aspect-ratio: 16 / 9 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 840px){
+  .pm-case.case-michael .pm-gallery{
+    grid-template-columns: 1fr !important; /* mantém 1 por linha no mobile */
+  }
+}

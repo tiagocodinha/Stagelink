@@ -544,6 +544,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         wrap.appendChild(gal);
       }
+
+      
       /* ---------- /GALERIA ---------- */
 
       // Reels (telemóveis)
@@ -605,6 +607,11 @@ document.addEventListener("DOMContentLoaded", () => {
           screen.style.overflow = "hidden";
           screen.appendChild(makeVideoEl(src));
           phone.appendChild(screen);
+
+          wrap.className = "pm-case";
+          const isMichael = card.classList.contains("case-michael");
+          if (isMichael) wrap.classList.add("case-michael");
+
 
           // 👉 Posicionamento para manter o tamanho:
           if (count === 1) {
