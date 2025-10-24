@@ -150,6 +150,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (e) => e.key === "Escape" && close());
   })();
 
+  // ---- Ir direto para /projetos com a categoria selecionada ----
+  (function goToProjectsCategory(){
+    document.querySelectorAll('.js-go-cat').forEach(el=>{
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', ()=>{
+        const cat = el.dataset.goCat || '';
+        const url = `/projetos/?cat=${encodeURIComponent(cat)}`;
+        window.location.href = url;
+      });
+    });
+  })();
+
+
   /* -------- Carousel (secção Eventos) -------- */
   (function heroCarousel() {
     const slides = Array.from(document.querySelectorAll(".carousel-slide"));
@@ -820,6 +833,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
+  /* -------- Scroll Reveal (IntersectionObserver) -------- */
+  (function scrollReveal(){
+    // se o user preferir menos movimento, não ativa
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "-8% 0px -8% 0px" });
+
+    const add = (selector, variant='up', stagger=90, extraDelay=0) => {
+      const els = document.querySelectorAll(selector);
+      let i = 0;
+      els.forEach(el=>{
+        el.classList.add('sr');
+        if (variant) el.classList.add(`sr-${variant}`);
+        el.style.setProperty('--sr-delay', `${extraDelay + i*stagger}ms`);
+        obs.observe(el);
+        i++;
+      });
+    };
+
+    // Headings principais “de cima para baixo”
+    add('#sobre h2, #servicos .heading-decor, #eventos h2, #contactos h2', 'down', 0);
+
+    // Parágrafos da intro (stagger suave)
+    add('#sobre p', 'up', 120);
+
+    // Cards dos serviços em grelha (stagger por ordem)
+    add('#servicos .service-card', 'up', 100);
+
+    // Carrossel de eventos + CTA
+    add('#eventos .carousel-container', 'zoom', 0);
+    add('#servicos .pill-cta, .pill-projetos', 'up', 0);
+
+    // Logos (track inteiro aparece suave)
+    add('.logo-carousel', 'up', 0);
+
+    // Colunas do footer
+    add('footer .grid > *', 'up', 80);
+
+    // Hero: botão aparece depois do texto
+    const heroTitle  = document.querySelector('#inicio h1');
+    const heroSub    = document.querySelector('#inicio .hero-subcopy');
+    const heroBtn    = document.querySelector('#inicio .hero-btn');
+    [heroTitle, heroSub, heroBtn].forEach((el,i)=>{
+      if (!el) return;
+      el.classList.add('sr','sr-down');
+      el.style.setProperty('--sr-delay', `${i*120}ms`);
+      obs.observe(el);
+    });
+  })();
+
+
+
+
 }); // DOMContentLoaded end
 
 
@@ -867,7 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mk = (label)=>{ const b=document.createElement('button');
     b.type='button'; b.className='pf-chip'; b.dataset.value=label; b.textContent=label; return b; };
 
-  const btnAll = mk('ALL'); rail.appendChild(btnAll);
+  const btnAll = mk('TODOS'); rail.appendChild(btnAll);
   const btns = cats.map(c => mk(c)); btns.forEach(b=>rail.appendChild(b));
   wrap.appendChild(rail); container.appendChild(wrap);
 
@@ -911,6 +984,26 @@ document.addEventListener("DOMContentLoaded", () => {
     appendInRandomOrder(visible);
   }
 
+  // normaliza strings (sem acentos, lowercase, sem espaços duplos)
+  const norm = (s='') => s
+    .toString()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/\s+/g,' ')
+    .trim();
+
+  // cria um mapa label-normalizado -> botão
+  const btnMap = new Map();
+  [btnAll, ...btns].forEach(b => btnMap.set(norm(b.dataset.value || b.textContent || ''), b));
+
+  // tenta obter categoria da URL (?cat=...) ou do hash (#cat=...)
+  function getCatFromURL(){
+    const q = new URLSearchParams(location.search).get('cat');
+    if (q) return q;
+    const m = location.hash.match(/cat=([^&]+)/i);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+
   // 5) Eventos
   btnAll.addEventListener('click', ()=>{ active='ALL'; setActive(btnAll); posIndicator(btnAll); center(btnAll); apply(); });
   btns.forEach(b=>{
@@ -923,11 +1016,32 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('resize', raf(()=>posIndicator(activeBtn)));
   new ResizeObserver(raf(()=>posIndicator(activeBtn))).observe(rail);
 
-  setActive(btnAll);
+  // ---- Inicialização ----
+setActive(btnAll);
+
+  // posiciona indicador depois de as fontes carregarem (evita “salto”)
   (document.fonts?.ready || Promise.resolve()).then(()=>{
     posIndicator(btnAll);
+
     // primeira randomização global
     appendInRandomOrder(allCards);
+
+    // aplica filtro vindo da URL (se existir)
+    const wanted = getCatFromURL();
+    if (wanted) {
+      const key = norm(wanted);
+      const targetBtn = btnMap.get(key);
+      if (targetBtn) {
+        active = targetBtn.dataset.value;
+        setActive(targetBtn);
+        posIndicator(targetBtn);
+        center(targetBtn);
+        apply();
+        return; // já filtrou; não cai no apply() default
+      }
+    }
+
+    // senão, mostra ALL
     apply();
   });
 })();

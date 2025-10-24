@@ -1717,3 +1717,70 @@ img { display:block; max-width:100%; height:auto; }
     margin-right: 14px !important;
   }
 }
+
+
+
+
+
+/* Ajusta o tamanho e estilo dos ícones nas service-cards */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* efeito de hover igual ao svg antigo */
+.service-card:hover .icon-img {
+  transform: scale(1.08);
+}
+
+
+
+
+
+/* ===== Scroll Reveal (acessível e responsivo) ===== */
+:root {
+  --sr-distance: 24px;
+  --sr-duration: 720ms;
+  --sr-ease: cubic-bezier(.22,.61,.36,1);
+}
+
+.sr {
+  opacity: 0;
+  transform: translateY(var(--sr-distance));
+  will-change: transform, opacity;
+  transition:
+    opacity var(--sr-duration) var(--sr-ease) var(--sr-delay,0ms),
+    transform var(--sr-duration) var(--sr-ease) var(--sr-delay,0ms);
+}
+.sr.in { opacity: 1; transform: none; }
+
+.sr-left  { transform: translateX(calc(var(--sr-distance) * -1)); }
+.sr-right { transform: translateX(var(--sr-distance)); }
+.sr-down  { transform: translateY(calc(var(--sr-distance) * -1)); }
+.sr-zoom  { transform: scale(.96); }
+
+/* Stagger opcional por linha */
+.sr-row > * { --sr-delay: 0ms; }
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce){
+  .sr,
+  .sr.in,
+  .sr-left,.sr-right,.sr-down,.sr-zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
