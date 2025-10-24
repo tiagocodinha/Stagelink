@@ -657,6 +657,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const panel = modal.querySelector(".modal-panel");
+        // --- Botão "X" dentro do pop-up ---
+    let pmX = panel.querySelector('.pm-x');
+    if (!pmX) {
+      pmX = document.createElement('button');
+      pmX.className = 'pm-x';
+      pmX.type = 'button';
+      pmX.setAttribute('aria-label', 'Fechar');
+      pmX.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414l4.361-4.361-4.361-4.361a1 1 0 010-1.414z"/>
+        </svg>
+      `;
+      panel.appendChild(pmX);
+      pmX.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+    }
+
     modal.addEventListener("mousedown", (e) => {
       if (!panel) return;
       if (!panel.contains(e.target)) close();

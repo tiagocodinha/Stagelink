@@ -1525,3 +1525,195 @@ img { display:block; max-width:100%; height:auto; }
   );
   pointer-events: none;
 }
+
+
+
+
+
+
+
+/* --- BOTÃO DE FECHAR (dentro do pop-up) --- */
+.pm-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.pm-x:hover {
+  background: rgba(0,0,0,0.75);
+  transform: scale(1.05);
+}
+
+.pm-x svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+/* mobile: um pouco maior para toque */
+@media (max-width: 640px) {
+  .pm-x {
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+  }
+  .pm-x svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* garante que o X absoluto referencia o painel */
+#portfolio-modal .modal-panel { position: relative; }
+
+/* esconde o botão antigo que fica fora */
+#pm-close { display: none !important; }
+
+/* opcional: respeita a safe area e não cola ao scroll vertical */
+.pm-x { right: max(14px, env(safe-area-inset-right)); top: 14px; }
+@media (max-width: 640px){
+  .pm-x { right: max(10px, env(safe-area-inset-right)); top: 10px; }
+}
+
+
+
+/* === MODAL – POLISH GERAL (desktop + mobile) === */
+
+/* overlay com respiro e safe-areas */
+#portfolio-modal > .relative {
+  padding: clamp(14px, 2.4vw, 28px) !important;
+  padding-left: max(12px, env(safe-area-inset-left)) !important;
+  padding-right: max(12px, env(safe-area-inset-right)) !important;
+}
+
+/* painel mais “premium” e ligeiramente deslocado à esquerda em desktop */
+#portfolio-modal .modal-panel{
+  max-width: min(1180px, 92vw) !important;
+  max-height: 88vh !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+  box-shadow: 0 30px 80px rgba(2,8,23,.35), 0 8px 20px rgba(2,8,23,.12) !important;
+  overflow: hidden !important;
+
+  /* afasta da scrollbar da janela */
+  margin-right: 10px !important;
+  transform: translateX(-4px); /* leve “puxão” à esquerda */
+}
+
+/* corpo com gutter estável -> evita “saltos” quando aparece a scrollbar */
+#pm-body{
+  padding: clamp(12px, 1.6vw, 18px) !important;
+  scrollbar-gutter: stable both-edges;
+}
+
+/* scrollbars discretas dentro do modal */
+#pm-body::-webkit-scrollbar{ width: 10px; }
+#pm-body::-webkit-scrollbar-track{ background: transparent; }
+#pm-body::-webkit-scrollbar-thumb{
+  background: rgba(15,23,42,.15);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* header cartão mais bonito (desktop) */
+.pm-case > div:first-of-type{
+  background: #fff !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+  border-radius: 16px !important;
+  padding: clamp(16px, 2vw, 22px) !important;
+  box-shadow: 0 12px 28px rgba(2,8,23,.06) !important;
+}
+
+/* galeria com ritmo consistente */
+.pm-gallery{
+  gap: clamp(12px, 1.6vw, 18px) !important;
+}
+.pm-gallery > *{
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  background: #f3f4f6 !important;
+}
+
+/* botão X: dentro do painel, com melhor contraste em ambos os temas */
+.pm-x{
+  top: 10px !important;
+  right: 10px !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: rgba(17,24,39,.75) !important; /* slate-800 */
+  color:#fff !important;
+  box-shadow: 0 6px 18px rgba(2,8,23,.25);
+}
+.pm-x:hover{ background: rgba(17,24,39,.9) !important; }
+
+/* ——— MOBILE (≤840px): modal “bonito” e arejado ——— */
+@media (max-width: 840px){
+  #portfolio-modal .modal-panel{
+    width: 94vw !important;
+    max-width: 94vw !important;
+    height: auto !important;
+    max-height: 90dvh !important;
+    border-radius: 16px !important;
+    margin-right: 0 !important;       /* sem offset em mobile */
+    transform: none !important;
+  }
+  #pm-body{
+    padding: 12px !important;
+    max-height: calc(90dvh - 0px) !important;
+  }
+
+  /* header compacto, com logo visível e sem distorção */
+  .pm-header,
+  .pm-case > div:first-of-type{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+  .pm-logo{
+    justify-content: flex-start !important;
+  }
+  .pm-logo img{
+    max-height: 56px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    filter: none !important; /* mantém cor original do logo */
+  }
+
+  /* galeria 1 por linha (look clean) */
+  .pm-gallery{
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .pm-gallery > *{ aspect-ratio: 4/5 !important; }
+
+  /* botão X maior para toque */
+  .pm-x{
+    width: 40px !important; height: 40px !important;
+    top: 8px !important; right: 8px !important;
+  }
+}
+
+/* ——— DESKTOP largo (≥1280px): ligeiro respiro extra ——— */
+@media (min-width: 1280px){
+  #portfolio-modal .modal-panel{
+    transform: translateX(-8px);
+    margin-right: 14px !important;
+  }
+}
