@@ -877,7 +877,7 @@ document.addEventListener("DOMContentLoaded", () => {
       add("#servicos .service-card", "up", 100);
       // Eventos + CTAs
       add("#eventos .carousel-container", "zoom", 0);
-      add("#servicos .pill-cta, .pill-projetos", "up", 0);
+      add("#servicos .pill-cta, section .pill-projetos", "up", 0);
       // Logos
       add(".logo-carousel", "up", 0);
       // Footer
