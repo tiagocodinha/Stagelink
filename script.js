@@ -834,65 +834,89 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* -------- Scroll Reveal (IntersectionObserver) -------- */
-  (function scrollReveal(){
-    // se o user preferir menos movimento, não ativa
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  (function scrollReveal() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if (e.isIntersecting){
-          e.target.classList.add('in');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "-8% 0px -8% 0px" });
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "-8% 0px -8% 0px" }
+    );
 
-    const add = (selector, variant='up', stagger=90, extraDelay=0) => {
+    const add = (selector, variant = "up", stagger = 90, extraDelay = 0) => {
       const els = document.querySelectorAll(selector);
       let i = 0;
-      els.forEach(el=>{
-        el.classList.add('sr');
+      els.forEach((el) => {
+        el.classList.add("sr");
         if (variant) el.classList.add(`sr-${variant}`);
-        el.style.setProperty('--sr-delay', `${extraDelay + i*stagger}ms`);
+        el.style.setProperty("--sr-delay", `${extraDelay + i * stagger}ms`);
         obs.observe(el);
         i++;
       });
     };
 
-    // Headings principais “de cima para baixo”
-    add('#sobre h2, #servicos .heading-decor, #eventos h2, #contactos h2', 'down', 0);
+    // ====== HOMEPAGE
+    const onHome =
+      location.pathname === "/" ||
+      location.pathname.endsWith("/index.html") ||
+      (!location.pathname.startsWith("/projetos") &&
+        !location.pathname.includes("/projetos/"));
 
-    // Parágrafos da intro (stagger suave)
-    add('#sobre p', 'up', 120);
+    if (onHome) {
+      // Headings
+      add("#sobre h2, #servicos .heading-decor, #eventos h2, #contactos h2", "down", 0);
+      // Intro
+      add("#sobre p", "up", 120);
+      // Serviços
+      add("#servicos .service-card", "up", 100);
+      // Eventos + CTAs
+      add("#eventos .carousel-container", "zoom", 0);
+      add("#servicos .pill-cta, .pill-projetos", "up", 0);
+      // Logos
+      add(".logo-carousel", "up", 0);
+      // Footer
+      add("footer .grid > *", "up", 80);
 
-    // Cards dos serviços em grelha (stagger por ordem)
-    add('#servicos .service-card', 'up', 100);
+      // Hero sequência
+      const heroTitle = document.querySelector("#inicio h1");
+      const heroSub = document.querySelector("#inicio .hero-subcopy");
+      const heroBtn = document.querySelector("#inicio .hero-btn");
+      [heroTitle, heroSub, heroBtn].forEach((el, i) => {
+        if (!el) return;
+        el.classList.add("sr", "sr-down");
+        el.style.setProperty("--sr-delay", `${i * 120}ms`);
+        obs.observe(el);
+      });
+    }
 
-    // Carrossel de eventos + CTA
-    add('#eventos .carousel-container', 'zoom', 0);
-    add('#servicos .pill-cta, .pill-projetos', 'up', 0);
+    // ====== PROJETOS — só cards e footer
+    const onProjects =
+      location.pathname.startsWith("/projetos") ||
+      location.pathname.includes("/projetos/index.html");
 
-    // Logos (track inteiro aparece suave)
-    add('.logo-carousel', 'up', 0);
+    if (onProjects) {
+      // Cards: todos a subir (stagger)
+      const cards = document.querySelectorAll(".proj-card");
+      cards.forEach((el, i) => {
+        el.classList.add("sr", "sr-up");
+        el.style.setProperty("--sr-delay", `${i * 80}ms`);
+        obs.observe(el);
+      });
 
-    // Colunas do footer
-    add('footer .grid > *', 'up', 80);
-
-    // Hero: botão aparece depois do texto
-    const heroTitle  = document.querySelector('#inicio h1');
-    const heroSub    = document.querySelector('#inicio .hero-subcopy');
-    const heroBtn    = document.querySelector('#inicio .hero-btn');
-    [heroTitle, heroSub, heroBtn].forEach((el,i)=>{
-      if (!el) return;
-      el.classList.add('sr','sr-down');
-      el.style.setProperty('--sr-delay', `${i*120}ms`);
-      obs.observe(el);
-    });
+      // Footer colunas: subir
+      add("footer .grid > *", "up", 80);
+    }
   })();
 
 
 
-
+  
 }); // DOMContentLoaded end
 
 
