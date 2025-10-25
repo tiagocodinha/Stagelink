@@ -1721,7 +1721,6 @@ img { display:block; max-width:100%; height:auto; }
 
 
 
-
 /* Ajusta o tamanho e estilo dos ícones nas service-cards */
 .icon-badge {
   display: flex;
@@ -1744,7 +1743,6 @@ img { display:block; max-width:100%; height:auto; }
 .service-card:hover .icon-img {
   transform: scale(1.08);
 }
-
 
 
 
@@ -1783,4 +1781,11 @@ img { display:block; max-width:100%; height:auto; }
     transform: none !important;
     transition: none !important;
   }
+}
+
+
+/* Mobile: quando só há 1 coluna, ignora qualquer grid-column vindo do JS */
+@media (max-width: 840px){
+  .pm-phones { grid-template-columns: 1fr !important; }
+  .pm-phones .phone { grid-column: auto !important; } /* 👈 reset crítico */
 }
