@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* -------- Formulário + EmailJS + reCAPTCHA -------- */
   (function contactFormHandler() {
-    const form = document.getElementById("contactForm");
+    const form = document.getElementById("contactForm") || document.getElementById("leadForm");
     const btn = document.getElementById("sendBtn");
     if (!form || !btn) return;
 
@@ -229,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const name = form.name?.value?.trim();
       const email = form.email?.value?.trim();
+      const phone = form.phone?.value?.trim() || "";
       const message = form.message?.value?.trim();
 
       if (!name || !email || !message) {
