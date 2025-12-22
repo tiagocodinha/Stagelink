@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const serviceId = "service_iyooo0p";
         const templateId = "template_4wi67kr";
-        await emailjs.send(serviceId, templateId, { name, email, message, "g-recaptcha-response": recaptchaToken });
+        await emailjs.send(serviceId, templateId, { name, email, phone, message, "g-recaptcha-response": recaptchaToken });
 
         showToast?.("Vamos responder em breve.", "success", { title: "Mensagem enviada", duration: 4000 });
         form.reset();
