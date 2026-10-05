@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Stagelink</title>
+  <script>
+    (function () {
+      var m = location.pathname.match(/^\/projetos\/([^\/]+)\/?$/);
+      if (m) location.replace("/projetos/?p=" + m[1]);
+      else location.replace("/");
+    })();
+  </script>
+</head>
+<body></body>
+</html>

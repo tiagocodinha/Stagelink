@@ -374,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("hidden");
       document.body.classList.remove("overflow-hidden");
       pmBody.innerHTML = ""; // limpa conteúdo e pára vídeos
+      if (location.pathname !== "/projetos/") history.replaceState(null, "", "/projetos/");
     };
 
     // --- Helpers ---
@@ -686,14 +687,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Click -> abre modal
+    const slugify = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const slugOf = (c) => c.dataset.slug || slugify(c.dataset.title || "");
+
+    const openCard = (card) => {
+      const isCase =
+        !!(card.dataset.logo || card.dataset.reels || card.dataset.images || card.dataset.services);
+      if (isCase) buildCaseStudy(card); else buildLegacy(card);
+      open();
+      history.replaceState(null, "", "/projetos/" + slugOf(card));
+    };
+
     cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const isCase =
-          !!(card.dataset.logo || card.dataset.reels || card.dataset.images || card.dataset.services);
-        if (isCase) buildCaseStudy(card); else buildLegacy(card);
-        open();
-      });
+      card.addEventListener("click", () => openCard(card));
     });
+
+    // Abre automaticamente se vier de /projetos/<slug> (via 404.html) ou /projetos/#<slug>
+    const wanted = new URLSearchParams(location.search).get("p") || location.hash.replace("#", "");
+    if (wanted) {
+      const target = [...cards].find((c) => slugOf(c) === wanted.toLowerCase());
+      if (target) openCard(target);
+    }
 
     // Fechar (botão, ESC, clique fora do painel)
     pmClose?.addEventListener("click", close);
