@@ -562,8 +562,39 @@ document.addEventListener("DOMContentLoaded", () => {
       
       /* ---------- /GALERIA ---------- */
 
-      // Reels (telemóveis)
-      if (reels.length) {
+      // Reels (computador ou telemóveis)
+      if (reels.length && card.dataset.device === "laptop") {
+        const lap = document.createElement("div");
+        lap.style.cssText = "max-width:720px;margin:24px auto 8px;padding:0 16px;";
+
+        const lid = document.createElement("div");
+        lid.style.cssText = "position:relative;aspect-ratio:16/10;background:#0b0b0b;border-radius:16px 16px 0 0;padding:14px 14px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.06);";
+
+        const scr = document.createElement("div");
+        scr.style.cssText = "width:100%;height:100%;border-radius:6px;overflow:hidden;background:#000;";
+
+        const v = document.createElement("video");
+        v.src = reels[0];
+        v.muted = true;
+        v.loop = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.controls = false;
+        v.setAttribute("muted", "");
+        v.setAttribute("playsinline", "");
+        v.style.cssText = "width:100%;height:100%;object-fit:cover;";
+
+        scr.appendChild(v);
+        lid.appendChild(scr);
+
+        const base = document.createElement("div");
+        base.style.cssText = "height:14px;margin:0 -4%;background:linear-gradient(#d4d4d8,#9ca3af);border-radius:0 0 16px 16px;box-shadow:0 10px 24px rgba(0,0,0,.25);";
+
+        lap.appendChild(lid);
+        lap.appendChild(base);
+        wrap.appendChild(lap);
+
+      } else if (reels.length) {
         const phones = document.createElement("div");
         phones.className = "pm-phones";
         phones.style.display = "grid";
